@@ -16,4 +16,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Hoy está en el **Módulo 0: entorno y herramientas**.
+El proyecto avanza módulo a módulo. Hoy está en el **Módulo 1: caso de negocio, interesados y alcance**.
