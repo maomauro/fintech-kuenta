@@ -1,30 +1,31 @@
-# Kuenta — Arquitectura de una fintech (curso práctico)
+# Kuenta — Arquitectura de una fintech
 
-Simulación guiada: el rol de **arquitecto de software** de **Kuenta**, una fintech colombiana ficticia de **ahorros, pagos y créditos**, diseñada sobre **AWS** (Amazon Web Services) con equivalencias en Azure y Google Cloud.
+Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **ahorros, pagos y créditos**, diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: Módulo 0 (Entorno y herramientas) en curso. Este README se completa a medida que avanza el curso.
+> Estado: el proyecto avanza módulo a módulo. Hoy está en el **Módulo 0: entorno y herramientas**.
 
 ## Cómo navegar este repositorio
 
 | Carpeta | Para qué sirve |
 |---|---|
-| `00-contexto/` | Decisiones, temario y glosario del curso |
-| `docs/modulos/` | Una nota por módulo (qué se aprendió y qué se decidió) |
-| `docs/requisitos/` | Requisitos, historias de usuario y casos de uso |
-| `docs/adr/` | ADR (Architecture Decision Record, registro de decisión de arquitectura): una decisión por archivo |
-| `modelos/archi/` | Modelo ArchiMate hecho con Archi |
-| `modelos/structurizr/` | Modelo C4 (Context, Containers, Components, Code) escrito como código |
-| `modelos/bpmn/` | Procesos de negocio en BPMN (Business Process Model and Notation) |
-| `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas |
-| `contratos-api/` | Contratos de API (Application Programming Interface) de ejemplo, en OpenAPI |
-| `infraestructura/` | Diseño en AWS, ejemplos de IaC (Infrastructure as Code) y despliegue en el VPS (servidor virtual privado) |
-| `entrevista/` | Guion y preguntas típicas para exponer la arquitectura |
-| `referencias/` | Lecturas y material de apoyo |
+| `00-contexto/` | Punto de partida del proyecto: objetivo, decisiones tomadas, temario y glosario de siglas. Es lo primero que se lee para entender el alcance. |
+| `sitio/` | La aplicación web (Docusaurus) que convierte la documentación en un sitio navegable. Contiene configuración y tema, no contenido. |
+| `docs/modulos/` | Una nota por módulo: qué se hizo, qué se decidió y por qué. Cuenta la historia del proyecto en orden. |
+| `docs/requisitos/` | Qué debe hacer el sistema (requisitos funcionales), qué tan bien debe hacerlo (no funcionales), historias de usuario y casos de uso. |
+| `docs/adr/` | Un archivo por cada decisión de arquitectura importante, escrito como ADR (Architecture Decision Record, registro de decisión de arquitectura): contexto, opciones, decisión y consecuencias. |
+| `modelos/archi/` | El modelo de arquitectura empresarial en ArchiMate hecho con Archi: capacidades de negocio, aplicaciones y tecnología. |
+| `modelos/structurizr/` | El modelo C4 (Context, Containers, Components, Code: contexto, contenedores, componentes y código) escrito como texto, de donde salen los diagramas de la arquitectura de aplicación. |
+| `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir una cuenta o aprobar un crédito. |
+| `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
+| `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |
+| `infraestructura/` | Diseño de la solución en AWS, ejemplos de IaC (Infrastructure as Code, infraestructura como código) y el despliegue del sitio en el VPS (servidor virtual privado). |
+| `entrevista/` | Guion y preguntas típicas para exponer la arquitectura ante otras personas. |
+| `referencias/` | Lecturas y enlaces públicos que respaldan las decisiones. |
 
 ## Herramientas
 
-Archi, Structurizr, draw.io / Excalidraw, Docusaurus, Git y Docker.
+Archi, Structurizr, draw.io y Excalidraw, Docusaurus, Git y Docker. La descripción de cada una está en la nota del Módulo 0 del sitio (`docs/modulos/entorno-y-herramientas.md`).
 
 ## Módulos
 
-Temario de 16 módulos (0 a 15), del entorno hasta la publicación del sitio y el guion de entrevista. El detalle vive en `00-contexto/`.
+El proyecto se organiza en 16 módulos (0 a 15), desde el entorno de trabajo hasta la publicación del sitio y el guion de entrevista. El detalle vive en `00-contexto/`.
