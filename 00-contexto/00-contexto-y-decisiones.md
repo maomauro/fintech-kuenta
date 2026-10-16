@@ -21,6 +21,14 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Estructura del sitio | Docusaurus vive en la carpeta **`sitio/`** (opción A elegida por el autor), configurada para leer el contenido de `../docs`; así `docs/` queda limpia y la raíz del repo ordenada | 2026-10-15 |
 | Entorno de trabajo | **Docker** como estrategia: las herramientas que lo permitan corren en contenedores (cajas aisladas con la herramienta y sus dependencias ya incluidas), para no instalar Node.js ni Java en el equipo y para reforzar Docker. Docker Desktop usa WSL 2 (Windows Subsystem for Linux, un Linux ligero dentro de Windows). Pendiente verificar las imágenes oficiales | 2026-10-15 |
 | Herramientas ya instaladas en el equipo de el autor | Docker Desktop, Archi y Git (versiones sin verificar) | 2026-10-15 |
+| Público objetivo (Módulo 1) | **Personas naturales con poco acceso bancario** en la primera versión | 2026-10-15 |
+| Producto ancla (Módulo 1) | **Ahorros** (cuenta o billetera digital); pagos y créditos llegan después | 2026-10-15 |
+| Interesados (Módulo 1) | Cinco grupos: **clientes, reguladores, inversionistas, equipo interno y aliados/integraciones** | 2026-10-15 |
+| Alcance de la primera versión (Módulo 1) | **Dentro:** registro y verificación de identidad (KYC), cuenta de ahorros digital, depósitos y retiros (incluido efectivo en corresponsales bancarios), transferencias entre cuentas Kuenta, consulta de saldo y movimientos, notificaciones, atención básica, antifraude básico y reportes mínimos. **Fuera:** créditos, pagos de servicios y recargas, tarjeta física, cobros a comercios, inversiones, operación fuera de Colombia. Detalles regulatorios se verifican en el Módulo 2 | 2026-10-16 |
+| Convenciones BPMN (Módulo 1) | Tareas con **verbo + objeto**; todo camino termina en un evento de fin; el cliente siempre queda notificado del resultado; los caminos excluyentes pueden converger en una misma tarea de notificación | 2026-10-15 |
+| Identidad en la apertura de cuenta (Módulo 1) | La validación de identidad la hace la **Registraduría Nacional del Estado Civil (simulada)**, tratada como sistema externo. Cómo se accede de verdad se verifica en el Módulo 6 | 2026-10-16 |
+| Monto mínimo de apertura (Módulo 1) | **Sin monto mínimo**: la cuenta se abre vacía y el depósito es un proceso aparte. Normativa de cuentas de trámite simplificado y depósitos electrónicos por verificar en el Módulo 2 | 2026-10-16 |
+| Corresponsales bancarios (Módulo 1) | **Incluidos como aliados** para depositar y retirar efectivo; agregan el proceso BPMN "Depositar efectivo". Su regulación se verifica en el Módulo 2 | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
 
 ## 3. Temario aprobado (16 módulos, numeración vigente)
@@ -129,7 +137,7 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulo 0 (Entorno y herramientas) en proyecto.** Entregable: repo, sitio base y modelo vacío en Archi. Hecho: mapa visual del flujo de herramientas, decisión de usar Docker, inventario de herramientas instaladas (Docker Desktop, Archi y Git), repo en `C:\dev\fintech-kuenta` con esqueleto de carpetas, `README.md` y copia de este documento en `00-contexto/`. **Siguiente paso (paso 0.5, en proyecto):** Git ya está inicializado y el primer commit hecho (`8bc936a`). El repo público https://github.com/maomauro/fintech-kuenta ya existe y `main` está subida. La rama `modulo-00-entorno` ya está creada. En ella se genera el sitio base en `sitio/` con Docusaurus (Docker) y el modelo vacío de Archi. Después: sitio base con Docusaurus en Docker, modelo vacío en Archi, glosario común y repaso con pregunta de entrevista.
+- **Foco actual:** **Módulo 0 cerrado. Módulo 1 (Caso de negocio, interesados y alcance, con BPMN) en proyecto**, rama `modulo-01-caso-negocio`. Hecho: caso de negocio, público, interesados y alcance; tres procesos BPMN (abrir cuenta de ahorros, transferencia entre cuentas y depositar efectivo) en `modelos/bpmn/` y `diagramas/`; nota del módulo en `docs/modulos/caso-de-negocio.md`. Pendiente: repaso, pregunta de entrevista y pull request a `main`.
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
 - **Pendiente por verificar al llegar a cada módulo:** imagen oficial de Structurizr; versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
@@ -152,6 +160,8 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-15 | Rama `modulo-00-entorno` creada. Docusaurus verificado en fuentes oficiales (MIT + CC-BY-4.0, Node.js 20+, sin imagen Docker oficial; se usa `node:24`). El autor elige la carpeta `sitio/` para la aplicación (secciones 2, 5 y 5.1) |
 | 2026-10-15 | Se centra el proyecto solo en AWS: se retira todo lo relacionado con otras nubes (secciones 2, 3 y 9) |
 | 2026-10-15 | Se reescribe este documento con enfoque de proyecto (sin enfoque didáctico) y se agrega la página Herramientas al sitio |
+| 2026-10-15 | **Módulo 0 cerrado** y fusionado a `main`. Inicia el Módulo 1: se deciden público objetivo, producto ancla, interesados y alcance (sección 2) |
+| 2026-10-16 | Módulo 1: BPMN de apertura de cuenta y de transferencia entre cuentas, con la Registraduría simulada; se decide apertura sin monto mínimo y se incluyen corresponsales bancarios como aliados, con el proceso "Depositar efectivo". Nota del módulo publicada en el sitio (sección 2) |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
