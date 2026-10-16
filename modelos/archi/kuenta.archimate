@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archimate:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="Kuenta" id="id-23a5eaeda8084e498c25c9981390152b" version="5.0.0">
+  <folder name="Strategy" id="id-34698941a1fa4d74b6de20b0714e881f" type="strategy"/>
+  <folder name="Business" id="id-da8904d513ea4e86878d4138b2915a02" type="business"/>
+  <folder name="Application" id="id-f5cc58ff6179464692821f410156544d" type="application"/>
+  <folder name="Technology &amp; Physical" id="id-aaeaa0265aba48a9a434d0b140efb5d8" type="technology"/>
+  <folder name="Motivation" id="id-dade27675b6842f188a57cc0afae2258" type="motivation"/>
+  <folder name="Implementation &amp; Migration" id="id-04bc4deb612641dc8e6f8e796fac5203" type="implementation_migration"/>
+  <folder name="Other" id="id-75c6d4d3bc024f939870ec7593817d75" type="other"/>
+  <folder name="Relations" id="id-585a31489ef347488218e9774cce16b1" type="relations"/>
+  <folder name="Views" id="id-0aa1efbbdfdd4148908430d414dc701e" type="diagrams">
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Default View" id="id-cd9aec1e21294556b38319bd8d6c89a5"/>
+  </folder>
+</archimate:model>
