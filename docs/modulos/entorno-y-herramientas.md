@@ -65,5 +65,48 @@ Los artefactos se guardan **por tipo** (modelos, diagramas, contratos) para no d
 
 - [x] Repositorio creado y publicado en GitHub
 - [x] Sitio base con Docusaurus ejecutándose en Docker
-- [ ] Modelo vacío en Archi
-- [ ] Glosario común
+- [x] Modelo vacío en Archi (`modelos/archi/kuenta.archimate`)
+- [x] Glosario común (al final de esta página)
+
+## Glosario
+
+Siglas y términos usados en el proyecto, con su significado completo. Crece al cerrar cada módulo.
+
+| Sigla o término | Significado |
+|---|---|
+| ADR | Architecture Decision Record: registro de decisión de arquitectura (qué se decidió, por qué y con qué consecuencias) |
+| API | Application Programming Interface: interfaz de programación de aplicaciones; la forma en que un sistema ofrece funciones a otros |
+| arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
+| Archi | Programa gratuito para modelar arquitectura empresarial con ArchiMate |
+| ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
+| AWS | Amazon Web Services: la nube de Amazon |
+| BPMN | Business Process Model and Notation: notación para dibujar procesos de negocio |
+| C4 | Context, Containers, Components, Code: método para diagramar arquitectura en cuatro niveles de detalle |
+| CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
+| CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
+| Commit | Punto guardado en el historial de Git: un conjunto de cambios con un mensaje que explica qué se hizo |
+| Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
+| Conventional Commits | Convención para escribir mensajes de commit con el formato `tipo(alcance): descripción` |
+| DDD | Domain-Driven Design: diseño guiado por el dominio; modela el software según el lenguaje y las reglas del negocio |
+| Docker | Herramienta para crear y ejecutar contenedores |
+| Docusaurus | Generador de sitios web de documentación a partir de archivos Markdown |
+| DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
+| EA | Enterprise Architecture: arquitectura empresarial |
+| FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
+| Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
+| Git | Sistema que guarda el historial de cambios de un proyecto y permite trabajar en ramas |
+| GitHub | Servicio en internet donde se aloja el repositorio de Git y se comparte públicamente |
+| HTML | HyperText Markup Language: lenguaje con el que se escriben las páginas web |
+| IaC | Infrastructure as Code: infraestructura como código; crear servidores y redes mediante archivos en vez de clics |
+| Markdown | Formato de texto sencillo (títulos, listas, tablas) con el que se escriben las páginas de `docs/` |
+| MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
+| PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
+| Pull request | Solicitud de integración: propuesta para unir los cambios de una rama con `main`, que se revisa antes de aceptarla |
+| Rama (branch) | Línea de trabajo paralela dentro de Git; aquí hay una por módulo y `main` es la estable |
+| Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
+| SOA | Service-Oriented Architecture: arquitectura orientada a servicios |
+| Structurizr | Herramienta que describe la arquitectura como texto y genera diagramas C4 |
+| TOGAF | The Open Group Architecture Framework: método de arquitectura empresarial |
+| UML | Unified Modeling Language: lenguaje unificado de modelado (diagramas de secuencia, clases, etc.) |
+| VPS | Virtual Private Server: servidor virtual privado que se alquila |
+| WSL 2 | Windows Subsystem for Linux, versión 2: Linux ligero que corre dentro de Windows; Docker Desktop lo usa |
