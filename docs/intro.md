@@ -16,4 +16,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 y 1 están cerrados. Hoy está en el **Módulo 2: requisitos, restricciones y regulación**.
+El proyecto avanza módulo a módulo. Los Módulos 0, 1 y 2 están cerrados. Hoy está en el **Módulo 3: metodología ágil**.
