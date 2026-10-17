@@ -1,14 +1,14 @@
 <mxfile host="Electron">
   <diagram name="Página-1" id="DepositarEfectivoKuenta">
-    <mxGraphModel dx="982" dy="584" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1776" dy="1245" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="pool" parent="1" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;whiteSpace=wrap;" value="Depositar efectivo en un corresponsal (Kuenta)" vertex="1">
-          <mxGeometry height="700" width="1400" x="40" y="40" as="geometry" />
+          <mxGeometry height="700" width="1560" x="40" y="40" as="geometry" />
         </mxCell>
         <mxCell id="lc" parent="pool" style="swimlane;html=1;startSize=20;horizontal=0;" value="Cliente" vertex="1">
-          <mxGeometry height="160" width="1400" y="20" as="geometry" />
+          <mxGeometry height="160" width="1560" y="20" as="geometry" />
         </mxCell>
         <mxCell id="start" parent="lc" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=standard;symbol=general;" value="" vertex="1">
           <mxGeometry height="50" width="50" x="60" y="55" as="geometry" />
@@ -17,48 +17,52 @@
           <mxGeometry height="80" width="120" x="170" y="40" as="geometry" />
         </mxCell>
         <mxCell id="fin" parent="lc" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=middle;labelBackgroundColor=#ffffff;verticalAlign=middle;align=right;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=terminate2;labelPosition=left;" value="Depósito notificado" vertex="1">
-          <mxGeometry height="50" width="50" x="1235" y="55" as="geometry" />
+          <mxGeometry height="50" width="50" x="1395" y="55" as="geometry" />
         </mxCell>
         <mxCell id="lk" parent="pool" style="swimlane;html=1;startSize=20;horizontal=0;" value="Corresponsal bancario" vertex="1">
-          <mxGeometry height="180" width="1400" y="180" as="geometry" />
+          <mxGeometry height="180" width="1560" y="180" as="geometry" />
         </mxCell>
         <mxCell id="t_registra" parent="lk" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Registra el depósito en el terminal" vertex="1">
           <mxGeometry height="80" width="120" x="170" y="50" as="geometry" />
         </mxCell>
         <mxCell id="t_recibe" parent="lk" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Recibe el efectivo y entrega el comprobante" vertex="1">
-          <mxGeometry height="80" width="120" x="800" y="50" as="geometry" />
+          <mxGeometry height="80" width="120" x="960" y="50" as="geometry" />
         </mxCell>
         <mxCell id="lx" parent="pool" style="swimlane;html=1;startSize=20;horizontal=0;" value="Kuenta" vertex="1">
-          <mxGeometry height="340" width="1400" y="360" as="geometry" />
+          <mxGeometry height="340" width="1560" y="360" as="geometry" />
         </mxCell>
         <mxCell id="g1" parent="lx" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=middle;labelBackgroundColor=#ffffff;verticalAlign=middle;align=right;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;labelPosition=left;" value="¿La cuenta existe y está activa?" vertex="1">
           <mxGeometry height="50" width="50" x="325" y="100" as="geometry" />
         </mxCell>
+        <mxCell id="g_tope" parent="lx" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=top;labelBackgroundColor=#ffffff;verticalAlign=bottom;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;" value="¿Dentro del tope permitido?" vertex="1">
+          <mxGeometry height="50" width="50" x="470" y="100" as="geometry" />
+        </mxCell>
         <mxCell id="t_antifraude" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Revisa el movimiento con las reglas antifraude" vertex="1">
-          <mxGeometry height="80" width="120" x="470" y="85" as="geometry" />
+          <mxGeometry height="80" width="120" x="630" y="85" as="geometry" />
         </mxCell>
         <mxCell id="g2" parent="lx" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=top;labelBackgroundColor=#ffffff;verticalAlign=bottom;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;" value="¿Es sospechoso?" vertex="1">
-          <mxGeometry height="50" width="50" x="660" y="100" as="geometry" />
+          <mxGeometry height="50" width="50" x="820" y="100" as="geometry" />
         </mxCell>
         <mxCell id="t_autoriza" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Autoriza el depósito" vertex="1">
-          <mxGeometry height="80" width="120" x="800" y="85" as="geometry" />
+          <mxGeometry height="80" width="120" x="960" y="85" as="geometry" />
         </mxCell>
         <mxCell id="t_acredita" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Acredita el valor en la cuenta" vertex="1">
-          <mxGeometry height="80" width="120" x="1000" y="85" as="geometry" />
+          <mxGeometry height="80" width="120" x="1160" y="85" as="geometry" />
         </mxCell>
         <mxCell id="t_notifica" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Notifica el resultado" vertex="1">
-          <mxGeometry height="80" width="120" x="1200" y="85" as="geometry" />
+          <mxGeometry height="80" width="120" x="1360" y="85" as="geometry" />
         </mxCell>
         <mxCell id="t_rechaza" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Rechaza el depósito" vertex="1">
-          <mxGeometry height="69" width="120" x="462" y="262" as="geometry" />
+          <mxGeometry height="69" width="120" x="435" y="262" as="geometry" />
         </mxCell>
         <mxCell id="t_retiene" parent="lx" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;container=1;expand=0;collapsible=0;taskMarker=abstract;" value="Retiene el depósito para revisión" vertex="1">
-          <mxGeometry height="80" width="120" x="800" y="200" as="geometry" />
+          <mxGeometry height="80" width="120" x="960" y="200" as="geometry" />
         </mxCell>
         <mxCell id="e5" edge="1" parent="lx" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="t_rechaza" value="No">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="435.64" y="310.44000000000005" as="targetPoint" />
-          </mxGeometry>
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5b" edge="1" parent="lx" source="g_tope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="t_rechaza" value="No">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="t_indica" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -69,7 +73,10 @@
         <mxCell id="e3" edge="1" parent="1" source="t_registra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="g1" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="t_antifraude" value="Sí">
+        <mxCell id="e4" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="g_tope" value="Sí">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4b" edge="1" parent="1" source="g_tope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="t_antifraude" value="Sí">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e6" edge="1" parent="1" source="t_antifraude" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;" target="g2" value="">
@@ -82,7 +89,7 @@
           <mxGeometry relative="1" x="0.4408" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="725" y="640" />
+              <mxPoint x="885" y="640" />
             </Array>
           </mxGeometry>
         </mxCell>
