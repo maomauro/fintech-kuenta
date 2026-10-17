@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="gJd_Mx-u4cBK0K51_kti-1" parent="1" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=30;horizontalStack=0;whiteSpace=wrap;" value="Abrir cuenta de ahorros (Kuenta)" vertex="1">
+        <mxCell id="gJd_Mx-u4cBK0K51_kti-1" parent="1" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=30;horizontalStack=0;whiteSpace=wrap;" value="Abrir depósito de bajo monto (Kuenta)" vertex="1">
           <mxGeometry height="690" width="1840" x="380" y="90" as="geometry">
             <mxRectangle height="30" width="260" x="150" y="80" as="alternateBounds" />
           </mxGeometry>
@@ -116,7 +116,7 @@
             <mxPoint x="910" y="-210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="xvvC-7x3QzrFTCnzThV_-2" parent="gJd_Mx-u4cBK0K51_kti-4" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=middle;labelBackgroundColor=#ffffff;verticalAlign=middle;align=right;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;labelPosition=left;" value="¿Indentidad válida?" vertex="1">
+        <mxCell id="xvvC-7x3QzrFTCnzThV_-2" parent="gJd_Mx-u4cBK0K51_kti-4" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=middle;labelBackgroundColor=#ffffff;verticalAlign=middle;align=right;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;labelPosition=left;" value="¿Identidad válida?" vertex="1">
           <mxGeometry height="50" width="50" x="605" y="40" as="geometry" />
         </mxCell>
         <mxCell id="xvvC-7x3QzrFTCnzThV_-3" parent="gJd_Mx-u4cBK0K51_kti-4" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=top;labelBackgroundColor=#ffffff;verticalAlign=bottom;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;labelPosition=center;" value="¿Cliente aprobado?" vertex="1">

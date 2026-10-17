@@ -1,8 +1,8 @@
 # Kuenta — Arquitectura de una fintech
 
-Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **ahorros, pagos y créditos**, diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
+Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Hoy está en el **Módulo 0: entorno y herramientas**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 y 1 están cerrados. Hoy está en el **Módulo 2: requisitos, restricciones y regulación**.
 
 ## Cómo navegar este repositorio
 
@@ -15,7 +15,7 @@ Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana fic
 | `docs/adr/` | Un archivo por cada decisión de arquitectura importante, escrito como ADR (Architecture Decision Record, registro de decisión de arquitectura): contexto, opciones, decisión y consecuencias. |
 | `modelos/archi/` | El modelo de arquitectura empresarial en ArchiMate hecho con Archi: capacidades de negocio, aplicaciones y tecnología. |
 | `modelos/structurizr/` | El modelo C4 (Context, Containers, Components, Code: contexto, contenedores, componentes y código) escrito como texto, de donde salen los diagramas de la arquitectura de aplicación. |
-| `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir una cuenta o aprobar un crédito. |
+| `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir un depósito de bajo monto o depositar efectivo en un corresponsal. |
 | `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
 | `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |
 | `infraestructura/` | Diseño de la solución en AWS, ejemplos de IaC (Infrastructure as Code, infraestructura como código) y el despliegue del sitio en el VPS (servidor virtual privado). |

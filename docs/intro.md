@@ -6,7 +6,7 @@ title: Kuenta · Arquitectura
 
 # Kuenta · Arquitectura
 
-**Kuenta** es una fintech colombiana **ficticia** de ahorros, pagos y créditos. Este sitio documenta, paso a paso, la arquitectura que diseña un arquitecto de software recién contratado: desde el caso de negocio hasta el despliegue en **AWS** (Amazon Web Services).
+**Kuenta** es una fintech colombiana **ficticia** de depósitos y pagos, constituida como SEDPE (Sociedad Especializada en Depósitos y Pagos Electrónicos). Este sitio documenta, paso a paso, la arquitectura que diseña un arquitecto de software recién contratado: desde el caso de negocio hasta el despliegue en **AWS** (Amazon Web Services).
 
 ## Cómo navegar
 
@@ -16,4 +16,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Hoy está en el **Módulo 1: caso de negocio, interesados y alcance**.
+El proyecto avanza módulo a módulo. Los Módulos 0 y 1 están cerrados. Hoy está en el **Módulo 2: requisitos, restricciones y regulación**.
