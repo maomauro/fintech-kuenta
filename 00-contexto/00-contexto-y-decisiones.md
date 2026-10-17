@@ -1,16 +1,16 @@
 # Kuenta — Contexto y decisiones del proyecto
 
-_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-15. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
+_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-16. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
 
 ## 1. Objetivo
-Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia de ahorros, pagos y créditos, desde el punto de vista de un arquitecto de software recién contratado: **paso a paso y "como debe ser"**. El resultado queda documentado, diagramado y **publicado en un VPS (servidor virtual privado)** como sitio navegable, para consultarlo y exponerlo en entrevistas. Debe ser completo: que no falte nada.
+Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia de depósitos y pagos (constituida como SEDPE; los créditos llegan en una etapa posterior), desde el punto de vista de un arquitecto de software recién contratado: **paso a paso y "como debe ser"**. El resultado queda documentado, diagramado y **publicado en un VPS (servidor virtual privado)** como sitio navegable, para consultarlo y exponerlo en entrevistas. Debe ser completo: que no falte nada.
 
 **Principio de trabajo: todo se define desde cero.** Nada se construye ni se decide por adelantado; cada paso se acuerda antes de ejecutarlo.
 
 ## 2. Decisiones tomadas
 | Decisión | Resultado | Fecha |
 |---|---|---|
-| Escenario | **Fintech colombiana** de ahorros, pagos y créditos (ficticia) | 2026-10-15 |
+| Escenario | **Fintech colombiana** ficticia de depósitos y pagos, constituida como SEDPE (ver "Figura legal"). Los créditos quedan para una etapa posterior, porque una SEDPE no puede otorgarlos | 2026-10-16 |
 | Nombre de la fintech | **Kuenta** (juego con "cuenta"; ficticia, sin verificar coincidencia con marcas reales) | 2026-10-15 |
 | Nube principal | **AWS (Amazon Web Services)**. El proyecto se centra solo en esta nube | 2026-10-15 |
 | Temario | **16 módulos aprobados** (ver sección 3) | 2026-10-15 |
@@ -22,13 +22,19 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Entorno de trabajo | **Docker** como estrategia: las herramientas que lo permitan corren en contenedores (cajas aisladas con la herramienta y sus dependencias ya incluidas), para no instalar Node.js ni Java en el equipo y para reforzar Docker. Docker Desktop usa WSL 2 (Windows Subsystem for Linux, un Linux ligero dentro de Windows). Pendiente verificar las imágenes oficiales | 2026-10-15 |
 | Herramientas ya instaladas en el equipo de el autor | Docker Desktop, Archi y Git (versiones sin verificar) | 2026-10-15 |
 | Público objetivo (Módulo 1) | **Personas naturales con poco acceso bancario** en la primera versión | 2026-10-15 |
-| Producto ancla (Módulo 1) | **Ahorros** (cuenta o billetera digital); pagos y créditos llegan después | 2026-10-15 |
+| Producto ancla (Módulo 1) | **Depósito de bajo monto** digital (ahorro y pagos); los créditos llegan en una etapa posterior con otra figura legal o con un aliado | 2026-10-16 |
 | Interesados (Módulo 1) | Cinco grupos: **clientes, reguladores, inversionistas, equipo interno y aliados/integraciones** | 2026-10-15 |
-| Alcance de la primera versión (Módulo 1) | **Dentro:** registro y verificación de identidad (KYC), cuenta de ahorros digital, depósitos y retiros (incluido efectivo en corresponsales bancarios), transferencias entre cuentas Kuenta, consulta de saldo y movimientos, notificaciones, atención básica, antifraude básico y reportes mínimos. **Fuera:** créditos, pagos de servicios y recargas, tarjeta física, cobros a comercios, inversiones, operación fuera de Colombia. Detalles regulatorios se verifican en el Módulo 2 | 2026-10-16 |
+| Alcance de la primera versión (Módulo 1) | **Dentro:** registro y verificación de identidad (KYC), depósito de bajo monto digital, depósitos y retiros (incluido efectivo en corresponsales bancarios), transferencias entre cuentas Kuenta y a otras entidades por Bre-B, consulta de saldo y movimientos, notificaciones, atención básica y reclamos, antifraude básico y reportes mínimos. **Fuera:** créditos, pagos de servicios y recargas, tarjeta física, cobros a comercios, inversiones, operación fuera de Colombia. Detalles regulatorios se verifican en el Módulo 2 | 2026-10-16 |
 | Convenciones BPMN (Módulo 1) | Tareas con **verbo + objeto**; todo camino termina en un evento de fin; el cliente siempre queda notificado del resultado; los caminos excluyentes pueden converger en una misma tarea de notificación | 2026-10-15 |
-| Identidad en la apertura de cuenta (Módulo 1) | La validación de identidad la hace la **Registraduría Nacional del Estado Civil (simulada)**, tratada como sistema externo. Cómo se accede de verdad se verifica en el Módulo 6 | 2026-10-16 |
-| Monto mínimo de apertura (Módulo 1) | **Sin monto mínimo**: la cuenta se abre vacía y el depósito es un proceso aparte. Normativa de cuentas de trámite simplificado y depósitos electrónicos por verificar en el Módulo 2 | 2026-10-16 |
-| Corresponsales bancarios (Módulo 1) | **Incluidos como aliados** para depositar y retirar efectivo; agregan el proceso BPMN "Depositar efectivo". Su regulación se verifica en el Módulo 2 | 2026-10-16 |
+| Identidad en la apertura de cuenta (Módulo 1) | La validación de identidad la hace la **Registraduría Nacional del Estado Civil (simulada)**, tratada como sistema externo. Cómo se accede de verdad se verifica en el Módulo 7 | 2026-10-16 |
+| Monto mínimo de apertura (Módulo 1) | **Sin monto mínimo**: la cuenta se abre vacía y el depósito es un proceso aparte. Regulación verificada en el Módulo 2 (ver "Regulación verificada") | 2026-10-16 |
+| Corresponsales bancarios (Módulo 1) | **Incluidos como aliados** para depositar y retirar efectivo; agregan el proceso BPMN "Depositar efectivo". Su regulación se verificó en el Módulo 2 | 2026-10-16 |
+| Figura legal (Módulo 2) | **SEDPE** (Sociedad Especializada en Depósitos y Pagos Electrónicos, Ley 1735 de 2014) que ofrece **depósitos de bajo monto**. Una SEDPE no puede otorgar crédito (Ley 1735, art. 1 par. 1): los créditos quedan para una etapa posterior con otra figura legal (banco o compañía de financiamiento) o con un aliado; se retoma en el ADR del Módulo 13 | 2026-10-16 |
+| Tope del depósito de bajo monto (Módulo 2) | **8 SMLMV** de saldo máximo y de débitos mensuales (hoy $14.007.240 con SMLMV 2026 de $1.750.905, Decreto 159 de 2026, transitorio). El sistema debe controlarlo y bloquear lo que lo supere; el valor del SMLMV es parametrizable | 2026-10-16 |
+| Nombre del producto (Módulo 2) | En documentos y diagramas técnicos se usa **"depósito de bajo monto"** (término legal, Decreto 222 de 2020). El nombre comercial se valida con un abogado antes de publicarlo | 2026-10-16 |
+| Transferencias a otras entidades (Módulo 2) | **Dentro de la primera versión**, por **Bre-B** (sistema de pagos inmediatos). Implica requisitos de disponibilidad (98,5 % a 99,5 % según el Decreto 1069 de 2025), nombre enmascarado del beneficiario antes de confirmar e integración externa (Módulo 7). Por verificar: si Bre-B es obligatoria para una SEDPE | 2026-10-16 |
+| Regulación verificada (Módulo 2) | **Depósitos de bajo monto:** Decreto 222 de 2020 / Decreto 2555 de 2010 (saldo y débitos mensuales máx. 8 SMLMV, un depósito por persona y entidad, terminación si queda sin fondos 3 meses o más, apertura sin presencia física). **SEDPE:** capital mínimo de $5.846.000.000 a valores de 2014, ajustado cada enero por IPC (fuente de tercero, sin confirmar); autorización en dos etapas. **Fogafín:** inscripción de 0,115 por mil del capital suscrito (una vez), prima de 0,15 % anual sobre depósitos asegurados y cobertura de $50.000.000 por persona (Resolución 002 de 2026). **SARLAFT/KYC:** apertura a distancia permitida (biometría, firma digital, bases de datos); debida diligencia simplificada para bajo monto (identidad al abrir y completar información en 3 días hábiles); listas restrictivas antes de abrir y de forma continua; reporte de operaciones sospechosas a la UIAF. **Corresponsales:** reciben y entregan efectivo, hacen transferencias y consultas; solo con terminal conectado y no operan si falla la comunicación; la entidad responde por completo y entrega comprobante. **GMF:** exención de retiros hasta 65 UVT para bajo monto (Estatuto Tributario, art. 879 num. 25). **Ley 1328 de 2009:** Sistema de Atención al Consumidor (SAC), defensor del consumidor, tarifas publicadas, costo informado antes de cada operación, extracto mensual gratis, aviso previo de cambios. **Nube y ciberseguridad:** Circular Externa 005 de 2019 y 007 de 2018. **Datos personales:** Ley 1581 de 2012 (biométricos sensibles; autorización previa, expresa e informada). **Pagos:** Decreto 1069 de 2025 (Bre-B) y Decreto 368 de 2026 (finanzas abiertas; las SEDPE son proveedoras de datos obligatorias). **No verificado aún:** capital SEDPE indexado, conservación de documentos SARLAFT, plazos de quejas y SAC, acceso a la Registraduría, obligatoriedad de Bre-B, tarifa del GMF y UVT 2026; algunas normas se leyeron en copias de terceros y se confirman en fuente oficial antes de publicar | 2026-10-16 |
+| Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
 
 ## 3. Temario aprobado (16 módulos, numeración vigente)
@@ -57,6 +63,7 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 - Cada módulo incluye: concepto, por qué importa, cómo lo hace un arquitecto real, práctica, entregable y una pregunta típica de entrevista.
 - Al final del proyecto, lista de verificación de completitud contra una arquitectura completa.
 - Nada cambia de alcance, orden o numeración sin acordarlo y registrarlo en este documento.
+- **Investigar primero:** al iniciar cada módulo se investiga lo que pueda cambiar las definiciones y solo después se define y se documenta una sola vez.
 
 **Terminología**
 - Todo término técnico se explica con descripción y detalle, y toda sigla se escribe con su significado completo la primera vez que aparece. Las siglas se reúnen en el glosario (sección 11).
@@ -131,13 +138,23 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 - Excalidraw: https://excalidraw.com/
 - AWS Well-Architected: https://aws.amazon.com/architecture/well-architected/
 - Circular Externa 005 de 2019 (Superintendencia Financiera de Colombia, computación en la nube): https://www.ambitojuridico.com/sites/default/files/BancoMedios/Archivos/circexterna-005-19%28superfinanciera%29.pdf
+- Resolución 002 de 2026 de Fogafín: https://www.fogafin.gov.co/sites/default/files/2026-05/Resolucion%20JD%20002%20de%202026.pdf
+- Nombre de los depósitos (Ámbito Jurídico): https://www.ambitojuridico.com/noticias/mercantil/financiero-cambiario-y-seguros/aunque-comparten-naturaleza-juridica-depositos-de
+- GMF en depósitos de bajo monto (INCP): https://incp.org.co/publicaciones/infoincp-publicaciones/impuestos/2024/06/cual-es-la-exencion-del-gmf-para-depositos-de-bajo-monto/
+- Capítulo SARLAFT (copia de 2022, tercero): https://www.hklaw.com/-/media/files/insights/publications/2022/11/sfccircularbasicajurdicasarlaft.pdf?la=en
+- Decreto 2672 de 2012, corresponsales (copia de tercero): https://www.dmsjuridica.com/buscador_20179478954/legislacion/decretos/2023/08/03/decreto-2672-de-2012/?pdf=45212
+- Ley 1328 de 2009: http://www.secretariasenado.gov.co/senado/basedoc/ley_1328_2009.html
+- Decreto 1069 de 2025 (Bre-B): https://www.hklaw.com/en/insights/publications/2025/11/nuevo-decreto-regula-las-ordenes-de-pago-y-las-transferencias
+- Decreto 368 de 2026 (finanzas abiertas): https://www.hklaw.com/en/insights/publications/2026/04/nuevo-decreto-incorpora-el-sistema-de-finanzas-abiertas-en-colombia
+- Circular Externa 4 de 2026 (SFC): https://normativa.colpensiones.gov.co/compilacion/docs/circular_superfinanciera_0004_2026.htm
+- Requisitos SEDPE (tercero, sin confirmar): https://prifinance.com/en/payments/colombia-payment-license/
 - SOA Governance (Erl): https://informit.com/store/soa-governance-9780132478397
 
 ## 8. Lecturas recomendadas
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulo 0 cerrado. Módulo 1 (Caso de negocio, interesados y alcance, con BPMN) en proyecto**, rama `modulo-01-caso-negocio`. Hecho: caso de negocio, público, interesados y alcance; tres procesos BPMN (abrir cuenta de ahorros, transferencia entre cuentas y depositar efectivo) en `modelos/bpmn/` y `diagramas/`; nota del módulo en `docs/modulos/caso-de-negocio.md`. Pendiente: repaso, pregunta de entrevista y pull request a `main`.
+- **Foco actual:** **Módulos 0 y 1 cerrados. Módulo 2 (Requisitos funcionales y no funcionales, restricciones y regulación) en proyecto**, rama `modulo-02-requisitos`. Hecho: regulación verificada (dos rondas), figura legal SEDPE, tope de 8 SMLMV, nombre técnico "depósito de bajo monto" y Bre-B dentro de la primera versión; documentación y procesos BPMN actualizados. Pendiente: requisitos funcionales, atributos de calidad priorizados, catálogo en `docs/requisitos/` y nota del módulo.
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
 - **Pendiente por verificar al llegar a cada módulo:** imagen oficial de Structurizr; versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
@@ -162,33 +179,47 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-15 | Se reescribe este documento con enfoque de proyecto (sin enfoque didáctico) y se agrega la página Herramientas al sitio |
 | 2026-10-15 | **Módulo 0 cerrado** y fusionado a `main`. Inicia el Módulo 1: se deciden público objetivo, producto ancla, interesados y alcance (sección 2) |
 | 2026-10-16 | Módulo 1: BPMN de apertura de cuenta y de transferencia entre cuentas, con la Registraduría simulada; se decide apertura sin monto mínimo y se incluyen corresponsales bancarios como aliados, con el proceso "Depositar efectivo". Nota del módulo publicada en el sitio (sección 2) |
+| 2026-10-16 | Módulo 1 cerrado y fusionado a `main`. Inicia el Módulo 2: se verifica la regulación y se decide la figura SEDPE, el tope de 8 SMLMV, el nombre técnico "depósito de bajo monto" y las transferencias por Bre-B en la primera versión. Se adopta la regla "investigar primero" y se actualizan documentos y procesos BPMN en una sola vez (sección 2) |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
 |---|---|
 | ADR | Architecture Decision Record: registro de decisión de arquitectura (qué se decidió, por qué y con qué consecuencias) |
 | API | Application Programming Interface: interfaz de programación de aplicaciones; la forma en que un sistema ofrece funciones a otros |
-| ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
 | arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
+| ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
 | AWS | Amazon Web Services: la nube de Amazon |
 | BPMN | Business Process Model and Notation: notación para dibujar procesos de negocio |
+| Bre-B | Sistema de pagos inmediatos de Colombia, que permite transferencias entre entidades al instante (Decreto 1069 de 2025) |
 | C4 | Context, Containers, Components, Code: método para diagramar arquitectura en cuatro niveles de detalle |
 | CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
 | CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
 | Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
 | DDD | Domain-Driven Design: diseño guiado por el dominio; modela el software según el lenguaje y las reglas del negocio |
+| Debida diligencia simplificada | Versión reducida del conocimiento del cliente que la norma permite para productos de bajo riesgo, como el depósito de bajo monto |
+| Depósito de bajo monto | Producto de depósito electrónico para personas naturales con tope de saldo y de débitos mensuales de 8 SMLMV; se puede abrir a distancia (Decreto 222 de 2020) |
 | Docker | Herramienta para crear y ejecutar contenedores |
 | DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
 | EA | Enterprise Architecture: arquitectura empresarial |
 | FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
+| Fogafín | Fondo de Garantías de Instituciones Financieras: seguro de depósitos; cubre hasta $50.000.000 por persona |
 | Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
+| GMF | Gravamen a los Movimientos Financieros (impuesto sobre retiros y transferencias); tiene exenciones para depósitos de bajo monto |
 | HTML | HyperText Markup Language: lenguaje con el que se escriben las páginas web |
 | IaC | Infrastructure as Code: infraestructura como código; crear servidores y redes mediante archivos en vez de clics |
+| Listas restrictivas | Listas de personas con las que una entidad no debe vincularse por riesgo de lavado de activos o financiación del terrorismo |
 | MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
 | PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
+| SAC | Sistema de Atención al Consumidor Financiero: políticas y procesos para atender consultas, quejas y reclamos (Ley 1328 de 2009) |
+| SARLAFT | Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo: controles obligatorios contra el lavado de dinero |
+| SEDPE | Sociedad Especializada en Depósitos y Pagos Electrónicos: figura legal de Kuenta (Ley 1735 de 2014); no puede otorgar créditos |
+| SFC | Superintendencia Financiera de Colombia: entidad que vigila a las entidades financieras |
+| SMLMV | Salario Mínimo Legal Mensual Vigente; en 2026 es $1.750.905 (Decreto 159 de 2026, transitorio) |
 | SOA | Service-Oriented Architecture: arquitectura orientada a servicios |
 | TOGAF | The Open Group Architecture Framework: método de arquitectura empresarial |
+| UIAF | Unidad de Información y Análisis Financiero: recibe los reportes de operaciones sospechosas |
 | UML | Unified Modeling Language: lenguaje unificado de modelado (diagramas de secuencia, clases, etc.) |
+| UVT | Unidad de Valor Tributario: unidad con la que se expresan los montos de impuestos |
 | VPS | Virtual Private Server: servidor virtual privado que se alquila |
 | WSL 2 | Windows Subsystem for Linux, versión 2: Linux ligero que corre dentro de Windows; Docker Desktop lo usa |
