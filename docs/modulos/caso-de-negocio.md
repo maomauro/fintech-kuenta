@@ -61,13 +61,13 @@ Las metas numéricas (usuarios, saldos, tiempos) se definirán con datos verific
 | Transferencias entre cuentas Kuenta y a otras entidades por Bre-B | Cobros a comercios |
 | Consulta de saldo y movimientos | Inversiones |
 | Notificaciones y atención básica | Operación fuera de Colombia |
-| Antifraude básico y reportes mínimos | |
+| Antifraude básico y reportes mínimos | Finanzas abiertas (etapa siguiente) |
 
 La regulación de lo que está dentro se verificó en el Módulo 2. Una consecuencia directa es el **tope del depósito de bajo monto**: el saldo y los débitos mensuales no pueden superar 8 SMLMV (salarios mínimos legales mensuales vigentes), hoy $14.007.240.
 
 ## Procesos clave en BPMN
 
-Se modelan cuatro procesos con **BPMN** (*Business Process Model and Notation*). Cada uno parte de una acción del cliente y termina siempre notificándole el resultado.
+Se modelan ocho procesos con **BPMN** (*Business Process Model and Notation*). Cada uno parte de una acción del cliente y termina siempre notificándole el resultado.
 
 **Convenciones del modelado:**
 
@@ -112,6 +112,33 @@ El cliente entrega su documento y el valor en un corresponsal bancario, que regi
 
 Este proceso se agregó en el Módulo 2, cuando Bre-B entró en la primera versión. El cliente indica el destino y el valor, y Kuenta consulta el destino en **Bre-B**, que devuelve el nombre del beneficiario. Antes de continuar, Kuenta muestra ese nombre **enmascarado** junto con el **costo** de la operación, y el cliente confirma. Después aplica cuatro controles: que el destino exista, que el saldo alcance, que el movimiento esté dentro del tope y que no sea sospechoso. Si los pasa, **reserva** el valor, envía la orden de pago a Bre-B y, según la respuesta, confirma el débito o libera lo reservado. Los rechazos y las retenciones convergen en una sola notificación.
 
+### 5. Retirar efectivo en un corresponsal
+
+![Proceso BPMN: retirar efectivo en un corresponsal bancario](../../diagramas/retirar-efectivo.svg)
+
+Es el espejo del depósito, pero con un orden distinto: Kuenta **debita primero** y solo entonces autoriza al corresponsal a entregar el efectivo, de modo que el corresponsal nunca entrega dinero que no se haya descontado. Antes de autorizar, Kuenta aplica los mismos controles: cuenta activa, saldo suficiente, tope permitido y antifraude.
+
+### 6. Revisar manualmente lo retenido
+
+![Proceso BPMN: revisar manualmente lo retenido](../../diagramas/revision-manual.svg)
+
+Recibe todo lo que los otros procesos retienen: solicitudes de apertura, transferencias, depósitos y retiros. Una persona de cumplimiento revisa el caso. Si es sospechoso, reporta la operación a la **UIAF** (Unidad de Información y Análisis Financiero) y Kuenta la rechaza; si no, Kuenta libera y ejecuta lo retenido. En ambos casos el cliente recibe la notificación.
+
+### 7. Atender una queja o un reclamo
+
+![Proceso BPMN: atender una queja o un reclamo](../../diagramas/atender-queja.svg)
+
+Responde al **Sistema de Atención al Consumidor Financiero** que exige la Ley 1328 de 2009. El cliente presenta la queja, Kuenta la registra con un número de radicado, la analiza y responde. Si el cliente no acepta la respuesta, puede acudir al **defensor del consumidor financiero**. Los plazos de respuesta se verificarán y quedarán como requisito.
+
+### 8. Completar información y cerrar depósitos inactivos
+
+![Proceso BPMN: completar información y cerrar depósitos inactivos](../../diagramas/completar-informacion-inactivos.svg)
+
+Reúne dos procesos que ocurren después de abrir el depósito y no durante la apertura:
+
+- **Completar información:** por la debida diligencia simplificada, Kuenta pide al cliente la información restante. Si no la completa a tiempo, aplica una medida que **aún no se ha verificado** y por eso aparece marcada en el diagrama.
+- **Depósitos inactivos:** si un depósito queda sin fondos por 3 meses o más, la norma permite terminarlo. Kuenta avisa primero al cliente y solo lo termina si no vuelve a depositar.
+
 ## Decisiones de este módulo
 
 | Decisión | Resultado | Motivo |
@@ -134,6 +161,7 @@ Este proceso se agregó en el Módulo 2, cuando Bre-B entró en la primera versi
 - [x] BPMN: transferencia entre cuentas
 - [x] BPMN: depositar efectivo en un corresponsal
 - [x] BPMN: transferir a otra entidad por Bre-B (agregado en el Módulo 2)
+- [x] BPMN: retirar efectivo, revisión manual, queja o reclamo, y completar información y cerrar inactivos (agregados en el Módulo 2)
 - [x] Glosario ampliado (al final de esta página)
 
 ## Glosario
