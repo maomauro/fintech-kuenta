@@ -10,6 +10,7 @@ title: Kuenta · Arquitectura
 
 ## Cómo navegar
 
+- **[Mapa general](./mapa-general.md)**: cómo se implementa una arquitectura, paso a paso.
 - **Módulos**: una nota por módulo, con lo hecho y lo decidido.
 - **Requisitos**: catálogo de requisitos, historias de usuario y casos de uso.
 - **Decisiones (ADR)**: cada decisión de arquitectura en un registro (*Architecture Decision Record*).
