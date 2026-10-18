@@ -37,6 +37,10 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Finanzas abiertas (Módulo 2) | **Fuera de la primera versión**, como etapa siguiente. El Decreto 368 de 2026 incluye a las SEDPE como proveedoras de datos obligatorias; falta verificar desde cuándo. Restricción de diseño: las APIs y el modelo de datos no deben impedir exponer datos a terceros con consentimiento del cliente | 2026-10-16 |
 | Atributos de calidad (Módulo 2) | Diez atributos aprobados el 2026-10-17, en este orden de prioridad: seguridad, integridad del dinero, disponibilidad (99,95 % en transferencias y depósitos; 99,9 % en el resto), cumplimiento y auditoría, rendimiento (Bre-B en 20 s), recuperación (RPO 5 min, RTO 1 h), evolutividad, usabilidad, observabilidad y capacidad. Detalle en `docs/requisitos/atributos-de-calidad.md` | 2026-10-17 |
 | Dimensionamiento (Módulo 2) | Hipótesis ficticia: **50.000 clientes el primer año** y pico de **50 transacciones por segundo**; a validar | 2026-10-17 |
+| Marco de trabajo (Módulo 3) | **Scrum** con roles simulados (Product Owner, Developers, Scrum Master); sprints de 2 semanas (propuesta). La Definition of Done tiene dos niveles (listo para usar y auditable) e incluye los requisitos regulatorios | 2026-10-17 |
+| Product Goal (Módulo 3) | "Que una persona abra su depósito de bajo monto y haga sus pagos del día a día sin ir a una oficina, cumpliendo la regulación" | 2026-10-17 |
+| Formato de historias (Módulo 3) | Épica, historia ("Como... quiero... para...") y criterios de aceptación Dado/Cuando/Entonces. Backlog inicial: 7 épicas y 23 historias que cubren los 24 requisitos | 2026-10-17 |
+| Corte del MVP (Módulo 3) | **Release 1 (MVP)** sin Bre-B: 20 historias. **Release 2** completa la primera versión con Bre-B, la terminación de depósitos inactivos (antes del mes 3 de operación) y el aviso de cambios del contrato. El cumplimiento va como historias en el mismo backlog | 2026-10-17 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
 
@@ -157,7 +161,7 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0, 1 y 2 cerrados.** El entregable del Módulo 2 está en `docs/requisitos/` (requisitos funcionales, atributos de calidad, restricciones y regulación, casos de uso) y en la nota `docs/modulos/requisitos.md`. Sigue el **Módulo 3 (metodología ágil)**. Pendiente: verificar en fuente oficial lo marcado como pendiente.
+- **Foco actual:** **Módulos 0, 1 y 2 cerrados. Módulo 3 (Metodología ágil) con el entregable redactado**, rama `modulo-03-metodologia-agil`: `docs/agil/` (marco de trabajo, épicas e historias, plan de releases) y la nota `docs/modulos/metodologia-agil.md`. Pendiente: repaso, pregunta de entrevista, pull request, y verificar las fuentes de Scrum y story mapping y si Bre-B es obligatoria para una SEDPE.
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
 - **Pendiente por verificar al llegar a cada módulo:** imagen oficial de Structurizr; versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
@@ -185,6 +189,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-16 | Módulo 1 cerrado y fusionado a `main`. Inicia el Módulo 2: se verifica la regulación y se decide la figura SEDPE, el tope de 8 SMLMV, el nombre técnico "depósito de bajo monto" y las transferencias por Bre-B en la primera versión. Se adopta la regla "investigar primero" y se actualizan documentos y procesos BPMN en una sola vez (sección 2) |
 | 2026-10-17 | Módulo 2: se dibujan cuatro BPMN más (ocho en total), se deja fuera las finanzas abiertas, se aprueban los atributos de calidad y su prioridad y se redacta el catálogo en `docs/requisitos/` y la nota del módulo |
 | 2026-10-17 | Módulo 2 cerrado: repaso (5 de 5), pregunta de entrevista y pull request del entregable. Inicia el Módulo 3 (metodología ágil) |
+| 2026-10-17 | Módulo 3: se elige Scrum, se define el Product Goal, se crea el backlog (7 épicas, 23 historias) y se corta el MVP sin Bre-B (Release 1) con Bre-B en el Release 2 |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
@@ -194,30 +199,37 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
 | ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
 | AWS | Amazon Web Services: la nube de Amazon |
+| Backlog | Lista ordenada de todo lo que se quiere construir |
 | BPMN | Business Process Model and Notation: notación para dibujar procesos de negocio |
 | Bre-B | Sistema de pagos inmediatos de Colombia, que permite transferencias entre entidades al instante (Decreto 1069 de 2025) |
 | C4 | Context, Containers, Components, Code: método para diagramar arquitectura en cuatro niveles de detalle |
 | CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
 | CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
 | Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
+| Criterio de aceptación | Condición verificable que debe cumplirse para dar una historia por terminada |
 | DDD | Domain-Driven Design: diseño guiado por el dominio; modela el software según el lenguaje y las reglas del negocio |
 | Debida diligencia simplificada | Versión reducida del conocimiento del cliente que la norma permite para productos de bajo riesgo, como el depósito de bajo monto |
+| Definition of Done | Estándar de calidad que debe cumplir todo elemento para considerarse terminado; incluye los requisitos regulatorios |
 | Depósito de bajo monto | Producto de depósito electrónico para personas naturales con tope de saldo y de débitos mensuales de 8 SMLMV; se puede abrir a distancia (Decreto 222 de 2020) |
 | Docker | Herramienta para crear y ejecutar contenedores |
 | DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
 | EA | Enterprise Architecture: arquitectura empresarial |
+| Épica | Conjunto de historias que persiguen un mismo objetivo |
 | FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
 | Fogafín | Fondo de Garantías de Instituciones Financieras: seguro de depósitos; cubre hasta $50.000.000 por persona |
 | Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
 | GMF | Gravamen a los Movimientos Financieros (impuesto sobre retiros y transferencias); tiene exenciones para depósitos de bajo monto |
+| Historia de usuario | Necesidad de un usuario escrita como "Como... quiero... para..." |
 | HTML | HyperText Markup Language: lenguaje con el que se escriben las páginas web |
 | IaC | Infrastructure as Code: infraestructura como código; crear servidores y redes mediante archivos en vez de clics |
 | Listas restrictivas | Listas de personas con las que una entidad no debe vincularse por riesgo de lavado de activos o financiación del terrorismo |
 | MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
 | PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
+| Product Goal | Objetivo de largo plazo del producto; en Scrum solo hay uno a la vez |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
 | SAC | Sistema de Atención al Consumidor Financiero: políticas y procesos para atender consultas, quejas y reclamos (Ley 1328 de 2009) |
 | SARLAFT | Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo: controles obligatorios contra el lavado de dinero |
+| Scrum | Marco de trabajo ágil con sprints, un backlog y roles definidos |
 | SEDPE | Sociedad Especializada en Depósitos y Pagos Electrónicos: figura legal de Kuenta (Ley 1735 de 2014); no puede otorgar créditos |
 | SFC | Superintendencia Financiera de Colombia: entidad que vigila a las entidades financieras |
 | SMLMV | Salario Mínimo Legal Mensual Vigente; en 2026 es $1.750.905 (Decreto 159 de 2026, transitorio) |
