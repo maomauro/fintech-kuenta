@@ -10,10 +10,11 @@ title: Kuenta · Arquitectura
 
 ## Cómo navegar
 
+- **[Mapa general](./mapa-general.md)**: cómo se implementa una arquitectura, paso a paso.
 - **Módulos**: una nota por módulo, con lo hecho y lo decidido.
 - **Requisitos**: catálogo de requisitos, historias de usuario y casos de uso.
 - **Decisiones (ADR)**: cada decisión de arquitectura en un registro (*Architecture Decision Record*).
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0, 1 y 2 están cerrados. Hoy está en el **Módulo 3: metodología ágil**.
+El proyecto avanza módulo a módulo. Los Módulos 0, 1, 2 y 3 están cerrados. Hoy está en el **Módulo 4: arquitectura empresarial ligera**.
