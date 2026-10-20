@@ -1,3 +1,6 @@
 # Archivos temporales y copias de seguridad de draw.io
 .$*.bkp
 .$*.dtmp
+
+# Salida de la exportación de Structurizr (se pega en docs/arquitectura-aplicacion/)
+modelos/structurizr/salida/

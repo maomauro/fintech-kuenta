@@ -1,0 +1,184 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="Nivel 3 - Componentes-1" name="Nivel 3 - Componentes">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2000" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Nivel 3 · Componentes (módulos) de Kuenta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Los 8 módulos del monolito y sus puertas públicas. Líneas punteadas azules: «Avisa» (a Notificaciones). Punteadas grises: «Registra» (en Auditoría)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="app" value="&lt;b&gt;Aplicación del cliente&lt;/b&gt;&lt;br&gt;[Aplicación móvil]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="895" y="90" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="terminal" value="&lt;b&gt;Terminal del corresponsal&lt;/b&gt;&lt;br&gt;[Aplicación de terminal]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="90" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="consola" value="&lt;b&gt;Consola de back office&lt;/b&gt;&lt;br&gt;[Aplicación web con MFA]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="90" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_mono" value="&lt;b&gt;Aplicación Kuenta&lt;/b&gt;&lt;br&gt;[Monolito modular]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="360" y="230" width="1250" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="identidad" value="&lt;b&gt;Identidad y apertura&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-01 a 03: registrar, verificar identidad, mantener datos del cliente" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="atencion" value="&lt;b&gt;Atención al cliente&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-20 a 23: tarifas, consultas, extractos, quejas, avisos" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="710" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="efectivo" value="&lt;b&gt;Efectivo y corresponsales&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-12 a 14: depositar, retirar, red de corresponsales" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pagos" value="&lt;b&gt;Pagos y transferencias&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-09 a 11: entre cuentas, Bre-B, conciliación" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cuentas" value="&lt;b&gt;Cuentas y depósitos&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-04 a 08: depósitos, topes, libro mayor, GMF, inactivos" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="865" y="520" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cumplimiento" value="&lt;b&gt;Cumplimiento y riesgo&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-15 a 17: listas, antifraude, reportes" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1175" y="520" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="notificaciones" value="&lt;b&gt;Notificaciones&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-19: avisar al cliente" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#2F6DB5;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="760" width="560" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="auditoria" value="&lt;b&gt;Auditoría&lt;/b&gt;&lt;br&gt;[Módulo]&lt;br&gt;&lt;br&gt;CAP-18: registro de cada operación, solo se agrega" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#2F6DB5;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="760" width="570" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="registraduria" value="&lt;b&gt;Registraduría Nacional (simulada)&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Valida la identidad del cliente" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="contable" value="&lt;b&gt;Sistema contable y de tesorería&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Contabilidad general y tesorería (CAP-24)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#B9A66B;strokeColor=#8C7C47;fontColor=#1A1A1A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mensajeria" value="&lt;b&gt;Proveedor de notificaciones&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Envía mensajes al cliente (SMS, correo, notificación en la app)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="745" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="breb" value="&lt;b&gt;Bre-B&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Sistema de pagos inmediatos del Banco de la República" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="240" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="redes" value="&lt;b&gt;Redes de corresponsales&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Operan los terminales y concilian con Kuenta" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="380" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="listas" value="&lt;b&gt;Proveedor de listas restrictivas&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Consulta de listas para SARLAFT" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="520" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="autoridades" value="&lt;b&gt;UIAF y Superintendencia Financiera&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Reciben los reportes de operaciones sospechosas y los reportes mínimos" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="650" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Registra al cliente&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="app" target="identidad">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="Consulta saldo&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="app" target="cuentas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="Solicita transferencias&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="app" target="pagos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Consulta, reclama&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="app" target="atencion">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Autoriza y confirma depósitos y retiros&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="terminal" target="efectivo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Revisión manual y reportes&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="consola" target="cumplimiento">
+          <mxGeometry relative="1" as="geometry" x="-0.7">
+            <Array as="points">
+              <mxPoint x="1295" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n10" value="Consulta la auditoría&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="consola" target="auditoria">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1660" y="130" />
+              <mxPoint x="1660" y="805" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" value="Valida la identidad" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="identidad" target="registraduria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="Envía y recibe transferencias" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="breb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="Concilia con corresponsales" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="redes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="Consulta listas restrictivas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cumplimiento" target="listas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="Reporta operaciones sospechosas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cumplimiento" target="autoridades">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Entrega los asientos contables" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cuentas" target="contable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="Pide enviar notificaciones" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="notificaciones" target="mensajeria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="Pide crear el depósito" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="identidad" target="cuentas">
+          <mxGeometry relative="1" as="geometry" x="-0.35" />
+        </mxCell>
+        <mxCell id="n19" value="Pide consultar listas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="identidad" target="cumplimiento">
+          <mxGeometry relative="1" as="geometry" x="0.1" />
+        </mxCell>
+        <mxCell id="n20" value="Reserva, debita y acredita" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="cuentas">
+          <mxGeometry relative="1" as="geometry" x="-0.1" />
+        </mxCell>
+        <mxCell id="n21" value="Pide revisión antifraude" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="cumplimiento">
+          <mxGeometry relative="1" as="geometry" x="-0.1" />
+        </mxCell>
+        <mxCell id="n22" value="Autoriza, debita y acredita" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="efectivo" target="cuentas">
+          <mxGeometry relative="1" as="geometry" x="-0.4" />
+        </mxCell>
+        <mxCell id="n23" value="Pide revisión antifraude" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="efectivo" target="cumplimiento">
+          <mxGeometry relative="1" as="geometry" x="0.2" />
+        </mxCell>
+        <mxCell id="n24" value="Consulta saldo y movimientos" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="atencion" target="cuentas">
+          <mxGeometry relative="1" as="geometry" x="-0.4" />
+        </mxCell>
+        <mxCell id="n25" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="identidad" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n26" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="identidad" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="atencion" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n28" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="atencion" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n29" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="efectivo" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n30" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="efectivo" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n31" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="pagos" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n32" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="pagos" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cuentas" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n34" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cuentas" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n35" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#3A7BD0;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cumplimiento" target="notificaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n36" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#8A8F98;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cumplimiento" target="auditoria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n37" value="Fuente de verdad: modelos/structurizr/kuenta.dsl. Este archivo es una copia editable en draw.io; si cambia el modelo, se regenera o se actualiza a mano." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="360" y="905" width="720" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

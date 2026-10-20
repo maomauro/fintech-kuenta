@@ -46,7 +46,7 @@ La Scrum Guide 2020 pide que la Definition of Done incluya los requisitos regula
 - Evidencia de la revisión por pares.
 - La norma que origina la historia está citada, si la hay.
 
-El segundo nivel se automatiza en el Módulo 10 (CI/CD): lo ideal es que la evidencia se genere sola con cada despliegue.
+El segundo nivel se automatiza en el Módulo 11 (CI/CD): lo ideal es que la evidencia se genere sola con cada despliegue.
 
 ## El cumplimiento va en el mismo backlog
 
