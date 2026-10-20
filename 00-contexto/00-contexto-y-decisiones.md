@@ -1,6 +1,6 @@
 # Kuenta — Contexto y decisiones del proyecto
 
-_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-16. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
+_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-19. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
 
 ## 1. Objetivo
 Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia de depósitos y pagos (constituida como SEDPE; los créditos llegan en una etapa posterior), desde el punto de vista de un arquitecto de software recién contratado: **paso a paso y "como debe ser"**. El resultado queda documentado, diagramado y **publicado en un VPS (servidor virtual privado)** como sitio navegable, para consultarlo y exponerlo en entrevistas. Debe ser completo: que no falte nada.
@@ -44,6 +44,10 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Mapa de capacidades (Módulo 4) | **Dos niveles**: 7 dominios y 27 capacidades, derivadas de los 8 procesos, las 7 épicas y la regulación, más un grupo de apoyo sin detallar. Clasificadas por tipo (diferenciadora, obligatoria, de apoyo) y por release. Detalle en `docs/arquitectura-empresarial/mapa-de-capacidades.md` | 2026-10-18 |
 | Dominios de negocio (Módulo 4) | Clientes e identidad; Cuentas y depósitos; Pagos y transferencias; Efectivo y corresponsales; Riesgo y cumplimiento; Atención y experiencia; Gestión corporativa y apoyo. En el Módulo 5 se refinan como límites de la aplicación | 2026-10-18 |
 | Principios (Módulo 4) | Formato TOGAF (nombre, enunciado, justificación, implicaciones). Ocho principios en orden de prevalencia: seguridad y privacidad desde el diseño; el dinero siempre cuadra; diseñar para fallar; cumplir es parte del diseño; un solo dueño por cada dato; lo más simple que cumpla; evolución en pasos pequeños; automatizar la entrega y la evidencia. La ley no se negocia. Propuesta a revisar | 2026-10-18 |
+| Estilo del core (Módulo 5) | **Monolito modular**: una sola aplicación y un solo despliegue, con varias réplicas, módulos con datos propios y puertas públicas. Un módulo pasa a servicio solo si cumple una señal (escala desigual, equipos que se pisan, ritmo de cambio distinto, aislamiento exigido, tecnología distinta o fallos en cascada) respaldada por una métrica; los umbrales se definen en los Módulos 10 y 14. El estilo solo afecta lo interno: lo externo (Bre-B, redes) va por la red en ambos estilos | 2026-10-19 |
+| Módulos del monolito (Módulo 5) | **Ocho**: Identidad y apertura, Cuentas y depósitos, Pagos y transferencias, Efectivo y corresponsales, Cumplimiento y riesgo, Atención al cliente, Notificaciones y Auditoría. Un dominio por módulo, más dos capacidades (CAP-19 y CAP-18) separadas por ser transversales. «Gestión corporativa y apoyo» (CAP-24 a 27) no es módulo: son sistemas de apoyo que se compran y aparecen como externos | 2026-10-19 |
+| Entregable y publicación de diagramas (Módulo 5) | C4 de contexto y contenedores y tres secuencias UML (apertura de depósito, transferencia entre cuentas, depósito en corresponsal), más una vista adicional de componentes (los módulos) y, a pedido del autor, un diagrama de clases de alto nivel de Cuentas y depósitos (C4 nivel 4, opcional, escrito a mano). Se publican como **Mermaid exportado desde Structurizr** y dibujado por el sitio (`@docusaurus/theme-mermaid`, `securityLevel: loose`). Las secuencias salen de vistas dinámicas del mismo modelo. Además, copias editables en draw.io (`modelos/c4/` y `modelos/uml/`, derivadas de `kuenta.dsl`, que sigue siendo la fuente de verdad) y un diagrama UML de casos de uso (CU-01 a CU-12), a pedido del autor | 2026-10-19 |
+| Mapas de alto nivel (portal) | Dos páginas con componentes React: **Mapa de alto nivel** (serpentina con iconos) y **Mapa de engranes** (recorrido vertical con bucle de evolución), junto al Mapa general. Comparten el contenido en `sitio/src/components/MapasAltoNivel/etapas.js` | 2026-10-19 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
 
@@ -55,7 +59,7 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | 2 | Requisitos funcionales y no funcionales, restricciones y regulación (incluye casos de uso) | Catálogo de requisitos y atributos de calidad priorizados |
 | 3 | **Metodología ágil: épicas, historias de usuario, criterios de aceptación, backlog (lista priorizada de trabajo) y MVP (Minimum Viable Product, producto mínimo viable)** (módulo nuevo) | Backlog inicial priorizado |
 | 4 | Arquitectura empresarial ligera: capacidades, dominios y principios | Mapa de capacidades y principios (Archi) |
-| 5 | Arquitectura de aplicación: estilo, límites de dominio, C4 (Context, Containers, Components, Code: contexto, contenedores, componentes y código) y UML (Unified Modeling Language, lenguaje unificado de modelado: secuencia y clases) | Diagramas de contexto y contenedores; secuencias clave |
+| 5 | Arquitectura de aplicación: estilo, límites de dominio, C4 (Context, Containers, Components, Code: contexto, contenedores, componentes y código) y UML (Unified Modeling Language, lenguaje unificado de modelado: secuencia y clases) | Diagramas C4 (contexto, contenedores, componentes y clases del nivel 4) y UML (casos de uso y secuencias clave) |
 | 6 | Datos y consistencia: modelo entidad-relación, eventos y sagas (secuencias de pasos con compensación entre servicios) | Modelo de datos de alto nivel y flujo de eventos |
 | 7 | Integración y APIs (Application Programming Interface, interfaz de programación de aplicaciones): contratos, gateway (puerta de entrada de las APIs), terceros | Contratos de ejemplo y mapa de integraciones |
 | 8 | Arquitectura en AWS (diagramación de AWS) | Diagrama de despliegue y tabla de servicios |
@@ -89,7 +93,7 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Necesidad | Herramienta | Cómo corre (propuesta, por confirmar en el Módulo 0) |
 |---|---|---|
 | Modelo formal ArchiMate (negocio → tecnología); exporta reporte HTML (HyperText Markup Language, lenguaje de páginas web) navegable | Archi (ya instalado) | Programa de escritorio |
-| Diagramas C4 como código | Structurizr (DSL: Domain-Specific Language, lenguaje específico de dominio; y CLI: Command-Line Interface, herramienta de línea de comandos) | Contenedor Docker (Structurizr Lite) |
+| Diagramas C4 como código | Structurizr (DSL: Domain-Specific Language, lenguaje específico de dominio; y CLI: Command-Line Interface, herramienta de línea de comandos) | Contenedor Docker (imagen `structurizr/structurizr`; Lite y el CLI antiguo figuran en fin de vida en su documentación) |
 | Diagramas libres, BPMN y UML (soporte a verificar al llegar a esos módulos) | draw.io; Excalidraw para bocetos | Aplicación web o de escritorio |
 | Sitio navegable de documentación | Docusaurus (licencia verificada 2026-10-15: MIT para el código y CC-BY-4.0 para la documentación; requiere Node.js 20 o superior; no publica imagen Docker oficial, así que se usa la imagen oficial de Node) | Contenedor Docker (imagen oficial `node:24`, Node.js 24 LTS) |
 | Control de versiones | Git (ya instalado) y GitHub | Instalación normal |
@@ -113,6 +117,8 @@ fintech-kuenta/
 ├─ modelos/
 │  ├─ archi/                  ← modelo ArchiMate (.archimate)
 │  ├─ structurizr/            ← modelo C4 (.dsl)
+│  ├─ c4/                     ← copias editables en draw.io: contexto, contenedores, componentes y clases
+│  ├─ uml/                    ← copias editables en draw.io: casos de uso y secuencias
 │  └─ bpmn/                   ← procesos de negocio
 ├─ diagramas/                 ← fuentes (draw.io, Excalidraw) y exportados (PNG, SVG)
 ├─ contratos-api/             ← OpenAPI de ejemplo
@@ -132,6 +138,8 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 **Arquitectura empresarial (EA: Enterprise Architecture) vs. de software/solución.** La arquitectura empresarial define rumbo, dominios, estándares y hoja de ruta para toda la organización (marcos: TOGAF, ArchiMate). La arquitectura de solución diseña un sistema concreto (C4, ADR, arc42). La arquitectura empresarial interviene antes (contexto), al arrancar (alineación), durante (revisión de cumplimiento) y después (panorama actualizado). En el ejercicio, el autor hace ambos papeles: arquitectura empresarial ligera + diseño de solución.
 
 **SOA, DDD, microservicios y AWS Well-Architected.** No compiten: SOA (Service-Oriented Architecture, arquitectura orientada a servicios) y microservicios son estilos de arquitectura; DDD (Domain-Driven Design, diseño guiado por el dominio) es un enfoque de modelado del dominio del negocio; Well-Architected ("bien diseñado") es un marco de buenas prácticas de nube (seis pilares: excelencia operativa, seguridad, confiabilidad, eficiencia de rendimiento, optimización de costos y sostenibilidad). Orden de uso: DDD define límites → SOA/microservicios los convierte en servicios → Well-Architected evalúa la solución en AWS. Tensiones reales: modelo canónico (SOA) vs. contextos delimitados (DDD); reutilización y gobierno centralizado vs. autonomía de equipos. Se resuelven documentando decisiones (ADR, módulo 13). Definir glosario común en el módulo 0.
+
+**Enfoques y estilos son preguntas distintas, en orden.** (1) Qué debe hacer y con qué calidad (requisitos); (2) dónde van los límites (capacidades, DDD, Event Storming, equipos, datos); (3) cómo conviven esos límites (monolito modular, microservicios, SOA); (4) cómo se ordena el código dentro de cada uno (capas, hexagonal, CQRS); (5) cómo se hablan (APIs, eventos); (6) dónde corre (nube). Cambiar una respuesta afecta a las siguientes, no a las anteriores. El estilo solo afecta lo interno: lo externo va por la red en cualquier estilo. Los sistemas de apoyo (nómina, compras, contabilidad) se compran o contratan y aparecen como sistemas externos. Pendiente contrastar con Evans (dominio, contexto delimitado, módulo) y con Erl (SOA).
 
 **Marcos estándar de referencia.** TOGAF 10 (The Open Group Architecture Framework: método de arquitectura empresarial), ArchiMate 3.2 (notación), ISO/IEC/IEEE 42010:2022 (norma internacional para describir arquitecturas; ISO: Organización Internacional de Normalización, IEC: Comisión Electrotécnica Internacional, IEEE: Instituto de Ingenieros Eléctricos y Electrónicos), C4 y arc42 (documentación ligera).
 
@@ -164,10 +172,10 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0, 1, 2 y 3 cerrados. Módulo 4 (Arquitectura empresarial ligera) con el entregable redactado**, rama `modulo-04-arquitectura-empresarial`: `docs/arquitectura-empresarial/` (mapa de capacidades y principios), el modelo `modelos/archi/kuenta.archimate` y la nota `docs/modulos/arquitectura-empresarial.md`. Pendiente: abrir el modelo en Archi y confirmar las vistas, commits y push, repaso, pregunta de entrevista, pull request; contrastar criterios con la especificación de ArchiMate y con BIAN.
+- **Foco actual:** **Módulos 0 a 4 cerrados y fusionados a `main`** (último commit: `b9f8db1`). **Módulo 5 (Arquitectura de aplicación) con las cuatro decisiones tomadas y el entregable redactado y revisado en el sitio**: `docs/arquitectura-aplicacion/` (estilo y límites, diagramas C4, secuencias), el modelo `modelos/structurizr/kuenta.dsl`, la nota `docs/modulos/arquitectura-de-aplicacion.md`, Mermaid configurado en el sitio, y copias en draw.io en `modelos/c4/` y `modelos/uml/` (con casos de uso). El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local). Pendiente: probar `exportar.sh` con Docker, revisar las copias en draw.io en la aplicación, repaso, pregunta de entrevista, pull request.
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
-- **Pendiente por verificar al llegar a cada módulo:** imagen oficial de Structurizr; versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
+- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
 - **Lista de temas para profundizar (fuera del flujo principal):** _(vacía)_
 
 ## 10. Registro de cambios
@@ -194,6 +202,8 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-17 | Módulo 2 cerrado: repaso (5 de 5), pregunta de entrevista y pull request del entregable. Inicia el Módulo 3 (metodología ágil) |
 | 2026-10-17 | Módulo 3: se elige Scrum, se define el Product Goal, se crea el backlog (7 épicas, 23 historias) y se corta el MVP sin Bre-B (Release 1) con Bre-B en el Release 2 |
 | 2026-10-18 | Módulo 3 cerrado y fusionado a `main`. Se corrige la numeración: el siguiente es el Módulo 4 (arquitectura empresarial), no el 5. Módulo 4: mapa de capacidades de dos niveles (7 dominios, 27 capacidades), 8 principios y modelo en Archi |
+| 2026-10-19 | Módulo 4 cerrado y fusionado a `main`. Se agregan al portal el Mapa general (componente React), el Mapa de alto nivel y el Mapa de engranes. Módulo 5: se aprueban las decisiones A (monolito modular), B (8 módulos), C (entregable) y D (Mermaid); se modela Kuenta en Structurizr y se redactan las páginas del módulo. Se corrige la herramienta: Structurizr Lite y el CLI figuran en fin de vida, la imagen vigente es `structurizr/structurizr` |
+| 2026-10-19 | Módulo 5: el sitio muestra los diagramas bien; se agregan copias en draw.io (C4 en `modelos/c4/`, UML en `modelos/uml/`) y un diagrama de casos de uso. Se alinean los estados del Mapa general, el README y la introducción, y una cita de CI/CD (Módulo 11) |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |

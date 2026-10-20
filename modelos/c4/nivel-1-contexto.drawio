@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="Nivel 1 - Contexto-1" name="Nivel 1 - Contexto">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1500" pageHeight="1230" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Nivel 1 · Contexto de Kuenta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Kuenta y su entorno: quién la usa y con qué sistemas se conecta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="700" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="cliente" value="&lt;b&gt;Cliente&lt;/b&gt;&lt;br&gt;[Persona]&lt;br&gt;&lt;br&gt;Persona natural con un depósito de bajo monto" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="corresponsal" value="&lt;b&gt;Corresponsal&lt;/b&gt;&lt;br&gt;[Persona]&lt;br&gt;&lt;br&gt;Atiende depósitos y retiros de efectivo en su establecimiento" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="analista" value="&lt;b&gt;Analista de cumplimiento&lt;/b&gt;&lt;br&gt;[Persona]&lt;br&gt;&lt;br&gt;Revisa lo retenido y decide si se libera o se rechaza" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="regulador" value="&lt;b&gt;Regulador&lt;/b&gt;&lt;br&gt;[Persona]&lt;br&gt;&lt;br&gt;Recibe reportes y consulta la auditoría" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="kuenta" value="&lt;b&gt;Kuenta&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Core transaccional: apertura de depósitos, cuentas, pagos, efectivo, cumplimiento y atención" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#0B3D6B;strokeColor=#082B4D;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="540" y="330" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="registraduria" value="&lt;b&gt;Registraduría Nacional (simulada)&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Valida la identidad del cliente" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="80" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="listas" value="&lt;b&gt;Proveedor de listas restrictivas&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Consulta de listas para SARLAFT" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="210" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="autoridades" value="&lt;b&gt;UIAF y Superintendencia Financiera&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Reciben los reportes de operaciones sospechosas y los reportes mínimos" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="340" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="breb" value="&lt;b&gt;Bre-B&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Sistema de pagos inmediatos del Banco de la República" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="470" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="redes" value="&lt;b&gt;Redes de corresponsales&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Operan los terminales y concilian con Kuenta" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="600" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mensajeria" value="&lt;b&gt;Proveedor de notificaciones&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Envía mensajes al cliente (SMS, correo, notificación en la app)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="730" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="contable" value="&lt;b&gt;Sistema contable y de tesorería&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Contabilidad general y tesorería (CAP-24)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#B9A66B;strokeColor=#8C7C47;fontColor=#1A1A1A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="540" y="700" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="nomina" value="&lt;b&gt;Sistema de personas y nómina&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Gestión de personas (CAP-26)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#B9A66B;strokeColor=#8C7C47;fontColor=#1A1A1A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="300" y="900" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="compras" value="&lt;b&gt;Sistema de compras y proveedores&lt;/b&gt;&lt;br&gt;[Sistema de software]&lt;br&gt;&lt;br&gt;Gestión de proveedores y terceros (CAP-27)" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#B9A66B;strokeColor=#8C7C47;fontColor=#1A1A1A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="780" y="900" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="personal" value="&lt;b&gt;Personal de Kuenta&lt;/b&gt;&lt;br&gt;[Persona]&lt;br&gt;&lt;br&gt;Empleados que usan los sistemas de apoyo" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="540" y="1030" width="320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Abre su depósito, transfiere y consulta" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="kuenta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="Registra depósitos y retiros" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="corresponsal" target="kuenta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="Revisa operaciones retenidas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="analista" target="kuenta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Consulta reportes y auditoría" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="regulador" target="kuenta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Valida la identidad" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="registraduria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Consulta listas restrictivas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="listas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Reporta operaciones sospechosas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="autoridades">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="Envía y recibe transferencias" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="breb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="Concilia con corresponsales" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="redes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="Pide enviar notificaciones" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="mensajeria">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="Entrega los asientos contables" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="kuenta" target="contable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="Usa" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="personal" target="nomina">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Usa" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="personal" target="compras">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="Entrega asientos" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="nomina" target="contable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="Entrega asientos" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="compras" target="contable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="Fuente de verdad: modelos/structurizr/kuenta.dsl. Este archivo es una copia editable en draw.io; si cambia el modelo, se regenera o se actualiza a mano." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1170" width="720" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

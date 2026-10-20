@@ -2,7 +2,7 @@
 
 Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Los Módulos 0, 1, 2 y 3 están cerrados. Hoy está en el **Módulo 4: arquitectura empresarial ligera**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 4 están cerrados. Hoy está en el **Módulo 5: arquitectura de aplicación**.
 
 ## Cómo navegar este repositorio
 
@@ -15,6 +15,7 @@ Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana fic
 | `docs/adr/` | Un archivo por cada decisión de arquitectura importante, escrito como ADR (Architecture Decision Record, registro de decisión de arquitectura): contexto, opciones, decisión y consecuencias. |
 | `modelos/archi/` | El modelo de arquitectura empresarial en ArchiMate hecho con Archi: capacidades de negocio, aplicaciones y tecnología. |
 | `modelos/structurizr/` | El modelo C4 (Context, Containers, Components, Code: contexto, contenedores, componentes y código) escrito como texto, de donde salen los diagramas de la arquitectura de aplicación. |
+| `modelos/c4/` y `modelos/uml/` | Copias editables en draw.io de los diagramas del Módulo 5: C4 (contexto, contenedores, componentes y clases del nivel 4) en `c4/`, y UML (casos de uso y tres secuencias) en `uml/`. La fuente de verdad de C4 y secuencias sigue siendo `modelos/structurizr/kuenta.dsl`. |
 | `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir un depósito de bajo monto o depositar efectivo en un corresponsal. |
 | `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
 | `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |

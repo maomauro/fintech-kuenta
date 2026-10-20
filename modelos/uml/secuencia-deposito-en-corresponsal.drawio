@@ -1,0 +1,136 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="Secuencia UML · Depositar efectivo en un corresponsal (CU-03)-1" name="Secuencia UML · Depositar efectivo en un corresponsal (CU-03)">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1555" pageHeight="1125" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Secuencia UML · Depositar efectivo en un corresponsal (CU-03)" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Kuenta autoriza antes de que el corresponsal reciba el dinero y acredita después de que lo confirma. La flecha punteada es una respuesta. Requisitos RF-09 y RF-10." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1475" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="corresponsal" value="&lt;b&gt;Corresponsal&lt;/b&gt;&lt;br&gt;[Persona]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="132.5" y="200" as="sourcePoint" />
+            <mxPoint x="132.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="terminal" value="&lt;b&gt;Terminal del corresponsal&lt;/b&gt;&lt;br&gt;[Contenedor: Aplicación de terminal]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="255" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="347.5" y="200" as="sourcePoint" />
+            <mxPoint x="347.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="efectivo" value="&lt;b&gt;Efectivo y corresponsales&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="470" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="200" as="sourcePoint" />
+            <mxPoint x="562.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cuentas" value="&lt;b&gt;Cuentas y depósitos&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="685" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="777.5" y="200" as="sourcePoint" />
+            <mxPoint x="777.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cumplimiento" value="&lt;b&gt;Cumplimiento y riesgo&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="900" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="992.5" y="200" as="sourcePoint" />
+            <mxPoint x="992.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="notificaciones" value="&lt;b&gt;Notificaciones&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1115" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1207.5" y="200" as="sourcePoint" />
+            <mxPoint x="1207.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="auditoria" value="&lt;b&gt;Auditoría&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="110" width="185" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1422.5" y="200" as="sourcePoint" />
+            <mxPoint x="1422.5" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" value="1. Ingresa el depósito del&lt;br&gt;cliente" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="132.5" y="250" as="sourcePoint" />
+            <mxPoint x="347.5" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n12" value="2. Pide autorizar el depósito&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="347.5" y="335" as="sourcePoint" />
+            <mxPoint x="562.5" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" value="3. Verifica cuenta activa y tope" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="420" as="sourcePoint" />
+            <mxPoint x="777.5" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n14" value="4. Pide revisión antifraude" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="505" as="sourcePoint" />
+            <mxPoint x="992.5" y="505" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n15" value="5. Autoriza recibir el efectivo&lt;br&gt;[HTTPS]" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="590" as="sourcePoint" />
+            <mxPoint x="347.5" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n16" value="6. Confirma que recibió el&lt;br&gt;efectivo&lt;br&gt;[HTTPS]" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="347.5" y="675" as="sourcePoint" />
+            <mxPoint x="562.5" y="675" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n17" value="7. Acredita el valor" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="760" as="sourcePoint" />
+            <mxPoint x="777.5" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n18" value="8. Avisa el resultado" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="845" as="sourcePoint" />
+            <mxPoint x="1207.5" y="845" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n19" value="9. Registra" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562.5" y="930" as="sourcePoint" />
+            <mxPoint x="1422.5" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n20" value=" Fuente de verdad: vista dinámica de modelos/structurizr/kuenta.dsl; este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1055" width="1475" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

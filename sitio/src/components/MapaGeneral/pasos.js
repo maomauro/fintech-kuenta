@@ -85,8 +85,7 @@ export const PASOS = [
     "c": "c3",
     "t": "Mapear capacidades",
     "q": "¿Qué debe saber hacer la empresa?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "Agrupar en dominios",
       "Marcar: diferenciadora, obligatoria o de apoyo",
@@ -123,8 +122,7 @@ export const PASOS = [
     "c": "c4",
     "t": "Fijar principios",
     "q": "¿Con qué reglas decidimos?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "Pocas reglas claras",
       "Ordenadas por prevalencia",
@@ -165,7 +163,8 @@ export const PASOS = [
     "c": "c5",
     "t": "Diseñar la solución",
     "q": "¿Cómo se construye?",
-    "st": "todo",
+    "st": "now",
+    "aqui": true,
     "bul": [
       "Estilo y límites de aplicación",
       "Datos y consistencia",

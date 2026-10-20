@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="Casos de uso-1" name="Casos de uso">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1400" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Casos de uso de Kuenta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Qué quiere lograr cada actor con el sistema. Detalle, procesos y requisitos en docs/requisitos/casos-de-uso.md." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="b" value="&lt;b&gt;Kuenta&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="330" y="80" width="760" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-01" value="&lt;b&gt;CU-01&lt;/b&gt;&lt;br&gt;Abrir un depósito de bajo monto desde la app" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="115" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-02" value="&lt;b&gt;CU-02&lt;/b&gt;&lt;br&gt;Completar su información tras la apertura" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="195" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-03" value="&lt;b&gt;CU-03&lt;/b&gt;&lt;br&gt;Depositar efectivo en un corresponsal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="275" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-04" value="&lt;b&gt;CU-04&lt;/b&gt;&lt;br&gt;Retirar efectivo en un corresponsal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="355" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-05" value="&lt;b&gt;CU-05&lt;/b&gt;&lt;br&gt;Transferir a otra cuenta Kuenta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="435" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-06" value="&lt;b&gt;CU-06&lt;/b&gt;&lt;br&gt;Transferir a otra entidad por Bre-B" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="515" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-07" value="&lt;b&gt;CU-07&lt;/b&gt;&lt;br&gt;Consultar saldo y movimientos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="595" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-08" value="&lt;b&gt;CU-08&lt;/b&gt;&lt;br&gt;Presentar una queja o un reclamo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="350" y="675" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-09" value="&lt;b&gt;CU-09&lt;/b&gt;&lt;br&gt;Registrar un depósito o un retiro en el terminal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="750" y="150" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="corresponsal" value="&lt;b&gt;Corresponsal&lt;/b&gt;&lt;br&gt;[Actor]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="136" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-10" value="&lt;b&gt;CU-10&lt;/b&gt;&lt;br&gt;Revisar lo retenido y decidir si se libera o se rechaza" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="750" y="300" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="analista" value="&lt;b&gt;Analista de cumplimiento&lt;/b&gt;&lt;br&gt;[Actor]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="286" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-12" value="&lt;b&gt;CU-12&lt;/b&gt;&lt;br&gt;Recibir los reportes y consultar la auditoría" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="750" y="450" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="regulador" value="&lt;b&gt;Regulador&lt;/b&gt;&lt;br&gt;[Actor]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="436" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CU-11" value="&lt;b&gt;CU-11&lt;/b&gt;&lt;br&gt;Terminar un depósito inactivo, avisando antes" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="750" y="600" width="300" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="sistema" value="&lt;b&gt;Kuenta (sistema)&lt;/b&gt;&lt;br&gt;[Actor]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="586" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cliente" value="&lt;b&gt;Cliente&lt;/b&gt;&lt;br&gt;[Actor]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="60" y="340" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-04">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-05">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-06">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cliente" target="CU-08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="corresponsal" target="CU-09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="analista" target="CU-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="regulador" target="CU-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="sistema" target="CU-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Fuente: docs/requisitos/casos-de-uso.md (CU-01 a CU-12). Copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="785" width="900" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

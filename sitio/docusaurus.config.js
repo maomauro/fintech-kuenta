@@ -40,6 +40,12 @@ const config = {
     locales: ['es'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+
   presets: [
     [
       'classic',
@@ -104,6 +110,12 @@ const config = {
           },
         ],
         copyright: `Kuenta es una fintech ficticia. Proyecto de arquitectura de software, construido con Docusaurus.`,
+      },
+      // Structurizr exige securityLevel 'loose' para exportar a Mermaid
+      mermaid: {
+        options: {
+          securityLevel: 'loose',
+        },
       },
       prism: {
         theme: prismThemes.github,

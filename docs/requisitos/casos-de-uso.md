@@ -22,4 +22,4 @@ Qué quiere lograr cada **actor** con el sistema. Cada caso se apoya en un proce
 | CU-11 | Kuenta (sistema) | Terminar un depósito inactivo, avisando antes | Completar información e inactivos | RF-14 |
 | CU-12 | Regulador | Recibir los reportes y consultar la auditoría | Revisión manual | RF-17, RF-18 |
 
-Los diagramas UML de casos de uso y de secuencia se dibujan en el Módulo 5, junto con la arquitectura de aplicación.
+El diagrama UML de estos casos de uso está en `modelos/uml/casos-de-uso.drawio` (editable en draw.io). Las secuencias de CU-01, CU-03 y CU-05 están en [Secuencias UML](../arquitectura-aplicacion/secuencias.md), del Módulo 5.

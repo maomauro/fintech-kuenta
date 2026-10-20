@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="Nivel 4 - Clases-1" name="Nivel 4 - Clases">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1260" pageHeight="860" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Nivel 4 · Código (opcional): clases de Cuentas y depósitos" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Diagrama de clases de alto nivel del módulo Cuentas y depósitos, dibujado a mano antes de que exista código." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Deposito" value="&lt;b&gt;Deposito&lt;/b&gt;&lt;hr&gt;id&lt;br&gt;estado&lt;br&gt;saldo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="430" y="230" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ReferenciaCliente" value="&lt;b&gt;ReferenciaCliente&lt;/b&gt;&lt;hr&gt;idCliente" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="60" y="255" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Movimiento" value="&lt;b&gt;Movimiento&lt;/b&gt;&lt;hr&gt;id&lt;br&gt;tipo (débito o crédito)&lt;br&gt;valor&lt;br&gt;fecha" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="880" y="70" width="270" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Reserva" value="&lt;b&gt;Reserva&lt;/b&gt;&lt;hr&gt;id&lt;br&gt;valor&lt;br&gt;estado (activa, confirmada o liberada)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="880" y="380" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Tope" value="&lt;b&gt;Tope&lt;/b&gt;&lt;hr&gt;valor en SMLMV (8, parametrizable)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="430" y="470" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="pertenece a" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1" source="Deposito" target="ReferenciaCliente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="392.82005220211215" y="268.9102473057129" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="287.17994779788785" y="298.28455788909224" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="registra" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=diamondThin;startFill=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1" source="Deposito" target="Movimiento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="690.3186881210256" y="245.1225523584189" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="0..*" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="839.6813118789744" y="165.24701285897243" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="aparta" style="endArrow=none;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=diamondThin;startFill=1;verticalLabelPosition=top;verticalAlign=bottom;startFill=0;" edge="1" parent="1" source="Deposito" target="Reserva">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="681.7733700561746" y="340.3684969836197" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="0..*" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=top;fontSize=10;fontColor=#15233A;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="848.2266299438254" y="363.47932910333685" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="se controla contra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;verticalLabelPosition=middle;verticalAlign=middle;" edge="1" parent="1" source="Deposito" target="Tope">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="al confirmarse genera" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;verticalLabelPosition=middle;verticalAlign=middle;" edge="1" parent="1" source="Reserva" target="Movimiento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="&lt;b&gt;Reglas del diseño&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Movimiento&lt;/b&gt; no se modifica nunca: las correcciones son movimientos nuevos (PA-02).&lt;br&gt;• &lt;b&gt;Reserva&lt;/b&gt; aparta valor mientras un tercero confirma, como en la transferencia por Bre-B (RF-13).&lt;br&gt;• &lt;b&gt;Tope&lt;/b&gt; es el límite de 8 SMLMV de saldo y de débitos mensuales (RF-08), con el valor parametrizable.&lt;br&gt;• &lt;b&gt;ReferenciaCliente&lt;/b&gt; guarda solo el identificador: los datos del cliente son del módulo Identidad (PA-05)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#15233A;fillColor=#F2F5F9;strokeColor=#CCD7E4;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="630" width="1090" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Notación UML: rombo lleno = composición (Movimiento no existe sin su Depósito); rombo vacío = agregación; flecha punteada = dependencia. Se dibuja a mano: Structurizr no genera diagramas de clases. Fuente de verdad: modelos/structurizr/kuenta.dsl; este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="1090" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
