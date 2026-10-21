@@ -163,8 +163,7 @@ export const PASOS = [
     "c": "c5",
     "t": "Diseñar la solución",
     "q": "¿Cómo se construye?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "Estilo y límites de aplicación",
       "Datos y consistencia",
@@ -220,7 +219,8 @@ export const PASOS = [
     "c": "c6",
     "t": "Elegir dónde corre",
     "q": "¿Sobre qué infraestructura?",
-    "st": "todo",
+    "st": "now",
+    "aqui": true,
     "bul": [
       "Nube y servicios",
       "Seguridad y cumplimiento",
@@ -237,6 +237,7 @@ export const PASOS = [
     ],
     "kuenta": [
       "Nube principal: AWS",
+      "Decisiones del M8: región São Paulo, monolito en contenedores con Fargate en dos zonas, base de datos PostgreSQL Multi-AZ y entrada por API Gateway con mTLS",
       "Controles alineados con la regulación financiera",
       "Objetivos de servicio y plan de recuperación definidos antes de construir"
     ],

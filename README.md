@@ -2,7 +2,7 @@
 
 Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 6 están cerrados. Hoy está en el **Módulo 7: integración y APIs**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 7 están cerrados. Hoy está en el **Módulo 8: arquitectura en AWS**.
 
 ## Cómo navegar este repositorio
 
@@ -18,6 +18,7 @@ Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana fic
 | `modelos/c4/` y `modelos/uml/` | Copias editables en draw.io de los diagramas del Módulo 5: C4 (contexto, contenedores, componentes y clases del nivel 4) en `c4/`, y UML (casos de uso y tres secuencias) en `uml/`. La fuente de verdad de C4 y secuencias sigue siendo `modelos/structurizr/kuenta.dsl`. |
 | `modelos/datos/` | Copias editables en draw.io de los diagramas del Módulo 6: modelo de datos, libro mayor, flujo de eventos y sagas (Bre-B y efectivo). La fuente de verdad son las páginas de `docs/datos-y-consistencia/`, escritas en Mermaid. |
 | `modelos/integraciones/` | Copia editable en draw.io del mapa de integraciones del Módulo 7. La fuente de verdad es la página de `docs/integracion-y-apis/`, escrita en Mermaid. |
+| `modelos/despliegue/` | Copia editable en draw.io del diagrama de despliegue en AWS del Módulo 8. La fuente de verdad es la página de `docs/arquitectura-en-aws/`, escrita en Mermaid. |
 | `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir un depósito de bajo monto o depositar efectivo en un corresponsal. |
 | `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
 | `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |
