@@ -62,6 +62,11 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Base de datos (Módulo 8) | **RDS para PostgreSQL Multi-AZ** (instancia principal con standby sincrónico, sin lecturas en el standby), un esquema por módulo, respaldos y restauración a un instante (registros subidos cada 5 minutos, encaja con el RPO de 5 minutos; la restauración crea una instancia nueva). Descartados el clúster Multi-AZ con lectores y Aurora (se evalúa en el Módulo 12 y el ADR del Módulo 13) | 2026-10-21 |
 | Entrada y red (Módulo 8) | Route 53, WAF y **API Gateway tipo REST API** (WAF, validación y planes de uso solo existen en este tipo; mTLS en ambos) hacia el ALB interno por enlace privado (VPC link V2); subredes privadas de aplicación y datos; salidas a terceros por NAT; endpoints privados a los servicios de AWS; sin SQS ni SNS por ahora. Cierra la decisión C1 del Módulo 7 | 2026-10-21 |
 | Entregable del Módulo 8 | Diagrama de despliegue en **Mermaid** con copia en draw.io (`modelos/despliegue/`) y tabla de servicios (servicio, para qué, quién lo usa, atributo de calidad). Páginas en `docs/arquitectura-en-aws/` y nota en `docs/modulos/arquitectura-en-aws.md`. Los precios van en el Módulo 12 | 2026-10-21 |
+| Modelo de amenazas (Módulo 9) | Método **STRIDE** sobre los flujos del diagrama de contexto y del despliegue, con el OWASP API Security Top 10 de 2023 como lista de chequeo de las APIs. Activos: dinero y libro, datos personales y biometría, credenciales y llaves, disponibilidad de pagos. Dieciséis amenazas con riesgo (propuesta a validar) y control; el fraude de negocio lo cubre Cumplimiento y riesgo | 2026-10-21 |
+| Identidad y acceso (Módulo 9) | Clientes: autenticación fuerte, confirmación adicional en operaciones de dinero ligada a la operación, credenciales de corta vida y autorización por objeto en cada puerta pública. Terminales: mTLS y credencial propia revocable. Personal: acceso único con MFA, mínimo privilegio, acceso temporal y separación de funciones | 2026-10-21 |
+| Protección de datos (Módulo 9) | Cifrado en tránsito y en reposo con llaves propias en KMS; cifrado por campo para documento y biometría; datos personales separados del dinero; sin datos personales en registros y eventos; retención y borrado como parámetros | 2026-10-21 |
+| Detección, respuesta y desarrollo seguro (Módulo 9) | Auditoría (Módulo 6), CloudTrail y alarmas; plan de respuesta a incidentes con reporte a la Superintendencia (por correo, con taxonomía y TLP, Circular 033 de 2020), COLCERT y clientes afectados; análisis de código, dependencias e imágenes y pruebas de seguridad en el pipeline (Módulo 11); prueba de penetración y pruebas de continuidad con ciberataques simulados | 2026-10-21 |
+| Cumplimiento y entregable (Módulo 9) | **Matriz de cumplimiento** (requisito, fuente, control, evidencia, responsable) sobre las Circulares 005 de 2019, 007 de 2018 y 033 de 2020, la Ley 1581 y SARLAFT; políticas simuladas (aprobación de la junta y rol responsable de seguridad). Páginas en `docs/seguridad-y-cumplimiento/`, nota en `docs/modulos/seguridad-y-cumplimiento.md` y copia en draw.io en `modelos/seguridad/`. AWS lista ISO 27001, 27017, 27018 y SOC 1, 2 y 3 | 2026-10-21 |
 | Forma de cierre de módulos (desde el Módulo 7) | A pedido del autor, **opción A «ciclo ligero»**: se omiten el repaso de 5 preguntas y la pregunta de entrevista; se mantiene la regla de investigar, proponer un borrador con decisiones, aprobación del autor, documentación única, rama por módulo y pull request con squash. El asistente tiene más autonomía para avanzar; el autor sigue ejecutando Git | 2026-10-21 |
 | Mapas de alto nivel (portal) | Dos páginas con componentes React: **Mapa de alto nivel** (serpentina con iconos) y **Mapa de engranes** (recorrido vertical con bucle de evolución), junto al Mapa general. Comparten el contenido en `sitio/src/components/MapasAltoNivel/etapas.js` | 2026-10-19 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
@@ -138,6 +143,7 @@ fintech-kuenta/
 │  ├─ datos/                  ← copias editables en draw.io: modelo de datos, libro mayor, eventos y sagas
 │  ├─ integraciones/          ← copia editable en draw.io del mapa de integraciones
 │  ├─ despliegue/             ← copia editable en draw.io del diagrama de despliegue en AWS
+│  ├─ seguridad/              ← copia editable en draw.io del diagrama de fronteras de confianza
 │  └─ bpmn/                   ← procesos de negocio
 ├─ diagramas/                 ← fuentes (draw.io, Excalidraw) y exportados (PNG, SVG)
 ├─ contratos-api/             ← OpenAPI de ejemplo (transferencias, efectivo, movimientos y componentes comunes)
@@ -198,10 +204,10 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0 a 7 cerrados y fusionados a `main`** (último commit: `e050016`, pull request del Módulo 7). **Módulo 8 (Arquitectura en AWS) con las decisiones A a E tomadas y la documentación única redactada**: `docs/arquitectura-en-aws/` (diagrama de despliegue, decisiones, tabla de servicios), la nota `docs/modulos/arquitectura-en-aws.md` y la copia en draw.io en `modelos/despliegue/`. Pendiente: revisión del autor en el sitio y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
+- **Foco actual:** **Módulos 0 a 8 cerrados y fusionados a `main`** (último commit: `f76d592`, pull request del Módulo 8). **Módulo 9 (Seguridad y cumplimiento) con las decisiones A a E tomadas y la documentación única redactada**: `docs/seguridad-y-cumplimiento/` (modelo de amenazas, controles, matriz de cumplimiento), la nota `docs/modulos/seguridad-y-cumplimiento.md` y la copia en draw.io en `modelos/seguridad/`. Pendiente: revisión del autor en el sitio y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
-- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8). **Módulo 7:** anexos 2, 4 y 5 de la DSP-465 y la DSP-471 (estados, consulta de estado, reintentos, reversos, idempotencia, disponibilidad de Bre-B); si Bre-B es obligatorio para Kuenta (el umbral de 1.500.000 productos del Decreto 1069 de 2025 viene de un resumen de terceros, no del texto oficial); canal y formato de los reportes a UIAF y Superfinanciera; camino real de acceso y costo de la Registraduría; validación de los contratos con un validador oficial de OpenAPI; copia en draw.io del mapa abierta en la aplicación; tipo de API gateway (Módulo 8). **Módulo 8:** tiempo máximo de integración del REST API de API Gateway (se recuerda de unos 29 s, sin confirmar en la documentación oficial); disponibilidad de cada servicio en São Paulo y latencia desde Colombia; equivalencia de jurisdicción para Brasil (Circular 005, numeral 3.7); aviso a la Superintendencia 15 días antes de procesar en la nube; certificaciones de AWS frente a la Circular 005 (Módulo 9); comparación RDS frente a Aurora (Módulos 12 y 13); recuperación entre regiones (Módulo 10); copia en draw.io del despliegue abierta en la aplicación.
+- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8). **Módulo 7:** anexos 2, 4 y 5 de la DSP-465 y la DSP-471 (estados, consulta de estado, reintentos, reversos, idempotencia, disponibilidad de Bre-B); si Bre-B es obligatorio para Kuenta (el umbral de 1.500.000 productos del Decreto 1069 de 2025 viene de un resumen de terceros, no del texto oficial); canal y formato de los reportes a UIAF y Superfinanciera; camino real de acceso y costo de la Registraduría; validación de los contratos con un validador oficial de OpenAPI; copia en draw.io del mapa abierta en la aplicación; tipo de API gateway (Módulo 8). **Módulo 8:** tiempo máximo de integración del REST API de API Gateway (se recuerda de unos 29 s, sin confirmar en la documentación oficial); disponibilidad de cada servicio en São Paulo y latencia desde Colombia; equivalencia de jurisdicción para Brasil (Circular 005, numeral 3.7); aviso a la Superintendencia 15 días antes de procesar en la nube; certificaciones de AWS frente a la Circular 005 (Módulo 9); comparación RDS frente a Aurora (Módulos 12 y 13); recuperación entre regiones (Módulo 10); copia en draw.io del despliegue abierta en la aplicación. **Módulo 9:** numeración de la Circular 007 de 2018 tras la Circular Externa 004 de 2026 (las citas vienen de copias de terceros); **transferencia internacional de datos a Brasil** (Brasil es solo candidato a la lista de la SIC; cláusulas contractuales modelo; concepto legal); plazo de reporte de incidentes a la Superintendencia; plazos de retención (SARLAFT y registros); frecuencia de la prueba de penetración; requisitos oficiales de autenticación de clientes en canales digitales; registro de bases de datos ante la SIC; marco de gestión de seguridad (ISO 27032, NIST, CIS o COBIT 5); herramienta de correlación de eventos (Módulo 10); copia en draw.io de fronteras abierta en la aplicación.
 - **Lista de temas para profundizar (fuera del flujo principal):** _(vacía)_
 
 ## 10. Registro de cambios
@@ -233,6 +239,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-20 | **Módulo 5 cerrado y fusionado a `main`** (`00338aa`): repaso y pregunta de entrevista. Inicia el Módulo 6: se investigan Bre-B (documento técnico del Banco de la República), los patrones saga y outbox de AWS y la conservación de documentos; se aprueban las decisiones A (dueño de los datos), B (libro mayor), C (eventos), D (sagas) y E (entregable). Se redactan las páginas del módulo, las copias en draw.io, el botón «Ampliar» del sitio y la corrección «Avisa» → «Publica evento» en el modelo y los diagramas del Módulo 5 |
 | 2026-10-21 | **Módulo 6 cerrado y fusionado a `main`** (`c905571`): repaso y pregunta de entrevista. Inicia el Módulo 7: se investigan Bre-B (DSP-465 y DSP-470), Registraduría, Decreto 368 de 2026, tipos de API gateway de AWS, `Idempotency-Key` y OpenAPI; se aprueban las decisiones A (mapa de integraciones), B (estilo de APIs), C (gateway y modelo canónico), D (resiliencia) y E (entregable). Se redactan las páginas, los tres contratos OpenAPI y la copia en draw.io, y se corrige en el Módulo 5 la conciliación con redes de corresponsales (de Pagos a Efectivo) |
 | 2026-10-21 | **Módulo 7 cerrado y fusionado a `main`** (`e050016`). El autor adopta el ciclo ligero (sin repaso ni pregunta de entrevista; se mantienen borrador, aprobación, documentación única, rama y pull request) para terminar el ejercicio. Inicia el Módulo 8: se investigan regiones de AWS y Colombia, la Circular 005 de 2019, Fargate, Multi-AZ y restauración a un instante de RDS y el tipo de API Gateway; se aprueban las decisiones A (región y cuentas), B (cómputo), C (base de datos), D (entrada y red) y E (entregable). Se redactan las páginas, la nota y la copia en draw.io |
+| 2026-10-21 | **Módulo 8 cerrado y fusionado a `main`** (`f76d592`). Inicia el Módulo 9: se investigan las Circulares 007 de 2018 y 033 de 2020, la Circular Externa 004 de 2026, certificaciones y responsabilidad compartida de AWS, transferencia internacional de datos, STRIDE y OWASP API Security Top 10; se aprueban las decisiones A (modelo de amenazas), B (identidad y acceso), C (protección de datos), D (detección, respuesta y desarrollo seguro) y E (cumplimiento y entregable). Se redactan las páginas, la nota y la copia en draw.io. Se registra el riesgo legal de procesar datos en São Paulo mientras Brasil no esté en la lista de la SIC |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
@@ -244,6 +251,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Apunte | Línea de un libro mayor: un valor positivo o negativo sobre una cuenta; los apuntes de una operación suman cero |
 | arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
 | ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
+| Autorización por objeto | Comprobar que el recurso pedido pertenece a quien lo pide |
 | AWS | Amazon Web Services: la nube de Amazon |
 | Backlog | Lista ordenada de todo lo que se quiere construir |
 | BFF | *Backend for Frontend*: una API hecha a la medida de un canal (app, web) |
@@ -257,8 +265,12 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Capa anticorrupción (adaptador) | Código que traduce entre el idioma de un tercero y el propio, para que no se filtre al resto |
 | Capacidad de negocio | Lo que una organización necesita saber hacer para cumplir su estrategia; combina personas, procesos, información y tecnología |
 | CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
+| Cifrado por campo | Cifrar un dato dentro de la aplicación, además del cifrado de la base |
+| CISO | Chief Information Security Officer: responsable de la seguridad de la información |
 | CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
+| COLCERT | Grupo nacional de respuesta a emergencias cibernéticas de Colombia |
 | Compensación | Paso que deshace el efecto de uno anterior cuando una saga falla |
+| Confirmación adicional (step-up) | Pedir otro factor al hacer una operación sensible |
 | Consistencia eventual | Los datos de distintos lugares coinciden con un pequeño retraso, no al instante |
 | Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
 | Contract-first | Escribir el contrato de la API antes que el código |
@@ -280,6 +292,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Fargate | Modo de ECS que ejecuta contenedores sin administrar servidores |
 | FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
 | Fogafín | Fondo de Garantías de Instituciones Financieras: seguro de depósitos; cubre hasta $50.000.000 por persona |
+| Frontera de confianza | Línea entre partes que se confían distinto; donde hay que verificar identidad y permisos |
 | Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
 | GMF | Gravamen a los Movimientos Financieros (impuesto sobre retiros y transferencias); tiene exenciones para depósitos de bajo monto |
 | Historia de usuario | Necesidad de un usuario escrita como "Como... quiero... para..." |
@@ -295,6 +308,8 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Local Zone | Extensión de una región de AWS cerca de una ciudad, con pocos servicios |
 | Mapa de calor | Mapa de capacidades coloreado según un criterio, como el tipo, la madurez o el release |
 | Mapa de capacidades | Representación visual de las capacidades de una organización, agrupadas por niveles |
+| MFA | Multi-Factor Authentication: más de un factor para entrar |
+| Mínimo privilegio | Dar a cada persona o sistema solo los permisos que necesita |
 | Modelo canónico | Formato único de datos al que todos los sistemas traducen; aquí no hay uno global |
 | mTLS | TLS en ambos sentidos: el cliente también se identifica con un certificado |
 | Multi-AZ | Base de datos con una réplica en otra zona que toma el control si falla la principal |
@@ -303,6 +318,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | OpenAPI | Especificación para describir APIs REST en un archivo |
 | Orquestación (saga) | Saga dirigida por un coordinador que decide el siguiente paso; la alternativa es la coreografía |
 | Outbox transaccional | Guardar el evento en la misma transacción que el dato y publicarlo después con otro proceso |
+| OWASP | Organización que publica guías de seguridad; su API Security Top 10 lista los diez riesgos más comunes de las APIs |
 | Partida doble | Cada operación se registra con apuntes que suman cero |
 | PITR | Point-in-Time Recovery: restauración a un instante, con respaldos y registros de transacciones |
 | PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
@@ -312,6 +328,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Región (AWS) | Zona geográfica de AWS con varios centros de datos |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
 | Reserva | Valor apartado del saldo disponible mientras se espera la confirmación de una operación |
+| Responsabilidad compartida | AWS protege la infraestructura; el cliente protege lo que pone encima |
 | RFC 9457 | Formato estándar de errores en HTTP (`problem+json`) |
 | SAC | Sistema de Atención al Consumidor Financiero: políticas y procesos para atender consultas, quejas y reclamos (Ley 1328 de 2009) |
 | Saga | Proceso de varios pasos locales con compensaciones, para mantener coherencia sin una sola transacción |
@@ -319,8 +336,12 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Scrum | Marco de trabajo ágil con sprints, un backlog y roles definidos |
 | SEDPE | Sociedad Especializada en Depósitos y Pagos Electrónicos: figura legal de Kuenta (Ley 1735 de 2014); no puede otorgar créditos |
 | SFC | Superintendencia Financiera de Colombia: entidad que vigila a las entidades financieras |
+| SIEM | Security Information and Event Management: herramienta que correlaciona eventos de seguridad |
 | SMLMV | Salario Mínimo Legal Mensual Vigente; en 2026 es $1.750.905 (Decreto 159 de 2026, transitorio) |
 | SOA | Service-Oriented Architecture: arquitectura orientada a servicios |
+| SOC | Security Operations Center: unidad que monitorea y defiende los sistemas |
+| STRIDE | Método de amenazas: suplantación, alteración, repudio, divulgación, denegación de servicio y elevación de privilegios |
+| TLP | Traffic Light Protocol: etiquetas de color que indican con quién se puede compartir un reporte |
 | TOGAF | The Open Group Architecture Framework: método de arquitectura empresarial |
 | UIAF | Unidad de Información y Análisis Financiero: recibe los reportes de operaciones sospechosas |
 | UML | Unified Modeling Language: lenguaje unificado de modelado (diagramas de secuencia, clases, etc.) |

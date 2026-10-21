@@ -239,6 +239,7 @@ export const PASOS = [
       "Nube principal: AWS",
       "Decisiones del M8: región São Paulo, monolito en contenedores con Fargate en dos zonas, base de datos PostgreSQL Multi-AZ y entrada por API Gateway con mTLS",
       "Controles alineados con la regulación financiera",
+      "Decisiones del M9: modelo de amenazas con STRIDE, autenticación fuerte, cifrado con llaves propias y matriz de cumplimiento con evidencia",
       "Objetivos de servicio y plan de recuperación definidos antes de construir"
     ],
     "mods": [
