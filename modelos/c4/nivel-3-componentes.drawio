@@ -7,7 +7,7 @@
         <mxCell id="n2" value="Nivel 3 · Componentes (módulos) de Kuenta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="10" width="800" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="n3" value="Los 8 módulos del monolito y sus puertas públicas. Líneas punteadas azules: «Avisa» (a Notificaciones). Punteadas grises: «Registra» (en Auditoría)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="n3" value="Los 8 módulos del monolito y sus puertas públicas. Líneas punteadas azules: «Publica evento» (a Notificaciones). Punteadas grises: «Registra» (en Auditoría)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="42" width="1100" height="24" as="geometry" />
         </mxCell>
         <mxCell id="app" value="&lt;b&gt;Aplicación del cliente&lt;/b&gt;&lt;br&gt;[Aplicación móvil]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">

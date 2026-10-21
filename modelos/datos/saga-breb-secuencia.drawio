@@ -1,0 +1,136 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="saga-breb-secuencia-1" name="saga-breb-secuencia">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1190" pageHeight="1380" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Saga de Bre-B · secuencia con respuesta pendiente" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Mensajes 4 a 7: camino feliz. Mensajes 8 a 12: la respuesta no llega a tiempo. La reserva se mantiene hasta conocer el resultado." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="42" width="1110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cliente" value="&lt;b&gt;Cliente&lt;/b&gt;&lt;br&gt;[Persona]" style="shape=mxgraph.c4.person2;whiteSpace=wrap;html=1;fillColor=#1F5FA8;strokeColor=#0B3D6B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135.0" y="200" as="sourcePoint" />
+            <mxPoint x="135.0" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pagos" value="&lt;b&gt;Pagos y transferencias&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="270" y="110" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="200" as="sourcePoint" />
+            <mxPoint x="365.0" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cuentas" value="&lt;b&gt;Cuentas y depósitos&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="500" y="110" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="595.0" y="200" as="sourcePoint" />
+            <mxPoint x="595.0" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="breb" value="&lt;b&gt;Bre-B&lt;/b&gt;&lt;br&gt;[Sistema externo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#8A8F98;strokeColor=#5F646B;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="730" y="110" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825.0" y="200" as="sourcePoint" />
+            <mxPoint x="825.0" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rev" value="&lt;b&gt;Revisión manual&lt;/b&gt;&lt;br&gt;[Consola de back office]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="110" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="" style="endArrow=none;html=1;strokeColor=#8FA3BC;strokeWidth=1;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1055.0" y="200" as="sourcePoint" />
+            <mxPoint x="1055.0" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n9" value="1. Pide transferir por llave&lt;br&gt;Bre-B" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135.0" y="250" as="sourcePoint" />
+            <mxPoint x="365.0" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n10" value="2. Reserva el valor (con llave de&lt;br&gt;idempotencia)" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="335" as="sourcePoint" />
+            <mxPoint x="595.0" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" value="3. Reserva creada" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="595.0" y="420" as="sourcePoint" />
+            <mxPoint x="365.0" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n12" value="4. Envía la orden" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="505" as="sourcePoint" />
+            <mxPoint x="825.0" y="505" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" value="5. Si responde a tiempo:&lt;br&gt;confirmada" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825.0" y="590" as="sourcePoint" />
+            <mxPoint x="365.0" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n14" value="6. Confirma la reserva y escribe&lt;br&gt;los apuntes" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="675" as="sourcePoint" />
+            <mxPoint x="595.0" y="675" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n15" value="7. Transferencia exitosa" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="760" as="sourcePoint" />
+            <mxPoint x="135.0" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n16" value="8. Si no hay respuesta en 20 s:&lt;br&gt;transferencia en proceso&lt;br&gt;(Pendiente)" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="845" as="sourcePoint" />
+            <mxPoint x="135.0" y="845" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n17" value="9. Consulta el estado (reintentos&lt;br&gt;con espera creciente)" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="930" as="sourcePoint" />
+            <mxPoint x="825.0" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n18" value="10. Confirmada o rechazada" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="825.0" y="1015" as="sourcePoint" />
+            <mxPoint x="365.0" y="1015" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n19" value="11. Confirma o libera la reserva" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="1100" as="sourcePoint" />
+            <mxPoint x="595.0" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n20" value="12. Si se supera el límite: envía&lt;br&gt;el caso a revisión manual" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365.0" y="1185" as="sourcePoint" />
+            <mxPoint x="1055.0" y="1185" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n21" value="Los mensajes 3, 5, 7, 8 y 10 son respuestas (flecha punteada). Fuente de verdad: páginas del Módulo 6 en docs/datos-y-consistencia/ (Mermaid); este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1310" width="1110" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

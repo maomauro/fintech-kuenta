@@ -19,4 +19,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 4 están cerrados. Hoy está en el **Módulo 5: arquitectura de aplicación**.
+El proyecto avanza módulo a módulo. Los Módulos 0 a 5 están cerrados. Hoy está en el **Módulo 6: datos y consistencia**.

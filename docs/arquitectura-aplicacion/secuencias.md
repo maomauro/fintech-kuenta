@@ -31,7 +31,7 @@ sequenceDiagram
   20->>24: Pide consultar listas
   24->>7: Consulta listas restrictivas
   20->>21: Pide crear el depósito
-  20->>26: Avisa el resultado
+  20->>26: Publica el evento del resultado
   26->>11: Pide enviar la notificación
   20->>27: Registra
 ```
@@ -56,7 +56,7 @@ sequenceDiagram
   16->>22: Solicita la transferencia<br />[HTTPS]
   22->>24: Pide revisión antifraude
   22->>21: Verifica destino, saldo y tope, y debita y acredita en una sola transacción
-  22->>26: Avisa el resultado
+  22->>26: Publica el evento del resultado
   26->>11: Pide enviar la notificación
   22->>27: Registra
 ```
@@ -83,7 +83,7 @@ sequenceDiagram
   23-->>17: Autoriza recibir el efectivo<br />[HTTPS]
   17->>23: Confirma que recibió el efectivo<br />[HTTPS]
   23->>21: Acredita el valor
-  23->>26: Avisa el resultado
+  23->>26: Publica el evento del resultado
   23->>27: Registra
 ```
 

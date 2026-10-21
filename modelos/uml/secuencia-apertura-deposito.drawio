@@ -136,7 +136,7 @@
             <mxPoint x="1422.5" y="675" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="n20" value="7. Avisa el resultado" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
+        <mxCell id="n20" value="7. Publica el evento del&lt;br&gt;resultado" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="562.5" y="760" as="sourcePoint" />
             <mxPoint x="1637.5" y="760" as="targetPoint" />
