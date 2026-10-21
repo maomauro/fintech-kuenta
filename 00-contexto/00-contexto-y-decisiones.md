@@ -1,6 +1,6 @@
 # Kuenta — Contexto y decisiones del proyecto
 
-_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-19. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
+_Documento vivo y **fuente de verdad del contexto del proyecto**. Última actualización: 2026-10-20. Se actualiza a medida que se toman decisiones o se hacen aclaraciones. Las siglas se escriben con su significado la primera vez que aparecen; el glosario completo está en la sección 11._
 
 ## 1. Objetivo
 Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia de depósitos y pagos (constituida como SEDPE; los créditos llegan en una etapa posterior), desde el punto de vista de un arquitecto de software recién contratado: **paso a paso y "como debe ser"**. El resultado queda documentado, diagramado y **publicado en un VPS (servidor virtual privado)** como sitio navegable, para consultarlo y exponerlo en entrevistas. Debe ser completo: que no falte nada.
@@ -47,6 +47,11 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Estilo del core (Módulo 5) | **Monolito modular**: una sola aplicación y un solo despliegue, con varias réplicas, módulos con datos propios y puertas públicas. Un módulo pasa a servicio solo si cumple una señal (escala desigual, equipos que se pisan, ritmo de cambio distinto, aislamiento exigido, tecnología distinta o fallos en cascada) respaldada por una métrica; los umbrales se definen en los Módulos 10 y 14. El estilo solo afecta lo interno: lo externo (Bre-B, redes) va por la red en ambos estilos | 2026-10-19 |
 | Módulos del monolito (Módulo 5) | **Ocho**: Identidad y apertura, Cuentas y depósitos, Pagos y transferencias, Efectivo y corresponsales, Cumplimiento y riesgo, Atención al cliente, Notificaciones y Auditoría. Un dominio por módulo, más dos capacidades (CAP-19 y CAP-18) separadas por ser transversales. «Gestión corporativa y apoyo» (CAP-24 a 27) no es módulo: son sistemas de apoyo que se compran y aparecen como externos | 2026-10-19 |
 | Entregable y publicación de diagramas (Módulo 5) | C4 de contexto y contenedores y tres secuencias UML (apertura de depósito, transferencia entre cuentas, depósito en corresponsal), más una vista adicional de componentes (los módulos) y, a pedido del autor, un diagrama de clases de alto nivel de Cuentas y depósitos (C4 nivel 4, opcional, escrito a mano). Se publican como **Mermaid exportado desde Structurizr** y dibujado por el sitio (`@docusaurus/theme-mermaid`, `securityLevel: loose`). Las secuencias salen de vistas dinámicas del mismo modelo. Además, copias editables en draw.io (`modelos/c4/` y `modelos/uml/`, derivadas de `kuenta.dsl`, que sigue siendo la fuente de verdad) y un diagrama UML de casos de uso (CU-01 a CU-12), a pedido del autor | 2026-10-19 |
+| Dueño de los datos (Módulo 6) | Cada módulo es dueño de su esquema dentro de la misma base de datos y ninguno lee las tablas de otro: lo pide por la puerta pública del dueño. Las referencias entre módulos son solo identificadores. Los archivos de identidad viven fuera de la base (almacenamiento de objetos; servicio en el Módulo 8) y la base guarda la referencia. Los datos personales se separan del dinero: depósito, movimiento y auditoría guardan solo el identificador del cliente. Las copias de lectura alimentadas por eventos se permiten solo con una razón medible y un solo dueño | 2026-10-20 |
+| Libro mayor (Módulo 6) | **Partida doble ligera**: cada operación escribe apuntes inmutables que suman cero; el dinero que sale a Bre-B o a un corresponsal pasa por cuentas internas de tránsito. El saldo se guarda y se actualiza en la misma transacción con bloqueo de fila, y un proceso periódico lo recalcula y avisa si no coincide; saldo disponible = saldo menos reservas activas. Las correcciones son movimientos contrarios (la aplicación no tiene `UPDATE` ni `DELETE` sobre el libro). Toda operación que mueve dinero lleva llave de idempotencia. Valores en decimal exacto y una sola moneda (COP). La contabilidad formal sigue siendo del sistema contable externo | 2026-10-20 |
+| Eventos (Módulo 6) | Mezcla según lo que se juegue: **Auditoría por llamada directa en la misma transacción**; Notificaciones, asientos para contabilidad y reportes por **eventos con transactional outbox** (entrega al menos una vez, consumidores idempotentes). Cada evento lleva identificador, tipo y versión, fecha, correlación y los datos justos, nunca datos personales. Transporte interno (tabla outbox y despachador); un servicio de mensajería de AWS solo si un módulo pasa a servicio o una integración externa lo pide (Módulo 8). En los diagramas del Módulo 5, «Avisa» pasa a «Publica evento»; «Registra» (Auditoría) se mantiene | 2026-10-20 |
+| Sagas (Módulo 6) | Solo donde interviene un sistema externo: **transferencia por Bre-B, depósito de efectivo y retiro de efectivo**. Transferencia entre cuentas y apertura no son saga. Son **orquestadas dentro del módulo dueño** (Pagos; Efectivo), como máquinas de estados en su propio esquema. Bre-B: iniciada, reservada, enviada, confirmada, rechazada o pendiente; sin respuesta en 20 s queda pendiente y nunca se libera la reserva sin conocer el resultado; pasado un límite parametrizable pasa a revisión manual. La compensación del retiro es un movimiento contrario. La reserva actúa como bloqueo semántico. Tiempos de vencimiento, número de reintentos y límite de revisión manual se fijan en el Módulo 10 | 2026-10-20 |
+| Entregable del Módulo 6 | Cinco piezas escritas en **Mermaid** (Structurizr no genera diagramas entidad-relación): modelo de datos general, detalle del libro mayor, flujo de eventos, saga de Bre-B (estados y secuencia) y estados del efectivo. Páginas en `docs/datos-y-consistencia/`, nota en `docs/modulos/datos-y-consistencia.md` y copias editables en draw.io en `modelos/datos/`. Se agrega al sitio un botón **«Ampliar»** para todos los diagramas Mermaid (`sitio/src/clientModules/ampliarMermaid.js`) | 2026-10-20 |
 | Mapas de alto nivel (portal) | Dos páginas con componentes React: **Mapa de alto nivel** (serpentina con iconos) y **Mapa de engranes** (recorrido vertical con bucle de evolución), junto al Mapa general. Comparten el contenido en `sitio/src/components/MapasAltoNivel/etapas.js` | 2026-10-19 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
@@ -119,6 +124,7 @@ fintech-kuenta/
 │  ├─ structurizr/            ← modelo C4 (.dsl)
 │  ├─ c4/                     ← copias editables en draw.io: contexto, contenedores, componentes y clases
 │  ├─ uml/                    ← copias editables en draw.io: casos de uso y secuencias
+│  ├─ datos/                  ← copias editables en draw.io: modelo de datos, libro mayor, eventos y sagas
 │  └─ bpmn/                   ← procesos de negocio
 ├─ diagramas/                 ← fuentes (draw.io, Excalidraw) y exportados (PNG, SVG)
 ├─ contratos-api/             ← OpenAPI de ejemplo
@@ -140,6 +146,8 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 **SOA, DDD, microservicios y AWS Well-Architected.** No compiten: SOA (Service-Oriented Architecture, arquitectura orientada a servicios) y microservicios son estilos de arquitectura; DDD (Domain-Driven Design, diseño guiado por el dominio) es un enfoque de modelado del dominio del negocio; Well-Architected ("bien diseñado") es un marco de buenas prácticas de nube (seis pilares: excelencia operativa, seguridad, confiabilidad, eficiencia de rendimiento, optimización de costos y sostenibilidad). Orden de uso: DDD define límites → SOA/microservicios los convierte en servicios → Well-Architected evalúa la solución en AWS. Tensiones reales: modelo canónico (SOA) vs. contextos delimitados (DDD); reutilización y gobierno centralizado vs. autonomía de equipos. Se resuelven documentando decisiones (ADR, módulo 13). Definir glosario común en el módulo 0.
 
 **Enfoques y estilos son preguntas distintas, en orden.** (1) Qué debe hacer y con qué calidad (requisitos); (2) dónde van los límites (capacidades, DDD, Event Storming, equipos, datos); (3) cómo conviven esos límites (monolito modular, microservicios, SOA); (4) cómo se ordena el código dentro de cada uno (capas, hexagonal, CQRS); (5) cómo se hablan (APIs, eventos); (6) dónde corre (nube). Cambiar una respuesta afecta a las siguientes, no a las anteriores. El estilo solo afecta lo interno: lo externo va por la red en cualquier estilo. Los sistemas de apoyo (nómina, compras, contabilidad) se compran o contratan y aparecen como sistemas externos. Pendiente contrastar con Evans (dominio, contexto delimitado, módulo) y con Erl (SOA).
+
+**Consistencia entre módulos y sistemas externos.** Dentro del monolito, una operación cabe en una transacción de base de datos (todo o nada). Una **saga** solo hace falta cuando interviene un sistema externo, porque ahí no hay una transacción compartida: cada paso es local y los fallos se deshacen con **compensaciones**. Las sagas no dan aislamiento, así que la defensa es la reserva (bloqueo semántico). El **outbox transaccional** resuelve la doble escritura (guardar el dato y publicar el evento) escribiendo ambos en la misma transacción; como la entrega puede repetirse, los consumidores y los pasos de las sagas deben ser **idempotentes**. Un libro mayor de **partida doble** hace verificable «el dinero cuadra»: la suma de los apuntes es cero.
 
 **Marcos estándar de referencia.** TOGAF 10 (The Open Group Architecture Framework: método de arquitectura empresarial), ArchiMate 3.2 (notación), ISO/IEC/IEEE 42010:2022 (norma internacional para describir arquitecturas; ISO: Organización Internacional de Normalización, IEC: Comisión Electrotécnica Internacional, IEEE: Instituto de Ingenieros Eléctricos y Electrónicos), C4 y arc42 (documentación ligera).
 
@@ -166,16 +174,21 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 - Decreto 368 de 2026 (finanzas abiertas): https://www.hklaw.com/en/insights/publications/2026/04/nuevo-decreto-incorpora-el-sistema-de-finanzas-abiertas-en-colombia
 - Circular Externa 4 de 2026 (SFC): https://normativa.colpensiones.gov.co/compilacion/docs/circular_superfinanciera_0004_2026.htm
 - Requisitos SEDPE (tercero, sin confirmar): https://prifinance.com/en/payments/colombia-payment-license/
+- Documento técnico Bre-B (Banco de la República, febrero de 2026): https://www.banrep.gov.co/sites/default/files/publicaciones/archivos/documento-tecnico-bre-b-febrero-2026.pdf
+- AWS, patrón saga coreografiada: https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga-choreography.html
+- AWS, patrón saga orquestada: https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga-orchestration.html
+- AWS, patrón transactional outbox: https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html
+- Supersociedades, oficio 220-020784 de 2023 (conservación por 10 años de libros y papeles del comerciante, artículo 60 del Código de Comercio): falta verificar el plazo aplicable a una entidad vigilada por la Superintendencia Financiera
 - SOA Governance (Erl): https://informit.com/store/soa-governance-9780132478397
 
 ## 8. Lecturas recomendadas
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0 a 4 cerrados y fusionados a `main`** (último commit: `b9f8db1`). **Módulo 5 (Arquitectura de aplicación) con las cuatro decisiones tomadas y el entregable redactado y revisado en el sitio**: `docs/arquitectura-aplicacion/` (estilo y límites, diagramas C4, secuencias), el modelo `modelos/structurizr/kuenta.dsl`, la nota `docs/modulos/arquitectura-de-aplicacion.md`, Mermaid configurado en el sitio, y copias en draw.io en `modelos/c4/` y `modelos/uml/` (con casos de uso). El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local). Pendiente: probar `exportar.sh` con Docker, revisar las copias en draw.io en la aplicación, repaso, pregunta de entrevista, pull request.
+- **Foco actual:** **Módulos 0 a 5 cerrados y fusionados a `main`** (último commit: `00338aa`, pull request del Módulo 5). **Módulo 6 (Datos y consistencia) con las decisiones A a E tomadas y la documentación única redactada**: `docs/datos-y-consistencia/` (modelo de datos, libro mayor, flujo de eventos, sagas y estados), la nota `docs/modulos/datos-y-consistencia.md`, copias en draw.io en `modelos/datos/`, el botón «Ampliar» de los diagramas del sitio y la corrección de «Avisa» a «Publica evento» en el Módulo 5. Pendiente: revisión del autor en el sitio, repaso, pregunta de entrevista y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
-- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera.
+- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8).
 - **Lista de temas para profundizar (fuera del flujo principal):** _(vacía)_
 
 ## 10. Registro de cambios
@@ -204,25 +217,31 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-18 | Módulo 3 cerrado y fusionado a `main`. Se corrige la numeración: el siguiente es el Módulo 4 (arquitectura empresarial), no el 5. Módulo 4: mapa de capacidades de dos niveles (7 dominios, 27 capacidades), 8 principios y modelo en Archi |
 | 2026-10-19 | Módulo 4 cerrado y fusionado a `main`. Se agregan al portal el Mapa general (componente React), el Mapa de alto nivel y el Mapa de engranes. Módulo 5: se aprueban las decisiones A (monolito modular), B (8 módulos), C (entregable) y D (Mermaid); se modela Kuenta en Structurizr y se redactan las páginas del módulo. Se corrige la herramienta: Structurizr Lite y el CLI figuran en fin de vida, la imagen vigente es `structurizr/structurizr` |
 | 2026-10-19 | Módulo 5: el sitio muestra los diagramas bien; se agregan copias en draw.io (C4 en `modelos/c4/`, UML en `modelos/uml/`) y un diagrama de casos de uso. Se alinean los estados del Mapa general, el README y la introducción, y una cita de CI/CD (Módulo 11) |
+| 2026-10-20 | **Módulo 5 cerrado y fusionado a `main`** (`00338aa`): repaso y pregunta de entrevista. Inicia el Módulo 6: se investigan Bre-B (documento técnico del Banco de la República), los patrones saga y outbox de AWS y la conservación de documentos; se aprueban las decisiones A (dueño de los datos), B (libro mayor), C (eventos), D (sagas) y E (entregable). Se redactan las páginas del módulo, las copias en draw.io, el botón «Ampliar» del sitio y la corrección «Avisa» → «Publica evento» en el modelo y los diagramas del Módulo 5 |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
 |---|---|
 | ADR | Architecture Decision Record: registro de decisión de arquitectura (qué se decidió, por qué y con qué consecuencias) |
 | API | Application Programming Interface: interfaz de programación de aplicaciones; la forma en que un sistema ofrece funciones a otros |
+| Apunte | Línea de un libro mayor: un valor positivo o negativo sobre una cuenta; los apuntes de una operación suman cero |
 | arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
 | ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
 | AWS | Amazon Web Services: la nube de Amazon |
 | Backlog | Lista ordenada de todo lo que se quiere construir |
 | BIAN | Banking Industry Architecture Network: red que publica un modelo de referencia de capacidades para la banca |
+| Bloqueo semántico | Marcar un valor como apartado (la reserva) mientras un proceso está a medias, porque las sagas no dan aislamiento |
 | BPMN | Business Process Model and Notation: notación para dibujar procesos de negocio |
 | Bre-B | Sistema de pagos inmediatos de Colombia, que permite transferencias entre entidades al instante (Decreto 1069 de 2025) |
 | C4 | Context, Containers, Components, Code: método para diagramar arquitectura en cuatro niveles de detalle |
 | Capacidad de negocio | Lo que una organización necesita saber hacer para cumplir su estrategia; combina personas, procesos, información y tecnología |
 | CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
 | CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
+| Compensación | Paso que deshace el efecto de uno anterior cuando una saga falla |
+| Consistencia eventual | Los datos de distintos lugares coinciden con un pequeño retraso, no al instante |
 | Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
 | Criterio de aceptación | Condición verificable que debe cumplirse para dar una historia por terminada |
+| Cuenta de tránsito | Cuenta interna del libro por donde pasa el dinero que sale o entra por Bre-B o por un corresponsal |
 | DDD | Domain-Driven Design: diseño guiado por el dominio; modela el software según el lenguaje y las reglas del negocio |
 | Debida diligencia simplificada | Versión reducida del conocimiento del cliente que la norma permite para productos de bajo riesgo, como el depósito de bajo monto |
 | Definition of Done | Estándar de calidad que debe cumplir todo elemento para considerarse terminado; incluye los requisitos regulatorios |
@@ -232,6 +251,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
 | EA | Enterprise Architecture: arquitectura empresarial |
 | Épica | Conjunto de historias que persiguen un mismo objetivo |
+| Evento | Aviso de un hecho que ya ocurrió; quien lo publica no sabe quién lo usará |
 | FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
 | Fogafín | Fondo de Garantías de Instituciones Financieras: seguro de depósitos; cubre hasta $50.000.000 por persona |
 | Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
@@ -239,15 +259,24 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Historia de usuario | Necesidad de un usuario escrita como "Como... quiero... para..." |
 | HTML | HyperText Markup Language: lenguaje con el que se escriben las páginas web |
 | IaC | Infrastructure as Code: infraestructura como código; crear servidores y redes mediante archivos en vez de clics |
+| Idempotencia | Propiedad de una operación que, repetida, no duplica sus efectos |
+| ISO 20022 | Estándar de mensajería financiera que usa Bre-B |
+| Libro mayor | Registro donde queda cada movimiento de dinero; solo se agrega, las correcciones son movimientos nuevos |
 | Listas restrictivas | Listas de personas con las que una entidad no debe vincularse por riesgo de lavado de activos o financiación del terrorismo |
+| Llave de idempotencia | Identificador único de una operación, para reconocer un reintento y no duplicarla |
 | Mapa de calor | Mapa de capacidades coloreado según un criterio, como el tipo, la madurez o el release |
 | Mapa de capacidades | Representación visual de las capacidades de una organización, agrupadas por niveles |
 | MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
+| Orquestación (saga) | Saga dirigida por un coordinador que decide el siguiente paso; la alternativa es la coreografía |
+| Outbox transaccional | Guardar el evento en la misma transacción que el dato y publicarlo después con otro proceso |
+| Partida doble | Cada operación se registra con apuntes que suman cero |
 | PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
 | Principio de arquitectura | Regla general que guía las decisiones de diseño; tiene nombre, enunciado, justificación e implicaciones |
 | Product Goal | Objetivo de largo plazo del producto; en Scrum solo hay uno a la vez |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
+| Reserva | Valor apartado del saldo disponible mientras se espera la confirmación de una operación |
 | SAC | Sistema de Atención al Consumidor Financiero: políticas y procesos para atender consultas, quejas y reclamos (Ley 1328 de 2009) |
+| Saga | Proceso de varios pasos locales con compensaciones, para mantener coherencia sin una sola transacción |
 | SARLAFT | Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo: controles obligatorios contra el lavado de dinero |
 | Scrum | Marco de trabajo ágil con sprints, un backlog y roles definidos |
 | SEDPE | Sociedad Especializada en Depósitos y Pagos Electrónicos: figura legal de Kuenta (Ley 1735 de 2014); no puede otorgar créditos |

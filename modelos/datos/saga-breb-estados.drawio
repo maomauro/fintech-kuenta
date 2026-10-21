@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="saga-breb-estados-1" name="saga-breb-estados">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1300" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Saga de Bre-B · estados de la transferencia" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Orquestada dentro de Pagos y transferencias. Bre-B exige respuesta en 20 s: si no llega, queda Pendiente y la reserva nunca se libera sin saber el resultado (decisión D)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1220" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="ini" value="&lt;b&gt;Iniciada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="100" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="res" value="&lt;b&gt;Reservada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="230" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="ret" value="&lt;b&gt;Retenida&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FFF3CC;strokeColor=#8C7C47;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="840" y="230" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="env" value="&lt;b&gt;Enviada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="pen" value="&lt;b&gt;Pendiente&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FFF3CC;strokeColor=#8C7C47;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="490" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="rm" value="&lt;b&gt;Revisión manual&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FFF3CC;strokeColor=#8C7C47;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="620" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="ok" value="&lt;b&gt;Confirmada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#D9F0E3;strokeColor=#1D5A40;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="150" y="740" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="no" value="&lt;b&gt;Rechazada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FBE0E0;strokeColor=#A33A3A;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="900" y="740" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="reserva el valor" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ini" target="res">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="destino inválido o fondos insuficientes" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ini" target="no">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="122" />
+              <mxPoint x="1180" y="762" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n6" value="Cumplimiento retiene" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;" edge="1" parent="1" source="res" target="ret">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n7" value="Cumplimiento libera" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ret" target="res">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="266" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n8" value="Cumplimiento rechaza" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ret" target="no">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="envía la orden a Bre-B" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="res" target="env">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Bre-B confirma" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="env" target="ok">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="382" />
+              <mxPoint x="120" y="762" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" value="Bre-B rechaza" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="env" target="no">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="382" />
+              <mxPoint x="820" y="762" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n12" value="sin respuesta en 20 s" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="env" target="pen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="la consulta confirma" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pen" target="ok">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="235" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n14" value="la consulta rechaza" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pen" target="no">
+          <mxGeometry relative="1" as="geometry" x="-0.75">
+            <Array as="points">
+              <mxPoint x="770" y="512" />
+              <mxPoint x="770" y="752" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n15" value="supera el límite de reintentos" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pen" target="rm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="analista concilia" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="rm" target="ok">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="642" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n17" value="analista concilia" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="rm" target="no">
+          <mxGeometry relative="1" as="geometry" x="-0.8">
+            <Array as="points">
+              <mxPoint x="720" y="642" />
+              <mxPoint x="720" y="776" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n18" value="Confirmada: se confirma la reserva y se escriben los apuntes." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#15233A;fillColor=#F2F5F9;strokeColor=#CCD7E4;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="810" width="340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="Rechazada: se libera la reserva (compensación)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#15233A;fillColor=#F2F5F9;strokeColor=#CCD7E4;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="900" y="810" width="330" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" value="Amarillo = estados de espera; verde y rojo = estados finales. Fuente de verdad: páginas del Módulo 6 en docs/datos-y-consistencia/ (Mermaid); este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="865" width="1200" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

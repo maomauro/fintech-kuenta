@@ -1,0 +1,150 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="er-general-1" name="er-general">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1900" pageHeight="1010" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Modelo de datos general · Kuenta" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Cada módulo es dueño de su esquema. Línea continua = relación dentro del módulo; punteada = referencia por identificador entre módulos (decisión A)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1700" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Identidad y apertura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="500" y="70" width="760" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="EVIDENCIA" value="&lt;b&gt;EVIDENCIA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;referencia_archivo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="CLIENTE" value="&lt;b&gt;CLIENTE&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;estado_verificacion" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="775" y="120" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="SOLICITUD_APERTURA" value="&lt;b&gt;SOLICITUD_APERTURA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;estado" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="520" y="225" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="AUTORIZACION_DATOS" value="&lt;b&gt;AUTORIZACION_DATOS&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;fecha&lt;br&gt;version_texto" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="225" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="Notificaciones" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="70" width="300" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="NOTIFICACION" value="&lt;b&gt;NOTIFICACION&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;canal&lt;br&gt;estado_entrega" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="120" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="Efectivo y corresponsales" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="30" y="380" width="560" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="OPERACION_EFECTIVO" value="&lt;b&gt;OPERACION_EFECTIVO&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;estado" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="350" y="430" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="CORRESPONSAL" value="&lt;b&gt;CORRESPONSAL&lt;/b&gt;&lt;hr&gt;id (PK)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="50" y="430" width="210" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="TERMINAL" value="&lt;b&gt;TERMINAL&lt;/b&gt;&lt;hr&gt;id (PK)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="50" y="560" width="210" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Cuentas y depósitos" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="630" y="380" width="500" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="DEPOSITO" value="&lt;b&gt;DEPOSITO&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;cliente_id&lt;br&gt;estado&lt;br&gt;saldo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="775" y="430" width="210" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="MOVIMIENTO" value="&lt;b&gt;MOVIMIENTO&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;operacion_id&lt;br&gt;valor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="650" y="575" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="RESERVA" value="&lt;b&gt;RESERVA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;valor&lt;br&gt;estado" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="900" y="575" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Pagos y transferencias" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="380" width="700" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="TRANSFERENCIA" value="&lt;b&gt;TRANSFERENCIA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;tipo (interna o Bre-B)&lt;br&gt;estado" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="430" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="ORDEN_BREB" value="&lt;b&gt;ORDEN_BREB&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;respuesta" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="430" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Cumplimiento y riesgo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="30" y="740" width="560" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="REPORTE_AUTORIDAD" value="&lt;b&gt;REPORTE_AUTORIDAD&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;autoridad" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="50" y="790" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="CASO_REVISION" value="&lt;b&gt;CASO_REVISION&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;decision" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="350" y="790" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Atención al cliente" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="755" y="740" width="250" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="QUEJA" value="&lt;b&gt;QUEJA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;radicado" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="775" y="790" width="210" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="Auditoría" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="740" width="250" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="REGISTRO_AUDITORIA" value="&lt;b&gt;REGISTRO_AUDITORIA&lt;/b&gt;&lt;hr&gt;id (PK)&lt;br&gt;actor&lt;br&gt;accion" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="790" width="210" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="tiene" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CLIENTE" target="EVIDENCIA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="inicia" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CLIENTE" target="SOLICITUD_APERTURA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="otorga" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CLIENTE" target="AUTORIZACION_DATOS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="registra" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="DEPOSITO" target="MOVIMIENTO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="aparta" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="DEPOSITO" target="RESERVA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="se envía como" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="TRANSFERENCIA" target="ORDEN_BREB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="opera" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CORRESPONSAL" target="TERMINAL">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="autoriza y confirma" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="TERMINAL" target="OPERACION_EFECTIVO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" value="puede generar" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CASO_REVISION" target="REPORTE_AUTORIDAD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" value="es titular (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CLIENTE" target="DEPOSITO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" value="recibe" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="CLIENTE" target="NOTIFICACION">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n23" value="origen o destino (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="DEPOSITO" target="TRANSFERENCIA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n24" value="se acredita o debita (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="DEPOSITO" target="OPERACION_EFECTIVO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n25" value="se reclama sobre (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="DEPOSITO" target="QUEJA">
+          <mxGeometry relative="1" as="geometry" x="0.2" />
+        </mxCell>
+        <mxCell id="n26" value="deja huella (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="MOVIMIENTO" target="REGISTRO_AUDITORIA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" value="puede retener (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="TRANSFERENCIA" target="CASO_REVISION">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1305" y="725" />
+              <mxPoint x="520" y="725" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n28" value="puede retener (por id)" style="endArrow=ERzeroToMany;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;startArrow=ERmandOne;startFill=1;" edge="1" parent="1" source="OPERACION_EFECTIVO" target="CASO_REVISION">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n29" value="Alcance: modelo de alto nivel. Muestra qué entidad es de quién y cómo se conectan, no cada columna. Fuente de verdad: páginas del Módulo 6 en docs/datos-y-consistencia/ (Mermaid); este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="985" width="1700" height="22" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

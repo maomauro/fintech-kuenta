@@ -45,6 +45,7 @@ const config = {
   },
 
   themes: ['@docusaurus/theme-mermaid'],
+  clientModules: ['./src/clientModules/ampliarMermaid.js'],
 
   presets: [
     [
@@ -58,7 +59,7 @@ const config = {
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/custom.css', './src/css/ampliar-mermaid.css'],
         },
       }),
     ],

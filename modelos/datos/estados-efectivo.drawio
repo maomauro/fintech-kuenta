@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="estados-efectivo-1" name="estados-efectivo">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1200" pageHeight="560" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Efectivo en el corresponsal · estados" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Saga orquestada dentro de Efectivo y corresponsales. El tiempo máximo de la autorización es un parámetro (se fija en el Módulo 10)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1100" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Depósito de efectivo (CU-03)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="1140" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="da" value="&lt;b&gt;Autorizada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="70" y="140" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="dc" value="&lt;b&gt;Confirmada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#D9F0E3;strokeColor=#1D5A40;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="100" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="dv" value="&lt;b&gt;Vencida&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FBE0E0;strokeColor=#A33A3A;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="190" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="el corresponsal confirma" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="da" target="dc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="no confirma a tiempo" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="da" target="dv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Al confirmar se acredita el valor al depósito. Si vence, no se escribe ningún apunte." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#15233A;fillColor=#F2F5F9;strokeColor=#CCD7E4;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="800" y="110" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Retiro de efectivo (CU-04)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="30" y="300" width="1140" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="rd" value="&lt;b&gt;Debitada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#1F5FA8;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="70" y="360" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="ra" value="&lt;b&gt;Entrega autorizada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FFF3CC;strokeColor=#8C7C47;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="360" width="190" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="re" value="&lt;b&gt;Entregada&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#D9F0E3;strokeColor=#1D5A40;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="780" y="330" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="rr" value="&lt;b&gt;Revertida&lt;/b&gt;" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#FBE0E0;strokeColor=#A33A3A;fontColor=#15233A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="780" y="430" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="autoriza la entrega" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="rd" target="ra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="el terminal confirma" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ra" target="re">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="el terminal no confirma" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ra" target="rr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="Revertida: un movimiento contrario anula el débito (compensación)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#15233A;fillColor=#F2F5F9;strokeColor=#CCD7E4;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="960" y="430" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="Fuente de verdad: páginas del Módulo 6 en docs/datos-y-consistencia/ (Mermaid); este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="525" width="1100" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

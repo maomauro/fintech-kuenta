@@ -1,0 +1,118 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="flujo-eventos-1" name="flujo-eventos">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1700" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Flujo de eventos · outbox transaccional" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=18;fontColor=#1F5FA8;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="Auditoría se registra por llamada directa en la misma transacción (línea punteada). El resto se publica como evento con outbox (decisión C)." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=11;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1600" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="aud" value="&lt;b&gt;Auditoría&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="Publicadores (módulos)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="290" y="90" width="250" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="id" value="&lt;b&gt;Identidad y apertura&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="140" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="Registra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="id" target="aud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cu" value="&lt;b&gt;Cuentas y depósitos&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="245" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="Registra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cu" target="aud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pa" value="&lt;b&gt;Pagos y transferencias&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="350" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="Registra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="pa" target="aud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ef" value="&lt;b&gt;Efectivo y corresponsales&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="455" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="Registra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="ef" target="aud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cr" value="&lt;b&gt;Cumplimiento y riesgo&lt;/b&gt;&lt;br&gt;[Módulo]" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="320" y="560" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Registra" style="endArrow=open;endFill=0;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="cr" target="aud">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ob" value="&lt;b&gt;Tabla outbox&lt;/b&gt;&lt;br&gt;[Base de datos]&lt;br&gt;El evento se guarda en la misma transacción que el dato" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=14;whiteSpace=wrap;html=1;fillColor=#2E7D5B;strokeColor=#1D5A40;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="300" width="210" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="de" value="&lt;b&gt;Despachador&lt;/b&gt;&lt;br&gt;[Proceso del monolito]&lt;br&gt;Entrega y reintenta con espera creciente" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#0B3D6B;strokeColor=#082B4D;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="930" y="310" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="Publica evento" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="id" target="ob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cu" target="ob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pa" target="ob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ef" target="ob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cr" target="ob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="Lee los pendientes" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="ob" target="de">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Consumidores (idempotentes)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0B3D6B;dashed=1;dashPattern=8 4;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=12;fontColor=#0B3D6B;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="90" width="480" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="&lt;b&gt;Notificaciones&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="130" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="&lt;b&gt;Contabilidad externa&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#B9A66B;strokeColor=#8C7C47;fontColor=#1A1A1A;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="220" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="&lt;b&gt;Cumplimiento y riesgo&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="310" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="&lt;b&gt;Pagos y transferencias&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="400" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="&lt;b&gt;Efectivo y corresponsales&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="490" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="&lt;b&gt;Cuentas y depósitos&lt;/b&gt;" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#3A7BD0;strokeColor=#1F5FA8;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="580" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" value="" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="de" target="c6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n23" value="Un evento nunca lleva datos personales: solo identificadores. Los eventos no entregados quedan en una cola de errores. Fuente de verdad: páginas del Módulo 6 en docs/datos-y-consistencia/ (Mermaid); este archivo es una copia editable en draw.io." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;fontColor=#58677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="715" width="1600" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

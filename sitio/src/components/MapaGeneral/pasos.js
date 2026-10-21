@@ -180,9 +180,10 @@ export const PASOS = [
       "Definir los contratos de las APIs y las integraciones con terceros"
     ],
     "kuenta": [
-      "Decisión previa, a reconfirmar en el M5: monolito modular, con extracción posterior si hace falta",
-      "Módulos propuestos: Identidad y apertura, Cuentas y depósitos, Pagos y transferencias, Efectivo y corresponsales, Cumplimiento y riesgo, Atención al cliente, más Notificaciones y Auditoría transversales",
-      "Diagramas C4 de contexto y de contenedores"
+      "Decisión del M5: monolito modular, con extracción posterior de un módulo solo si una señal medida lo pide",
+      "Ocho módulos: Identidad y apertura, Cuentas y depósitos, Pagos y transferencias, Efectivo y corresponsales, Cumplimiento y riesgo, Atención al cliente, más Notificaciones y Auditoría transversales",
+      "Diagramas C4 de contexto, contenedores y componentes, y secuencias UML",
+      "Decisiones del M6: libro mayor de partida doble ligera, eventos con outbox y sagas orquestadas para Bre-B y el efectivo"
     ],
     "conceptos": [
       "Monolito modular",
