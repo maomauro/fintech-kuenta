@@ -25,7 +25,7 @@ Lo que el sistema debe **cumplir bien**, no solo hacer. Están ordenados por pri
 - **p95:** el 95 % de las operaciones debe terminar dentro de ese tiempo.
 - **RPO** (*Recovery Point Objective*): cuántos datos se pueden perder como máximo en una falla, medidos en tiempo.
 - **RTO** (*Recovery Time Objective*): cuánto tiempo puede tardar el servicio en volver tras una falla.
-- **DORA:** las cuatro métricas de entrega de software (frecuencia de despliegue, tiempo de entrega, tasa de fallo de cambios y tiempo de recuperación).
+- **DORA:** las cinco métricas de entrega de software ([dora.dev](https://dora.dev/guides/dora-metrics/)): frecuencia de despliegue, plazo de cambio, tiempo de recuperación de un despliegue fallido, tasa de fallo de cambios y tasa de retrabajo. La meta de RNF-07 usa tres de ellas.
 
 ## Por qué este orden
 

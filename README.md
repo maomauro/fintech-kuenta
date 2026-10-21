@@ -2,7 +2,7 @@
 
 Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 9 están cerrados. Hoy está en el **Módulo 10: resiliencia y operación**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 10 están cerrados. Hoy está en el **Módulo 11: entrega, CI/CD e IaC**.
 
 ## Cómo navegar este repositorio
 
@@ -21,6 +21,7 @@ Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana fic
 | `modelos/despliegue/` | Copia editable en draw.io del diagrama de despliegue en AWS del Módulo 8. La fuente de verdad es la página de `docs/arquitectura-en-aws/`, escrita en Mermaid. |
 | `modelos/seguridad/` | Copia editable en draw.io del diagrama de fronteras de confianza del Módulo 9. La fuente de verdad es la página de `docs/seguridad-y-cumplimiento/`, escrita en Mermaid. |
 | `modelos/recuperacion/` | Copia editable en draw.io del diagrama de escenarios de recuperación del Módulo 10. La fuente de verdad es la página de `docs/resiliencia-y-operacion/`, escrita en Mermaid. |
+| `modelos/entrega/` | Copia editable en draw.io del diagrama del flujo de despliegue del Módulo 11. La fuente de verdad es la página de `docs/entrega-ci-cd-e-iac/`, escrita en Mermaid. |
 | `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir un depósito de bajo monto o depositar efectivo en un corresponsal. |
 | `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
 | `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |

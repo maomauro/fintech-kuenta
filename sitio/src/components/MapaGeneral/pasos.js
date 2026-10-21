@@ -219,8 +219,7 @@ export const PASOS = [
     "c": "c6",
     "t": "Elegir dónde corre",
     "q": "¿Sobre qué infraestructura?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "Nube y servicios",
       "Seguridad y cumplimiento",
@@ -276,7 +275,8 @@ export const PASOS = [
     "c": "c7",
     "t": "Entregar y controlar costos",
     "q": "¿Cómo llega a producción?",
-    "st": "todo",
+    "st": "now",
+    "aqui": true,
     "bul": [
       "CI/CD e infraestructura como código",
       "Evidencia automática",
@@ -293,6 +293,7 @@ export const PASOS = [
     ],
     "kuenta": [
       "La Definition of Done de nivel 2 (auditable) se produce con cada despliegue",
+      "Decisiones del M11: una sola imagen promovida entre entornos, OIDC sin llaves guardadas, blue/green con reversión e infraestructura como código con OpenTofu",
       "Estimación de costos en total anual"
     ],
     "mods": [
