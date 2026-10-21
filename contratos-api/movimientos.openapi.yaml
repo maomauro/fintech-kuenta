@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Kuenta · API de consulta de depósito (ejemplo)
+  version: 1.0.0
+  summary: Contrato de ejemplo del Módulo 7 para consultar saldo y movimientos.
+  description: |
+    **Contrato ilustrativo** de consulta. Muestra tres decisiones de estilo del Módulo 7:
+
+    - **Dinero como texto decimal** con moneda, y con signo en los movimientos
+      (un débito es negativo, igual que sus apuntes en el libro mayor).
+    - **Paginación por cursor**: los movimientos crecen sin parar y la paginación
+      por número de página se rompe cuando entran datos nuevos.
+    - **Fechas en ISO 8601 y UTC.**
+
+    La consulta de movimientos la sirve el módulo Cuentas y depósitos por su puerta
+    pública; Atención al cliente la usa para armar extractos (decisión A del Módulo 6).
+servers:
+  - url: https://api.kuenta.example/v1
+    description: Servidor ficticio de ejemplo
+tags:
+  - name: Depósitos
+security:
+  - clienteBearer: []
+paths:
+  /depositos/{depositoId}/saldo:
+    get:
+      tags: [Depósitos]
+      operationId: consultarSaldo
+      summary: Consulta el saldo
+      description: El saldo disponible es el saldo menos las reservas activas.
+      parameters:
+        - $ref: '#/components/parameters/DepositoId'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      responses:
+        '200':
+          description: Saldo del depósito.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Saldo'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '403':
+          $ref: 'comunes.yaml#/components/responses/NoAutorizado'
+        '404':
+          description: El depósito no existe o no pertenece al cliente.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+  /depositos/{depositoId}/movimientos:
+    get:
+      tags: [Depósitos]
+      operationId: listarMovimientos
+      summary: Lista los movimientos, del más reciente al más antiguo
+      parameters:
+        - $ref: '#/components/parameters/DepositoId'
+        - name: desde
+          in: query
+          description: Instante inicial en UTC (incluido).
+          schema:
+            type: string
+            format: date-time
+        - name: hasta
+          in: query
+          description: Instante final en UTC (excluido).
+          schema:
+            type: string
+            format: date-time
+        - name: tipo
+          in: query
+          schema:
+            $ref: '#/components/schemas/TipoMovimiento'
+        - name: limite
+          in: query
+          description: Cantidad máxima de movimientos por página.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: cursor
+          in: query
+          description: Valor opaco de `paginacion.siguienteCursor` de la página anterior.
+          schema:
+            type: string
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      responses:
+        '200':
+          description: Página de movimientos.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginaMovimientos'
+        '400':
+          $ref: 'comunes.yaml#/components/responses/PeticionInvalida'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '403':
+          $ref: 'comunes.yaml#/components/responses/NoAutorizado'
+        '404':
+          description: El depósito no existe o no pertenece al cliente.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+components:
+  securitySchemes:
+    clienteBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Credencial del cliente. El esquema definitivo se decide en el Módulo 9.
+  parameters:
+    DepositoId:
+      name: depositoId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Saldo:
+      type: object
+      required: [saldo, saldoDisponible, reservado, fechaCorte]
+      properties:
+        saldo:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        reservado:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        saldoDisponible:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        fechaCorte:
+          type: string
+          format: date-time
+    TipoMovimiento:
+      type: string
+      enum:
+        - deposito_efectivo
+        - retiro_efectivo
+        - transferencia_enviada
+        - transferencia_recibida
+        - gmf
+        - correccion
+    Movimiento:
+      type: object
+      required: [movimientoId, fecha, tipo, valor, saldoPosterior]
+      properties:
+        movimientoId:
+          type: string
+          format: uuid
+        fecha:
+          type: string
+          format: date-time
+        tipo:
+          $ref: '#/components/schemas/TipoMovimiento'
+        valor:
+          $ref: 'comunes.yaml#/components/schemas/DineroConSigno'
+        saldoPosterior:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        descripcion:
+          type: string
+        operacionId:
+          type: string
+          format: uuid
+        corrigeA:
+          type: [string, 'null']
+          format: uuid
+          description: Si es una corrección, el movimiento que anula.
+    PaginaMovimientos:
+      type: object
+      required: [datos, paginacion]
+      properties:
+        datos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Movimiento'
+        paginacion:
+          type: object
+          required: [hayMas]
+          properties:
+            hayMas:
+              type: boolean
+            siguienteCursor:
+              type: [string, 'null']

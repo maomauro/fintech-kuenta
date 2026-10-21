@@ -103,8 +103,13 @@
         <mxCell id="n12" value="Envía y recibe transferencias" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="breb">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n13" value="Concilia con corresponsales" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="pagos" target="redes">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="n13" value="Concilia con corresponsales" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="efectivo" target="redes">
+          <mxGeometry relative="1" as="geometry" x="0.62">
+            <Array as="points">
+              <mxPoint x="1140" y="488" />
+              <mxPoint x="1630" y="488" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="n14" value="Consulta listas restrictivas" style="endArrow=block;endFill=1;html=1;rounded=0;strokeColor=#44546A;fontSize=10;fontColor=#15233A;labelBackgroundColor=#FFFFFF;strokeWidth=1.5;" edge="1" parent="1" source="cumplimiento" target="listas">
           <mxGeometry relative="1" as="geometry" />

@@ -52,6 +52,11 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Eventos (Módulo 6) | Mezcla según lo que se juegue: **Auditoría por llamada directa en la misma transacción**; Notificaciones, asientos para contabilidad y reportes por **eventos con transactional outbox** (entrega al menos una vez, consumidores idempotentes). Cada evento lleva identificador, tipo y versión, fecha, correlación y los datos justos, nunca datos personales. Transporte interno (tabla outbox y despachador); un servicio de mensajería de AWS solo si un módulo pasa a servicio o una integración externa lo pide (Módulo 8). En los diagramas del Módulo 5, «Avisa» pasa a «Publica evento»; «Registra» (Auditoría) se mantiene | 2026-10-20 |
 | Sagas (Módulo 6) | Solo donde interviene un sistema externo: **transferencia por Bre-B, depósito de efectivo y retiro de efectivo**. Transferencia entre cuentas y apertura no son saga. Son **orquestadas dentro del módulo dueño** (Pagos; Efectivo), como máquinas de estados en su propio esquema. Bre-B: iniciada, reservada, enviada, confirmada, rechazada o pendiente; sin respuesta en 20 s queda pendiente y nunca se libera la reserva sin conocer el resultado; pasado un límite parametrizable pasa a revisión manual. La compensación del retiro es un movimiento contrario. La reserva actúa como bloqueo semántico. Tiempos de vencimiento, número de reintentos y límite de revisión manual se fijan en el Módulo 10 | 2026-10-20 |
 | Entregable del Módulo 6 | Cinco piezas escritas en **Mermaid** (Structurizr no genera diagramas entidad-relación): modelo de datos general, detalle del libro mayor, flujo de eventos, saga de Bre-B (estados y secuencia) y estados del efectivo. Páginas en `docs/datos-y-consistencia/`, nota en `docs/modulos/datos-y-consistencia.md` y copias editables en draw.io en `modelos/datos/`. Se agrega al sitio un botón **«Ampliar»** para todos los diagramas Mermaid (`sitio/src/clientModules/ampliarMermaid.js`) | 2026-10-20 |
+| Mapa de integraciones (Módulo 7) | Un adaptador por integración dentro del módulo dueño (capa anticorrupción); un solo módulo habla con cada tercero; síncrono si el cliente espera, asíncrono por outbox si no bloquea, lotes para conciliación y reportes; las entradas de terceros usan rutas y credenciales distintas de la API de clientes. Bre-B (Pagos, Release 2), Registraduría simulada (Identidad), listas restrictivas y UIAF/Superfinanciera (Cumplimiento), redes de corresponsales (Efectivo), proveedor de notificaciones (Notificaciones), sistema contable (Cuentas); finanzas abiertas en etapa posterior. Corrección al Módulo 5: la conciliación con redes es de Efectivo, no de Pagos | 2026-10-21 |
+| Estilo de APIs (Módulo 7) | REST con JSON sobre HTTPS; contrato primero en OpenAPI 3.1.x; versión en la ruta (`/v1`); errores RFC 9457 con `codigo` de negocio; `Idempotency-Key` obligatoria en operaciones que mueven dinero (misma llave y mismo contenido devuelve el resultado original; distinto contenido 422; en curso 409; es un borrador del IETF, no un RFC); la transferencia Bre-B responde 202 `en_proceso`; dinero como texto decimal con `COP`; fechas ISO 8601 UTC; paginación por cursor; seguridad solo en principios (Módulo 9) | 2026-10-21 |
+| Gateway y modelo canónico (Módulo 7) | API gateway gestionado delante del monolito sin lógica de negocio (el tipo REST API o HTTP API se decide en el Módulo 8); sin BFF por ahora; sin modelo canónico global (ISO 20022 solo en el adaptador de Bre-B; el catálogo de eventos es el único vocabulario compartido); las puertas públicas internas son interfaces de código, publicables como OpenAPI si un módulo pasa a servicio | 2026-10-21 |
+| Resiliencia de integraciones (Módulo 7) | Tiempo límite explícito, reintentos solo si es idempotente, cortacircuitos, compartimentos por integración e identificador de correlación; lo accesorio nunca bloquea y lo regulatorio nunca se omite; comportamiento definido por tercero; simuladores y pruebas de certificación de Bre-B; valores en el Módulo 10 | 2026-10-21 |
+| Entregable del Módulo 7 | Mapa de integraciones (Mermaid y copia en draw.io en `modelos/integraciones/`) y tres contratos OpenAPI de ejemplo en `contratos-api/` (transferencias, efectivo, movimientos, más `comunes.yaml`); no se escribe contrato de Bre-B porque sus anexos técnicos no son públicos. Páginas en `docs/integracion-y-apis/` y nota en `docs/modulos/integracion-y-apis.md`. Los contratos solo se verificaron estructuralmente, sin validador oficial | 2026-10-21 |
 | Mapas de alto nivel (portal) | Dos páginas con componentes React: **Mapa de alto nivel** (serpentina con iconos) y **Mapa de engranes** (recorrido vertical con bucle de evolución), junto al Mapa general. Comparten el contenido en `sitio/src/components/MapasAltoNivel/etapas.js` | 2026-10-19 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
@@ -125,9 +130,10 @@ fintech-kuenta/
 │  ├─ c4/                     ← copias editables en draw.io: contexto, contenedores, componentes y clases
 │  ├─ uml/                    ← copias editables en draw.io: casos de uso y secuencias
 │  ├─ datos/                  ← copias editables en draw.io: modelo de datos, libro mayor, eventos y sagas
+│  ├─ integraciones/          ← copia editable en draw.io del mapa de integraciones
 │  └─ bpmn/                   ← procesos de negocio
 ├─ diagramas/                 ← fuentes (draw.io, Excalidraw) y exportados (PNG, SVG)
-├─ contratos-api/             ← OpenAPI de ejemplo
+├─ contratos-api/             ← OpenAPI de ejemplo (transferencias, efectivo, movimientos y componentes comunes)
 ├─ infraestructura/           ← diseño AWS, ejemplos de IaC, despliegue en el VPS
 ├─ entrevista/                ← guion y preguntas típicas
 └─ referencias/               ← lecturas y enlaces públicos
@@ -185,10 +191,10 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0 a 5 cerrados y fusionados a `main`** (último commit: `00338aa`, pull request del Módulo 5). **Módulo 6 (Datos y consistencia) con las decisiones A a E tomadas y la documentación única redactada**: `docs/datos-y-consistencia/` (modelo de datos, libro mayor, flujo de eventos, sagas y estados), la nota `docs/modulos/datos-y-consistencia.md`, copias en draw.io en `modelos/datos/`, el botón «Ampliar» de los diagramas del sitio y la corrección de «Avisa» a «Publica evento» en el Módulo 5. Pendiente: revisión del autor en el sitio, repaso, pregunta de entrevista y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
+- **Foco actual:** **Módulos 0 a 6 cerrados y fusionados a `main`** (último commit: `c905571`, pull request del Módulo 6). **Módulo 7 (Integración y APIs) con las decisiones A a E tomadas y la documentación única redactada**: `docs/integracion-y-apis/` (mapa, estilo de APIs, gateway y modelo canónico, resiliencia, contratos), la nota `docs/modulos/integracion-y-apis.md`, tres contratos OpenAPI en `contratos-api/`, la copia en draw.io en `modelos/integraciones/` y la corrección Efectivo → Redes en el Módulo 5. Pendiente: revisión del autor en el sitio, repaso, pregunta de entrevista y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
-- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8).
+- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8). **Módulo 7:** anexos 2, 4 y 5 de la DSP-465 y la DSP-471 (estados, consulta de estado, reintentos, reversos, idempotencia, disponibilidad de Bre-B); si Bre-B es obligatorio para Kuenta (el umbral de 1.500.000 productos del Decreto 1069 de 2025 viene de un resumen de terceros, no del texto oficial); canal y formato de los reportes a UIAF y Superfinanciera; camino real de acceso y costo de la Registraduría; validación de los contratos con un validador oficial de OpenAPI; copia en draw.io del mapa abierta en la aplicación; tipo de API gateway (Módulo 8).
 - **Lista de temas para profundizar (fuera del flujo principal):** _(vacía)_
 
 ## 10. Registro de cambios
@@ -218,34 +224,43 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-19 | Módulo 4 cerrado y fusionado a `main`. Se agregan al portal el Mapa general (componente React), el Mapa de alto nivel y el Mapa de engranes. Módulo 5: se aprueban las decisiones A (monolito modular), B (8 módulos), C (entregable) y D (Mermaid); se modela Kuenta en Structurizr y se redactan las páginas del módulo. Se corrige la herramienta: Structurizr Lite y el CLI figuran en fin de vida, la imagen vigente es `structurizr/structurizr` |
 | 2026-10-19 | Módulo 5: el sitio muestra los diagramas bien; se agregan copias en draw.io (C4 en `modelos/c4/`, UML en `modelos/uml/`) y un diagrama de casos de uso. Se alinean los estados del Mapa general, el README y la introducción, y una cita de CI/CD (Módulo 11) |
 | 2026-10-20 | **Módulo 5 cerrado y fusionado a `main`** (`00338aa`): repaso y pregunta de entrevista. Inicia el Módulo 6: se investigan Bre-B (documento técnico del Banco de la República), los patrones saga y outbox de AWS y la conservación de documentos; se aprueban las decisiones A (dueño de los datos), B (libro mayor), C (eventos), D (sagas) y E (entregable). Se redactan las páginas del módulo, las copias en draw.io, el botón «Ampliar» del sitio y la corrección «Avisa» → «Publica evento» en el modelo y los diagramas del Módulo 5 |
+| 2026-10-21 | **Módulo 6 cerrado y fusionado a `main`** (`c905571`): repaso y pregunta de entrevista. Inicia el Módulo 7: se investigan Bre-B (DSP-465 y DSP-470), Registraduría, Decreto 368 de 2026, tipos de API gateway de AWS, `Idempotency-Key` y OpenAPI; se aprueban las decisiones A (mapa de integraciones), B (estilo de APIs), C (gateway y modelo canónico), D (resiliencia) y E (entregable). Se redactan las páginas, los tres contratos OpenAPI y la copia en draw.io, y se corrige en el Módulo 5 la conciliación con redes de corresponsales (de Pagos a Efectivo) |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
 |---|---|
 | ADR | Architecture Decision Record: registro de decisión de arquitectura (qué se decidió, por qué y con qué consecuencias) |
 | API | Application Programming Interface: interfaz de programación de aplicaciones; la forma en que un sistema ofrece funciones a otros |
+| API gateway | Puerta de entrada gestionada que recibe las peticiones y aplica autenticación, límites y validación antes de pasarlas |
 | Apunte | Línea de un libro mayor: un valor positivo o negativo sobre una cuenta; los apuntes de una operación suman cero |
 | arc42 | Plantilla ligera para documentar arquitecturas de software (es un nombre propio) |
 | ArchiMate | Lenguaje estándar para modelar arquitectura empresarial (negocio, aplicación, tecnología) |
 | AWS | Amazon Web Services: la nube de Amazon |
 | Backlog | Lista ordenada de todo lo que se quiere construir |
+| BFF | *Backend for Frontend*: una API hecha a la medida de un canal (app, web) |
 | BIAN | Banking Industry Architecture Network: red que publica un modelo de referencia de capacidades para la banca |
 | Bloqueo semántico | Marcar un valor como apartado (la reserva) mientras un proceso está a medias, porque las sagas no dan aislamiento |
 | BPMN | Business Process Model and Notation: notación para dibujar procesos de negocio |
 | Bre-B | Sistema de pagos inmediatos de Colombia, que permite transferencias entre entidades al instante (Decreto 1069 de 2025) |
+| Bulkhead (compartimento) | Recursos separados por integración para que una lenta no afecte a las demás |
+| Bus de integración (ESB) | Intermediario central por donde pasan y se transforman los mensajes entre sistemas; aquí no se usa |
 | C4 | Context, Containers, Components, Code: método para diagramar arquitectura en cuatro niveles de detalle |
+| Capa anticorrupción (adaptador) | Código que traduce entre el idioma de un tercero y el propio, para que no se filtre al resto |
 | Capacidad de negocio | Lo que una organización necesita saber hacer para cumplir su estrategia; combina personas, procesos, información y tecnología |
 | CI/CD | Continuous Integration / Continuous Delivery: integración y entrega continuas; automatiza probar y desplegar cambios |
 | CLI | Command-Line Interface: herramienta que se maneja escribiendo comandos |
 | Compensación | Paso que deshace el efecto de uno anterior cuando una saga falla |
 | Consistencia eventual | Los datos de distintos lugares coinciden con un pequeño retraso, no al instante |
 | Contenedor | Caja aislada que lleva una aplicación con todo lo que necesita para ejecutarse (Docker es la herramienta más usada) |
+| Contract-first | Escribir el contrato de la API antes que el código |
+| Cortacircuitos | Dejar de llamar a un tercero un rato tras fallos seguidos |
 | Criterio de aceptación | Condición verificable que debe cumplirse para dar una historia por terminada |
 | Cuenta de tránsito | Cuenta interna del libro por donde pasa el dinero que sale o entra por Bre-B o por un corresponsal |
 | DDD | Domain-Driven Design: diseño guiado por el dominio; modela el software según el lenguaje y las reglas del negocio |
 | Debida diligencia simplificada | Versión reducida del conocimiento del cliente que la norma permite para productos de bajo riesgo, como el depósito de bajo monto |
 | Definition of Done | Estándar de calidad que debe cumplir todo elemento para considerarse terminado; incluye los requisitos regulatorios |
 | Depósito de bajo monto | Producto de depósito electrónico para personas naturales con tope de saldo y de débitos mensuales de 8 SMLMV; se puede abrir a distancia (Decreto 222 de 2020) |
+| DICE, SEBRA | Sistemas del Banco de la República de los que depende Bre-B (DSP-470) |
 | Docker | Herramienta para crear y ejecutar contenedores |
 | Dominio de negocio | Grupo de capacidades relacionadas que comparten conocimiento y datos |
 | DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
@@ -260,13 +275,17 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | HTML | HyperText Markup Language: lenguaje con el que se escriben las páginas web |
 | IaC | Infrastructure as Code: infraestructura como código; crear servidores y redes mediante archivos en vez de clics |
 | Idempotencia | Propiedad de una operación que, repetida, no duplica sus efectos |
+| Idempotency-Key | Cabecera con una llave única para que un reintento no repita el efecto |
 | ISO 20022 | Estándar de mensajería financiera que usa Bre-B |
 | Libro mayor | Registro donde queda cada movimiento de dinero; solo se agrega, las correcciones son movimientos nuevos |
 | Listas restrictivas | Listas de personas con las que una entidad no debe vincularse por riesgo de lavado de activos o financiación del terrorismo |
 | Llave de idempotencia | Identificador único de una operación, para reconocer un reintento y no duplicarla |
 | Mapa de calor | Mapa de capacidades coloreado según un criterio, como el tipo, la madurez o el release |
 | Mapa de capacidades | Representación visual de las capacidades de una organización, agrupadas por niveles |
+| Modelo canónico | Formato único de datos al que todos los sistemas traducen; aquí no hay uno global |
+| mTLS | TLS en ambos sentidos: el cliente también se identifica con un certificado |
 | MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
+| OpenAPI | Especificación para describir APIs REST en un archivo |
 | Orquestación (saga) | Saga dirigida por un coordinador que decide el siguiente paso; la alternativa es la coreografía |
 | Outbox transaccional | Guardar el evento en la misma transacción que el dato y publicarlo después con otro proceso |
 | Partida doble | Cada operación se registra con apuntes que suman cero |
@@ -275,6 +294,7 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Product Goal | Objetivo de largo plazo del producto; en Scrum solo hay uno a la vez |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
 | Reserva | Valor apartado del saldo disponible mientras se espera la confirmación de una operación |
+| RFC 9457 | Formato estándar de errores en HTTP (`problem+json`) |
 | SAC | Sistema de Atención al Consumidor Financiero: políticas y procesos para atender consultas, quejas y reclamos (Ley 1328 de 2009) |
 | Saga | Proceso de varios pasos locales con compensaciones, para mantener coherencia sin una sola transacción |
 | SARLAFT | Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo: controles obligatorios contra el lavado de dinero |
