@@ -57,6 +57,12 @@ Diseñar la arquitectura completa de **Kuenta**, una fintech colombiana ficticia
 | Gateway y modelo canónico (Módulo 7) | API gateway gestionado delante del monolito sin lógica de negocio (el tipo REST API o HTTP API se decide en el Módulo 8); sin BFF por ahora; sin modelo canónico global (ISO 20022 solo en el adaptador de Bre-B; el catálogo de eventos es el único vocabulario compartido); las puertas públicas internas son interfaces de código, publicables como OpenAPI si un módulo pasa a servicio | 2026-10-21 |
 | Resiliencia de integraciones (Módulo 7) | Tiempo límite explícito, reintentos solo si es idempotente, cortacircuitos, compartimentos por integración e identificador de correlación; lo accesorio nunca bloquea y lo regulatorio nunca se omite; comportamiento definido por tercero; simuladores y pruebas de certificación de Bre-B; valores en el Módulo 10 | 2026-10-21 |
 | Entregable del Módulo 7 | Mapa de integraciones (Mermaid y copia en draw.io en `modelos/integraciones/`) y tres contratos OpenAPI de ejemplo en `contratos-api/` (transferencias, efectivo, movimientos, más `comunes.yaml`); no se escribe contrato de Bre-B porque sus anexos técnicos no son públicos. Páginas en `docs/integracion-y-apis/` y nota en `docs/modulos/integracion-y-apis.md`. Los contratos solo se verificaron estructuralmente, sin validador oficial | 2026-10-21 |
+| Región y cuentas (Módulo 8) | Región principal **São Paulo (`sa-east-1`)**: Colombia no tiene región de AWS, la Local Zone de Bogotá está anunciada sin servicios y la región de Chile sin fecha; São Paulo viene habilitada por defecto y México Central exige activación. Cuentas separadas de producción, pruebas y seguridad y registros; respaldos copiados a una segunda región (plan en el Módulo 10). La Circular 005 de 2019 no exige datos en Colombia pero sí informar la región (6.3), verificar jurisdicción equivalente (3.7) y avisar 15 días antes | 2026-10-21 |
+| Cómputo (Módulo 8) | El monolito en contenedores con **ECS Fargate**, mínimo dos tareas en dos zonas de disponibilidad, detrás de un balanceador interno (ALB). Descartados EKS y EC2 | 2026-10-21 |
+| Base de datos (Módulo 8) | **RDS para PostgreSQL Multi-AZ** (instancia principal con standby sincrónico, sin lecturas en el standby), un esquema por módulo, respaldos y restauración a un instante (registros subidos cada 5 minutos, encaja con el RPO de 5 minutos; la restauración crea una instancia nueva). Descartados el clúster Multi-AZ con lectores y Aurora (se evalúa en el Módulo 12 y el ADR del Módulo 13) | 2026-10-21 |
+| Entrada y red (Módulo 8) | Route 53, WAF y **API Gateway tipo REST API** (WAF, validación y planes de uso solo existen en este tipo; mTLS en ambos) hacia el ALB interno por enlace privado (VPC link V2); subredes privadas de aplicación y datos; salidas a terceros por NAT; endpoints privados a los servicios de AWS; sin SQS ni SNS por ahora. Cierra la decisión C1 del Módulo 7 | 2026-10-21 |
+| Entregable del Módulo 8 | Diagrama de despliegue en **Mermaid** con copia en draw.io (`modelos/despliegue/`) y tabla de servicios (servicio, para qué, quién lo usa, atributo de calidad). Páginas en `docs/arquitectura-en-aws/` y nota en `docs/modulos/arquitectura-en-aws.md`. Los precios van en el Módulo 12 | 2026-10-21 |
+| Forma de cierre de módulos (desde el Módulo 7) | A pedido del autor, **opción A «ciclo ligero»**: se omiten el repaso de 5 preguntas y la pregunta de entrevista; se mantiene la regla de investigar, proponer un borrador con decisiones, aprobación del autor, documentación única, rama por módulo y pull request con squash. El asistente tiene más autonomía para avanzar; el autor sigue ejecutando Git | 2026-10-21 |
 | Mapas de alto nivel (portal) | Dos páginas con componentes React: **Mapa de alto nivel** (serpentina con iconos) y **Mapa de engranes** (recorrido vertical con bucle de evolución), junto al Mapa general. Comparten el contenido en `sitio/src/components/MapasAltoNivel/etapas.js` | 2026-10-19 |
 | Regla "investigar primero" | En cada módulo, **primero se investiga lo que pueda cambiar las definiciones** (normativa, límites, costos) y solo después se define y se documenta, para no rehacer | 2026-10-16 |
 | Infraestructura de publicación | VPS propio (skill infraestructura-vps): Docker, nginx compartido (servidor web), Cloudflare, subdominio bajo sitiosapps.com | — |
@@ -131,6 +137,7 @@ fintech-kuenta/
 │  ├─ uml/                    ← copias editables en draw.io: casos de uso y secuencias
 │  ├─ datos/                  ← copias editables en draw.io: modelo de datos, libro mayor, eventos y sagas
 │  ├─ integraciones/          ← copia editable en draw.io del mapa de integraciones
+│  ├─ despliegue/             ← copia editable en draw.io del diagrama de despliegue en AWS
 │  └─ bpmn/                   ← procesos de negocio
 ├─ diagramas/                 ← fuentes (draw.io, Excalidraw) y exportados (PNG, SVG)
 ├─ contratos-api/             ← OpenAPI de ejemplo (transferencias, efectivo, movimientos y componentes comunes)
@@ -191,10 +198,10 @@ Criterio: los artefactos viven por tipo (modelos, diagramas, contratos) para no 
 Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensive Applications (Kleppmann); Building Microservices (Newman); SOA Governance (Erl).
 
 ## 9. Estado actual y pendientes
-- **Foco actual:** **Módulos 0 a 6 cerrados y fusionados a `main`** (último commit: `c905571`, pull request del Módulo 6). **Módulo 7 (Integración y APIs) con las decisiones A a E tomadas y la documentación única redactada**: `docs/integracion-y-apis/` (mapa, estilo de APIs, gateway y modelo canónico, resiliencia, contratos), la nota `docs/modulos/integracion-y-apis.md`, tres contratos OpenAPI en `contratos-api/`, la copia en draw.io en `modelos/integraciones/` y la corrección Efectivo → Redes en el Módulo 5. Pendiente: revisión del autor en el sitio, repaso, pregunta de entrevista y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
+- **Foco actual:** **Módulos 0 a 7 cerrados y fusionados a `main`** (último commit: `e050016`, pull request del Módulo 7). **Módulo 8 (Arquitectura en AWS) con las decisiones A a E tomadas y la documentación única redactada**: `docs/arquitectura-en-aws/` (diagrama de despliegue, decisiones, tabla de servicios), la nota `docs/modulos/arquitectura-en-aws.md` y la copia en draw.io en `modelos/despliegue/`. Pendiente: revisión del autor en el sitio y pull request. El sitio corre con Docker (instalación de dependencias también desde el contenedor, no en local).
 - **Pendiente de decidir con el autor:** licencia del repo público (sin licencia, por defecto, nadie puede reutilizar el contenido legalmente).
 - **Pendiente de confirmar con el autor:** qué hacer con la carpeta vacía de OneDrive; si el equipo usa WSL 2 como motor de Docker Desktop.
-- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8). **Módulo 7:** anexos 2, 4 y 5 de la DSP-465 y la DSP-471 (estados, consulta de estado, reintentos, reversos, idempotencia, disponibilidad de Bre-B); si Bre-B es obligatorio para Kuenta (el umbral de 1.500.000 productos del Decreto 1069 de 2025 viene de un resumen de terceros, no del texto oficial); canal y formato de los reportes a UIAF y Superfinanciera; camino real de acceso y costo de la Registraduría; validación de los contratos con un validador oficial de OpenAPI; copia en draw.io del mapa abierta en la aplicación; tipo de API gateway (Módulo 8).
+- **Pendiente por verificar al llegar a cada módulo:** comando `export` de la imagen `structurizr/structurizr` (el CLI antiguo funcionó para generar los diagramas); versiones instaladas de Docker Desktop, Archi y Git; soporte BPMN/UML en draw.io; condiciones de la capa gratuita de AWS; enlaces de documentación oficial de AWS; detalles de la normativa de la Superintendencia Financiera; **Bre-B** (anexos de la circular DSP-465: estados de una transferencia, reintentos, reversos, idempotencia, consulta de estado, nombre enmascarado del beneficiario y niveles de disponibilidad; se confirma en el Módulo 7); **plazo de conservación** de los registros del libro mayor y de SARLAFT (artículo 96 del Estatuto Orgánico del Sistema Financiero y artículo 60 del Código de Comercio; hasta confirmarlo, nada se borra y el plazo es un parámetro); copias en draw.io del Módulo 6 abiertas en la aplicación; parámetros de sagas (Módulo 10) y servicio de mensajería de AWS (Módulo 8). **Módulo 7:** anexos 2, 4 y 5 de la DSP-465 y la DSP-471 (estados, consulta de estado, reintentos, reversos, idempotencia, disponibilidad de Bre-B); si Bre-B es obligatorio para Kuenta (el umbral de 1.500.000 productos del Decreto 1069 de 2025 viene de un resumen de terceros, no del texto oficial); canal y formato de los reportes a UIAF y Superfinanciera; camino real de acceso y costo de la Registraduría; validación de los contratos con un validador oficial de OpenAPI; copia en draw.io del mapa abierta en la aplicación; tipo de API gateway (Módulo 8). **Módulo 8:** tiempo máximo de integración del REST API de API Gateway (se recuerda de unos 29 s, sin confirmar en la documentación oficial); disponibilidad de cada servicio en São Paulo y latencia desde Colombia; equivalencia de jurisdicción para Brasil (Circular 005, numeral 3.7); aviso a la Superintendencia 15 días antes de procesar en la nube; certificaciones de AWS frente a la Circular 005 (Módulo 9); comparación RDS frente a Aurora (Módulos 12 y 13); recuperación entre regiones (Módulo 10); copia en draw.io del despliegue abierta en la aplicación.
 - **Lista de temas para profundizar (fuera del flujo principal):** _(vacía)_
 
 ## 10. Registro de cambios
@@ -225,11 +232,13 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | 2026-10-19 | Módulo 5: el sitio muestra los diagramas bien; se agregan copias en draw.io (C4 en `modelos/c4/`, UML en `modelos/uml/`) y un diagrama de casos de uso. Se alinean los estados del Mapa general, el README y la introducción, y una cita de CI/CD (Módulo 11) |
 | 2026-10-20 | **Módulo 5 cerrado y fusionado a `main`** (`00338aa`): repaso y pregunta de entrevista. Inicia el Módulo 6: se investigan Bre-B (documento técnico del Banco de la República), los patrones saga y outbox de AWS y la conservación de documentos; se aprueban las decisiones A (dueño de los datos), B (libro mayor), C (eventos), D (sagas) y E (entregable). Se redactan las páginas del módulo, las copias en draw.io, el botón «Ampliar» del sitio y la corrección «Avisa» → «Publica evento» en el modelo y los diagramas del Módulo 5 |
 | 2026-10-21 | **Módulo 6 cerrado y fusionado a `main`** (`c905571`): repaso y pregunta de entrevista. Inicia el Módulo 7: se investigan Bre-B (DSP-465 y DSP-470), Registraduría, Decreto 368 de 2026, tipos de API gateway de AWS, `Idempotency-Key` y OpenAPI; se aprueban las decisiones A (mapa de integraciones), B (estilo de APIs), C (gateway y modelo canónico), D (resiliencia) y E (entregable). Se redactan las páginas, los tres contratos OpenAPI y la copia en draw.io, y se corrige en el Módulo 5 la conciliación con redes de corresponsales (de Pagos a Efectivo) |
+| 2026-10-21 | **Módulo 7 cerrado y fusionado a `main`** (`e050016`). El autor adopta el ciclo ligero (sin repaso ni pregunta de entrevista; se mantienen borrador, aprobación, documentación única, rama y pull request) para terminar el ejercicio. Inicia el Módulo 8: se investigan regiones de AWS y Colombia, la Circular 005 de 2019, Fargate, Multi-AZ y restauración a un instante de RDS y el tipo de API Gateway; se aprueban las decisiones A (región y cuentas), B (cómputo), C (base de datos), D (entrada y red) y E (entregable). Se redactan las páginas, la nota y la copia en draw.io |
 
 ## 11. Glosario de siglas y términos
 | Sigla o término | Significado |
 |---|---|
 | ADR | Architecture Decision Record: registro de decisión de arquitectura (qué se decidió, por qué y con qué consecuencias) |
+| ALB | Application Load Balancer: reparte las peticiones entre varias tareas |
 | API | Application Programming Interface: interfaz de programación de aplicaciones; la forma en que un sistema ofrece funciones a otros |
 | API gateway | Puerta de entrada gestionada que recibe las peticiones y aplica autenticación, límites y validación antes de pasarlas |
 | Apunte | Línea de un libro mayor: un valor positivo o negativo sobre una cuenta; los apuntes de una operación suman cero |
@@ -265,8 +274,10 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Dominio de negocio | Grupo de capacidades relacionadas que comparten conocimiento y datos |
 | DSL | Domain-Specific Language: lenguaje específico de dominio; aquí, el texto con el que Structurizr describe un modelo C4 |
 | EA | Enterprise Architecture: arquitectura empresarial |
+| ECS | Amazon Elastic Container Service: orquestador de contenedores de AWS |
 | Épica | Conjunto de historias que persiguen un mismo objetivo |
 | Evento | Aviso de un hecho que ya ocurrió; quien lo publica no sabe quién lo usará |
+| Fargate | Modo de ECS que ejecuta contenedores sin administrar servidores |
 | FinOps | Financial Operations: práctica de gestionar y optimizar el costo de la nube |
 | Fogafín | Fondo de Garantías de Instituciones Financieras: seguro de depósitos; cubre hasta $50.000.000 por persona |
 | Gateway | Puerta de entrada única que recibe las llamadas a las APIs y las dirige a cada servicio |
@@ -277,21 +288,28 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | Idempotencia | Propiedad de una operación que, repetida, no duplica sus efectos |
 | Idempotency-Key | Cabecera con una llave única para que un reintento no repita el efecto |
 | ISO 20022 | Estándar de mensajería financiera que usa Bre-B |
+| KMS | Key Management Service: administra las llaves de cifrado |
 | Libro mayor | Registro donde queda cada movimiento de dinero; solo se agrega, las correcciones son movimientos nuevos |
 | Listas restrictivas | Listas de personas con las que una entidad no debe vincularse por riesgo de lavado de activos o financiación del terrorismo |
 | Llave de idempotencia | Identificador único de una operación, para reconocer un reintento y no duplicarla |
+| Local Zone | Extensión de una región de AWS cerca de una ciudad, con pocos servicios |
 | Mapa de calor | Mapa de capacidades coloreado según un criterio, como el tipo, la madurez o el release |
 | Mapa de capacidades | Representación visual de las capacidades de una organización, agrupadas por niveles |
 | Modelo canónico | Formato único de datos al que todos los sistemas traducen; aquí no hay uno global |
 | mTLS | TLS en ambos sentidos: el cliente también se identifica con un certificado |
+| Multi-AZ | Base de datos con una réplica en otra zona que toma el control si falla la principal |
 | MVP | Minimum Viable Product: producto mínimo viable; la versión más pequeña que ya aporta valor |
+| NAT | Network Address Translation: puerta que permite salir a internet desde subredes privadas sin recibir conexiones |
 | OpenAPI | Especificación para describir APIs REST en un archivo |
 | Orquestación (saga) | Saga dirigida por un coordinador que decide el siguiente paso; la alternativa es la coreografía |
 | Outbox transaccional | Guardar el evento en la misma transacción que el dato y publicarlo después con otro proceso |
 | Partida doble | Cada operación se registra con apuntes que suman cero |
+| PITR | Point-in-Time Recovery: restauración a un instante, con respaldos y registros de transacciones |
 | PNG, SVG | Formatos de imagen: PNG es de píxeles; SVG es vectorial (se amplía sin perder calidad) |
 | Principio de arquitectura | Regla general que guía las decisiones de diseño; tiene nombre, enunciado, justificación e implicaciones |
 | Product Goal | Objetivo de largo plazo del producto; en Scrum solo hay uno a la vez |
+| RDS | Amazon Relational Database Service: base de datos administrada |
+| Región (AWS) | Zona geográfica de AWS con varios centros de datos |
 | Repo | Repositorio: carpeta de proyecto con el historial de todos sus cambios (lo gestiona Git) |
 | Reserva | Valor apartado del saldo disponible mientras se espera la confirmación de una operación |
 | RFC 9457 | Formato estándar de errores en HTTP (`problem+json`) |
@@ -307,5 +325,9 @@ Fundamentals of Software Architecture (Richards y Ford); Designing Data-Intensiv
 | UIAF | Unidad de Información y Análisis Financiero: recibe los reportes de operaciones sospechosas |
 | UML | Unified Modeling Language: lenguaje unificado de modelado (diagramas de secuencia, clases, etc.) |
 | UVT | Unidad de Valor Tributario: unidad con la que se expresan los montos de impuestos |
+| VPC | Virtual Private Cloud: red privada virtual dentro de AWS |
+| VPC link | Enlace privado entre API Gateway y un balanceador dentro de la VPC |
 | VPS | Virtual Private Server: servidor virtual privado que se alquila |
+| WAF | Web Application Firewall: filtra ataques web comunes |
 | WSL 2 | Windows Subsystem for Linux, versión 2: Linux ligero que corre dentro de Windows; Docker Desktop lo usa |
+| Zona de disponibilidad (AZ) | Centro de datos aislado dentro de una región; repartir en dos permite sobrevivir a la caída de una |

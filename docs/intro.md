@@ -19,4 +19,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 6 están cerrados. Hoy está en el **Módulo 7: integración y APIs**.
+El proyecto avanza módulo a módulo. Los Módulos 0 a 7 están cerrados. Hoy está en el **Módulo 8: arquitectura en AWS**.
