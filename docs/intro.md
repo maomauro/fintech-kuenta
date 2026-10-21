@@ -19,4 +19,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 8 están cerrados. Hoy está en el **Módulo 9: seguridad y cumplimiento**.
+El proyecto avanza módulo a módulo. Los Módulos 0 a 9 están cerrados. Hoy está en el **Módulo 10: resiliencia y operación**.
