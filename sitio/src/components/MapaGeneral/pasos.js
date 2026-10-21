@@ -183,7 +183,8 @@ export const PASOS = [
       "Decisión del M5: monolito modular, con extracción posterior de un módulo solo si una señal medida lo pide",
       "Ocho módulos: Identidad y apertura, Cuentas y depósitos, Pagos y transferencias, Efectivo y corresponsales, Cumplimiento y riesgo, Atención al cliente, más Notificaciones y Auditoría transversales",
       "Diagramas C4 de contexto, contenedores y componentes, y secuencias UML",
-      "Decisiones del M6: libro mayor de partida doble ligera, eventos con outbox y sagas orquestadas para Bre-B y el efectivo"
+      "Decisiones del M6: libro mayor de partida doble ligera, eventos con outbox y sagas orquestadas para Bre-B y el efectivo",
+      "Decisiones del M7: REST con OpenAPI e idempotencia, un adaptador por tercero y gateway sin modelo canónico global"
     ],
     "conceptos": [
       "Monolito modular",

@@ -1,0 +1,292 @@
+openapi: 3.1.0
+info:
+  title: Kuenta · API de transferencias (ejemplo)
+  version: 1.0.0
+  summary: Contrato de ejemplo del Módulo 7 para transferencias entre cuentas Kuenta y por Bre-B.
+  description: |
+    **Contrato ilustrativo** de la API de clientes de Kuenta, una SEDPE ficticia.
+    Cumple las reglas de estilo del Módulo 7: REST con JSON, versión en la ruta,
+    errores RFC 9457, `Idempotency-Key` obligatorio en lo que mueve dinero,
+    respuesta 202 para operaciones largas, dinero como texto decimal y fechas en UTC.
+
+    **No es el contrato oficial de Bre-B.** Los mensajes y anexos técnicos de Bre-B
+    (anexos 2, 4 y 5 de la circular DSP-465) no son públicos; la integración con
+    Bre-B vive detrás de un adaptador y este contrato no la expone.
+
+    **Estados hacia el cliente.** Internamente la saga de Bre-B tiene más estados
+    (iniciada, reservada, retenida, enviada, pendiente, revisión manual). Hacia el
+    cliente solo se muestran tres: `en_proceso`, `completada` y `rechazada`.
+    Nunca se revela que una operación fue retenida por cumplimiento.
+servers:
+  - url: https://api.kuenta.example/v1
+    description: Servidor ficticio de ejemplo
+tags:
+  - name: Transferencias
+    description: Consulta de destino, creación y seguimiento de transferencias.
+security:
+  - clienteBearer: []
+paths:
+  /transferencias/consultas-destino:
+    post:
+      tags: [Transferencias]
+      operationId: consultarDestino
+      summary: Consulta el destino de una transferencia por llave Bre-B
+      description: |
+        Resuelve la llave y devuelve el **nombre enmascarado del beneficiario**, que
+        la app debe mostrar al cliente **antes de confirmar** (num. 6.1.e de la
+        circular DSP-465). La consulta tiene una vigencia corta, definida como parámetro.
+      parameters:
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsultaDestinoSolicitud'
+      responses:
+        '200':
+          description: Destino resuelto.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultaDestino'
+        '400':
+          $ref: 'comunes.yaml#/components/responses/PeticionInvalida'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '404':
+          description: La llave no existe o no está activa.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+        '503':
+          description: Bre-B no está disponible. No se reservó ningún valor.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+  /transferencias:
+    post:
+      tags: [Transferencias]
+      operationId: crearTransferencia
+      summary: Crea una transferencia
+      description: |
+        - **Entre cuentas Kuenta:** se completa en una sola transacción y responde `201`.
+        - **Por Bre-B:** se reserva el valor y se envía la orden. Responde `202` con
+          estado `en_proceso`; el resultado llega por consulta o por notificación.
+        Repetir la misma `Idempotency-Key` con el mismo contenido devuelve la respuesta original.
+      parameters:
+        - $ref: 'comunes.yaml#/components/parameters/IdempotencyKey'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferenciaSolicitud'
+            examples:
+              entreCuentas:
+                summary: Entre cuentas Kuenta
+                value:
+                  depositoOrigenId: 3f0c9d1e-5a41-4b6e-9a53-2c1f1e7d8a10
+                  destino:
+                    tipo: deposito_kuenta
+                    depositoId: 8b7a6c55-1d2e-4f30-8c91-0a2b3c4d5e6f
+                  monto:
+                    valor: '50000.00'
+                    moneda: COP
+                  descripcion: Arriendo de octubre
+              porBreB:
+                summary: Por llave Bre-B (con consulta previa)
+                value:
+                  depositoOrigenId: 3f0c9d1e-5a41-4b6e-9a53-2c1f1e7d8a10
+                  destino:
+                    tipo: llave_breb
+                    consultaDestinoId: 5d1b2c3a-9e8f-4a7b-b6c5-d4e3f2a1b0c9
+                  monto:
+                    valor: '120000.00'
+                    moneda: COP
+      responses:
+        '201':
+          description: Transferencia entre cuentas Kuenta completada.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transferencia'
+        '202':
+          description: Transferencia por Bre-B aceptada y en proceso.
+          headers:
+            Location:
+              description: Dirección para consultar el estado.
+              schema:
+                type: string
+                format: uri-reference
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transferencia'
+        '400':
+          $ref: 'comunes.yaml#/components/responses/PeticionInvalida'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '403':
+          $ref: 'comunes.yaml#/components/responses/NoAutorizado'
+        '409':
+          $ref: 'comunes.yaml#/components/responses/LlaveEnCurso'
+        '422':
+          description: >
+            Regla de negocio incumplida (`SALDO_INSUFICIENTE`, `TOPE_SUPERADO`,
+            `CONSULTA_DESTINO_VENCIDA`) o `Idempotency-Key` reutilizada con otro contenido.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+        '500':
+          $ref: 'comunes.yaml#/components/responses/ErrorInterno'
+  /transferencias/{transferenciaId}:
+    get:
+      tags: [Transferencias]
+      operationId: consultarTransferencia
+      summary: Consulta el estado de una transferencia
+      parameters:
+        - name: transferenciaId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      responses:
+        '200':
+          description: Estado actual de la transferencia.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transferencia'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '404':
+          description: La transferencia no existe o no pertenece al cliente.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+components:
+  securitySchemes:
+    clienteBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Credencial del cliente. El esquema definitivo (OAuth 2.0 u otro) se decide en el Módulo 9.
+  schemas:
+    ConsultaDestinoSolicitud:
+      type: object
+      required: [tipoLlave, valorLlave]
+      properties:
+        tipoLlave:
+          $ref: '#/components/schemas/TipoLlave'
+        valorLlave:
+          type: string
+          maxLength: 128
+    TipoLlave:
+      type: string
+      description: Tipos de llave de Bre-B (DSP-470, num. 7), con nombres propios de este contrato.
+      enum: [celular, identificacion, correo, alfanumerica, comercio]
+    ConsultaDestino:
+      type: object
+      required: [consultaDestinoId, nombreBeneficiarioEnmascarado, venceEn]
+      properties:
+        consultaDestinoId:
+          type: string
+          format: uuid
+        nombreBeneficiarioEnmascarado:
+          type: string
+          examples: ['Mar*** Gó*** P***']
+        entidadDestino:
+          type: string
+        venceEn:
+          type: string
+          format: date-time
+          description: Instante en UTC hasta el que la consulta es válida.
+    TransferenciaSolicitud:
+      type: object
+      required: [depositoOrigenId, destino, monto]
+      properties:
+        depositoOrigenId:
+          type: string
+          format: uuid
+        destino:
+          oneOf:
+            - $ref: '#/components/schemas/DestinoDepositoKuenta'
+            - $ref: '#/components/schemas/DestinoLlaveBreB'
+          discriminator:
+            propertyName: tipo
+            mapping:
+              deposito_kuenta: '#/components/schemas/DestinoDepositoKuenta'
+              llave_breb: '#/components/schemas/DestinoLlaveBreB'
+        monto:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        descripcion:
+          type: string
+          maxLength: 140
+    DestinoDepositoKuenta:
+      type: object
+      required: [tipo, depositoId]
+      properties:
+        tipo:
+          type: string
+          const: deposito_kuenta
+        depositoId:
+          type: string
+          format: uuid
+    DestinoLlaveBreB:
+      type: object
+      required: [tipo, consultaDestinoId]
+      properties:
+        tipo:
+          type: string
+          const: llave_breb
+        consultaDestinoId:
+          type: string
+          format: uuid
+          description: Identificador de la consulta de destino que el cliente ya confirmó viendo el nombre enmascarado.
+    Transferencia:
+      type: object
+      required: [transferenciaId, estado, monto, creadaEn]
+      properties:
+        transferenciaId:
+          type: string
+          format: uuid
+        estado:
+          type: string
+          enum: [en_proceso, completada, rechazada]
+        motivoRechazo:
+          type: string
+          description: Código de negocio, solo si el estado es `rechazada`. Nunca revela una retención por cumplimiento.
+          examples: ['SALDO_INSUFICIENTE']
+        monto:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        creadaEn:
+          type: string
+          format: date-time
+        actualizadaEn:
+          type: string
+          format: date-time

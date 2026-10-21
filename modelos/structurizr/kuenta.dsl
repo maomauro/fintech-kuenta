@@ -77,7 +77,7 @@ workspace "Kuenta" "Arquitectura de aplicación de Kuenta: una SEDPE colombiana 
         cumplimiento -> listas "Consulta listas restrictivas"
         cumplimiento -> autoridades "Reporta operaciones sospechosas"
         pagos -> breb "Envía y recibe transferencias"
-        pagos -> redes "Concilia con corresponsales"
+        efectivo -> redes "Concilia con corresponsales"
         notificaciones -> mensajeria "Pide enviar notificaciones"
         cuentas -> contable "Entrega los asientos contables"
 

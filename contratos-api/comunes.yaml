@@ -1,0 +1,133 @@
+# Componentes compartidos por los contratos de ejemplo de Kuenta (Módulo 7).
+# No es un contrato por sí mismo: los demás archivos lo referencian con $ref.
+components:
+  schemas:
+    Dinero:
+      type: object
+      description: >
+        Valor monetario. El valor viaja como texto decimal, nunca como número
+        de coma flotante (decisión B6 del Módulo 7 y del libro mayor del Módulo 6).
+      required: [valor, moneda]
+      properties:
+        valor:
+          type: string
+          pattern: '^[0-9]{1,12}\.[0-9]{2}$'
+          examples: ['50000.00']
+        moneda:
+          type: string
+          const: COP
+    DineroConSigno:
+      type: object
+      description: Valor monetario que puede ser negativo (por ejemplo, un débito en el extracto).
+      required: [valor, moneda]
+      properties:
+        valor:
+          type: string
+          pattern: '^-?[0-9]{1,12}\.[0-9]{2}$'
+          examples: ['-50000.00']
+        moneda:
+          type: string
+          const: COP
+    Problema:
+      type: object
+      description: >
+        Error en formato RFC 9457 (Problem Details for HTTP APIs), con un código
+        de negocio propio en el campo `codigo` (decisión B3).
+      required: [type, title, status, codigo]
+      properties:
+        type:
+          type: string
+          format: uri-reference
+          examples: ['https://api.kuenta.example/errores/saldo-insuficiente']
+        title:
+          type: string
+          examples: ['Saldo insuficiente']
+        status:
+          type: integer
+          examples: [422]
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri-reference
+        codigo:
+          type: string
+          description: Código de negocio estable, en mayúsculas con guion bajo.
+          examples: ['SALDO_INSUFICIENTE']
+        idCorrelacion:
+          type: string
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: >
+        Identificador único de la operación, generado por quien llama (se
+        recomienda un UUID). Misma llave y mismo contenido devuelve el resultado
+        original; misma llave con contenido distinto devuelve 422; si la primera
+        petición sigue en curso, devuelve 409. El encabezado sigue siendo un
+        borrador del IETF (draft-ietf-httpapi-idempotency-key-header).
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+    IdCorrelacion:
+      name: X-Correlation-Id
+      in: header
+      required: false
+      description: Identificador para seguir la operación de punta a punta. Si no se envía, Kuenta lo genera.
+      schema:
+        type: string
+        maxLength: 128
+  headers:
+    IdCorrelacion:
+      description: Identificador de correlación de la operación.
+      schema:
+        type: string
+  responses:
+    NoAutenticado:
+      description: Credenciales ausentes o inválidas.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    NoAutorizado:
+      description: La credencial no tiene permiso para esta operación.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    PeticionInvalida:
+      description: La petición no cumple el contrato (campo ausente, formato inválido).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    LlaveEnCurso:
+      description: Otra petición con la misma Idempotency-Key sigue en curso.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    LlaveReutilizada:
+      description: La Idempotency-Key ya se usó con un contenido distinto, o la regla de negocio impide la operación.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    DemasiadasPeticiones:
+      description: Se superó el límite de peticiones. Reintentar después del tiempo indicado en `Retry-After`.
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'
+    ErrorInterno:
+      description: Error inesperado de Kuenta. Es seguro reintentar con la misma Idempotency-Key.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problema'

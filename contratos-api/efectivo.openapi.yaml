@@ -1,0 +1,288 @@
+openapi: 3.1.0
+info:
+  title: Kuenta · API de efectivo para terminales (ejemplo)
+  version: 1.0.0
+  summary: Contrato de ejemplo del Módulo 7 para depositar y retirar efectivo en un corresponsal.
+  description: |
+    **Contrato ilustrativo** de la API que usan los terminales de las redes de
+    corresponsales. Implementa las sagas de efectivo del Módulo 6:
+
+    - **Depósito:** se autoriza antes, el corresponsal recibe el dinero y confirma;
+      solo entonces se acredita. Si no confirma a tiempo, la autorización vence y no
+      se escribe ningún apunte.
+    - **Retiro:** se debita primero y se autoriza la entrega. Si el terminal informa
+      que no entregó, la compensación es un movimiento contrario que anula el débito.
+
+    Cada paso lleva `Idempotency-Key`: un terminal que reintente por una falla de
+    comunicación no duplica el efecto. El tiempo máximo de una autorización es un
+    parámetro que se fija en el Módulo 10; no tiene valor aquí.
+
+    Esta superficie es distinta de la API de clientes: usa credenciales propias de la
+    red del corresponsal y tiene sus propios límites de peticiones (decisión A.4).
+  contact:
+    name: Proyecto fintech-kuenta
+servers:
+  - url: https://api.kuenta.example/terminales/v1
+    description: Servidor ficticio de ejemplo
+tags:
+  - name: Depósitos
+  - name: Retiros
+  - name: Consulta
+security:
+  - terminalMtls: []
+paths:
+  /efectivo/depositos/autorizaciones:
+    post:
+      tags: [Depósitos]
+      operationId: autorizarDeposito
+      summary: Autoriza un depósito de efectivo
+      description: Verifica el depósito, el tope de 8 SMLMV y la revisión antifraude antes de que el corresponsal reciba el efectivo.
+      parameters:
+        - $ref: 'comunes.yaml#/components/parameters/IdempotencyKey'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutorizacionDepositoSolicitud'
+      responses:
+        '201':
+          description: Depósito autorizado; el corresponsal puede recibir el efectivo.
+          headers:
+            X-Correlation-Id:
+              $ref: 'comunes.yaml#/components/headers/IdCorrelacion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operacion'
+        '400':
+          $ref: 'comunes.yaml#/components/responses/PeticionInvalida'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '403':
+          $ref: 'comunes.yaml#/components/responses/NoAutorizado'
+        '409':
+          $ref: 'comunes.yaml#/components/responses/LlaveEnCurso'
+        '422':
+          description: >
+            Regla de negocio incumplida (`TOPE_SUPERADO`, `DEPOSITO_NO_ENCONTRADO`,
+            `OPERACION_NO_PERMITIDA`) o `Idempotency-Key` reutilizada con otro contenido.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+        '500':
+          $ref: 'comunes.yaml#/components/responses/ErrorInterno'
+  /efectivo/depositos/autorizaciones/{operacionId}/confirmacion:
+    post:
+      tags: [Depósitos]
+      operationId: confirmarDeposito
+      summary: Confirma que el corresponsal recibió el efectivo
+      description: Acredita el valor al depósito. Si la autorización ya venció responde 409 con `AUTORIZACION_VENCIDA` y no se acredita nada.
+      parameters:
+        - $ref: '#/components/parameters/OperacionId'
+        - $ref: 'comunes.yaml#/components/parameters/IdempotencyKey'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      responses:
+        '200':
+          description: Depósito confirmado y acreditado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operacion'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '404':
+          $ref: '#/components/responses/OperacionNoEncontrada'
+        '409':
+          description: La autorización venció (`AUTORIZACION_VENCIDA`) o la operación ya tiene otro resultado.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+  /efectivo/retiros:
+    post:
+      tags: [Retiros]
+      operationId: autorizarRetiro
+      summary: Debita y autoriza la entrega de un retiro
+      description: Debita el valor del depósito y autoriza al corresponsal a entregar el efectivo.
+      parameters:
+        - $ref: 'comunes.yaml#/components/parameters/IdempotencyKey'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetiroSolicitud'
+      responses:
+        '201':
+          description: Retiro debitado y entrega autorizada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operacion'
+        '400':
+          $ref: 'comunes.yaml#/components/responses/PeticionInvalida'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '403':
+          $ref: 'comunes.yaml#/components/responses/NoAutorizado'
+        '409':
+          $ref: 'comunes.yaml#/components/responses/LlaveEnCurso'
+        '422':
+          description: >
+            Regla de negocio incumplida (`SALDO_INSUFICIENTE`, `OPERACION_NO_PERMITIDA`)
+            o `Idempotency-Key` reutilizada con otro contenido.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+  /efectivo/retiros/{operacionId}/confirmacion:
+    post:
+      tags: [Retiros]
+      operationId: confirmarRetiro
+      summary: Informa si el terminal entregó el efectivo
+      description: Si el resultado es `no_entregado`, se escribe un movimiento contrario que anula el débito (compensación).
+      parameters:
+        - $ref: '#/components/parameters/OperacionId'
+        - $ref: 'comunes.yaml#/components/parameters/IdempotencyKey'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmacionRetiro'
+      responses:
+        '200':
+          description: Resultado registrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operacion'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '404':
+          $ref: '#/components/responses/OperacionNoEncontrada'
+        '409':
+          description: La operación ya tiene otro resultado.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'comunes.yaml#/components/schemas/Problema'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+  /efectivo/operaciones/{operacionId}:
+    get:
+      tags: [Consulta]
+      operationId: consultarOperacion
+      summary: Consulta el estado de una operación de efectivo
+      description: Sirve para que un terminal que perdió la respuesta conozca el estado real antes de reintentar.
+      parameters:
+        - $ref: '#/components/parameters/OperacionId'
+        - $ref: 'comunes.yaml#/components/parameters/IdCorrelacion'
+      responses:
+        '200':
+          description: Estado actual.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operacion'
+        '401':
+          $ref: 'comunes.yaml#/components/responses/NoAutenticado'
+        '404':
+          $ref: '#/components/responses/OperacionNoEncontrada'
+        '429':
+          $ref: 'comunes.yaml#/components/responses/DemasiadasPeticiones'
+components:
+  securitySchemes:
+    terminalMtls:
+      type: mutualTLS
+      description: Autenticación del terminal con certificado de cliente. El esquema definitivo se decide en el Módulo 9.
+  parameters:
+    OperacionId:
+      name: operacionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    OperacionNoEncontrada:
+      description: La operación no existe o no pertenece a este terminal.
+      content:
+        application/problem+json:
+          schema:
+            $ref: 'comunes.yaml#/components/schemas/Problema'
+  schemas:
+    ClienteDocumento:
+      type: object
+      description: Documento del cliente que el corresponsal digita o lee. Solo viaja en la petición; nunca se publica en eventos.
+      required: [tipoDocumento, numeroDocumento]
+      properties:
+        tipoDocumento:
+          type: string
+          enum: [CC, CE, PPT]
+        numeroDocumento:
+          type: string
+          maxLength: 20
+    AutorizacionDepositoSolicitud:
+      type: object
+      required: [terminalId, cliente, monto]
+      properties:
+        terminalId:
+          type: string
+        cliente:
+          $ref: '#/components/schemas/ClienteDocumento'
+        monto:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+    RetiroSolicitud:
+      type: object
+      required: [terminalId, cliente, monto]
+      properties:
+        terminalId:
+          type: string
+        cliente:
+          $ref: '#/components/schemas/ClienteDocumento'
+        monto:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+    ConfirmacionRetiro:
+      type: object
+      required: [resultado]
+      properties:
+        resultado:
+          type: string
+          enum: [entregado, no_entregado]
+    Operacion:
+      type: object
+      required: [operacionId, tipo, estado, monto]
+      properties:
+        operacionId:
+          type: string
+          format: uuid
+        tipo:
+          type: string
+          enum: [deposito, retiro]
+        estado:
+          type: string
+          description: |
+            Depósito: `autorizada`, `confirmada` o `vencida`.
+            Retiro: `entrega_autorizada`, `entregada` o `revertida`.
+          enum: [autorizada, confirmada, vencida, entrega_autorizada, entregada, revertida]
+        monto:
+          $ref: 'comunes.yaml#/components/schemas/Dinero'
+        venceEn:
+          type: string
+          format: date-time
+          description: Solo en depósitos autorizados. Instante UTC en que vence la autorización.
+        comprobante:
+          type: string
+          description: Número de comprobante para el cliente, cuando la operación se confirma.

@@ -209,7 +209,7 @@ graph LR
     24-. "<div>Consulta listas restrictivas</div><div style='font-size: 70%'></div>" .->7
     24-. "<div>Reporta operaciones<br />sospechosas</div><div style='font-size: 70%'></div>" .->9
     22-. "<div>Envía y recibe transferencias</div><div style='font-size: 70%'></div>" .->8
-    22-. "<div>Concilia con corresponsales</div><div style='font-size: 70%'></div>" .->10
+    23-. "<div>Concilia con corresponsales</div><div style='font-size: 70%'></div>" .->10
     26-. "<div>Pide enviar notificaciones</div><div style='font-size: 70%'></div>" .->11
     21-. "<div>Entrega los asientos<br />contables</div><div style='font-size: 70%'></div>" .->12
     20-. "<div>Pide crear el depósito</div><div style='font-size: 70%'></div>" .->21
