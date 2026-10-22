@@ -20,4 +20,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 14 están cerrados. Hoy está en el **Módulo 15: publicación y exposición**, el último.
+El proyecto avanza módulo a módulo. Los 16 módulos (0 a 15) están cerrados. El sitio está publicado en [kuenta.sitiosapps.com](https://kuenta.sitiosapps.com).
