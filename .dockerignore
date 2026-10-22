@@ -1,0 +1,8 @@
+# Contexto de construcción del sitio: solo hacen falta docs/, diagramas/ y sitio/
+.git
+**/node_modules
+sitio/build
+sitio/.docusaurus
+modelos
+contratos-api
+referencias

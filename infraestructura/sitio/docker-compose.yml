@@ -1,0 +1,45 @@
+# Sitio de Kuenta en el VPS (kuenta.sitiosapps.com). Copiar a /srv/sitiosapps/kuenta/ y ejecutar allí.
+#
+#   docker compose pull && docker compose up -d       # publicar la última imagen
+#   IMAGE_TAG=<sha-anterior> docker compose up -d     # volver a una versión anterior
+#
+# No publica puertos: solo el gateway recibe tráfico, y llega a este contenedor por el alias kuenta-web
+# en la red sitiosapps-edge.
+
+services:
+  web:
+    image: ghcr.io/maomauro/fintech-kuenta-sitio:${IMAGE_TAG:-latest}
+    container_name: kuenta-web
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:80/salud"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      edge:
+        aliases:
+          - kuenta-web
+
+networks:
+  edge:
+    external: true
+    name: ${EDGE_NET:-sitiosapps-edge}

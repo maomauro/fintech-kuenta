@@ -25,10 +25,10 @@ Vista consolidada de los 16 módulos del curso: qué responde cada uno, qué ent
 | 11 | [Entrega: CI/CD e IaC](entrega-ci-cd-e-iac.md) | ¿Cómo llega un cambio a producción? | Diseño del flujo de despliegue | Trunk-based, una imagen promovida, OIDC, blue/green de ECS, OpenTofu, cinco métricas DORA | Cerrado |
 | 12 | [Costos (FinOps)](costos-finops.md) | ¿Cuánto cuesta un año? | Estimación en total anual | Estimación por entorno con precios de São Paulo, optimización tras medir 3 meses | Cerrado |
 | 13 | [Decisiones y trade-offs](decisiones-y-trade-offs.md) | ¿Qué se decidió y qué se sacrificó? | ADR y evaluación de riesgos | Diez ADR en MADR, Java 25 con Spring Boot y Modulith, 13 riesgos puntuados | Cerrado |
-| 14 | [Gobierno y evolución](gobierno-y-evolucion.md) | ¿Cómo se mantiene en el tiempo? | Lineamientos y plan de evolución | Gobierno ligero, ocho funciones de aptitud, cinco umbrales de extracción y plan en tres horizontes | En revisión |
-| 15 | Publicación y exposición | ¿Cómo se presenta? | Sitio en el VPS y guion de entrevista | Pendiente: publicación en el VPS y guion de entrevista | Pendiente |
+| 14 | [Gobierno y evolución](gobierno-y-evolucion.md) | ¿Cómo se mantiene en el tiempo? | Lineamientos y plan de evolución | Gobierno ligero, ocho funciones de aptitud, cinco umbrales de extracción y plan en tres horizontes | Cerrado |
+| 15 | [Publicación y exposición](publicacion-y-exposicion.md) | ¿Cómo se presenta? | Sitio en el VPS y guion de entrevista | Imagen estática en GHCR detrás del gateway del VPS, guion de 2 y 10 minutos y banco de preguntas | En revisión |
 
-**Avance:** 15 de 16 módulos documentados; el 14 está en revisión y el 15 está pendiente.
+**Avance:** los 16 módulos están documentados; el 15 está en revisión.
 
 ## Kuenta en una página
 
@@ -72,6 +72,7 @@ flowchart LR
 | Saber qué puede salir mal | [Matriz de riesgos](../decisiones-y-trade-offs/matriz-de-riesgos.md) |
 | Ver el costo | [Estimación anual](../costos-finops/estimacion-anual.md) |
 | Ver el orden del recorrido | [Mapa general](../mapa-general.md) |
+| Preparar una entrevista | [Guion](../publicacion-y-exposicion/guion-de-entrevista.md) y [banco de preguntas](../publicacion-y-exposicion/banco-de-preguntas.md) |
 
 ## Riesgos altos abiertos
 
