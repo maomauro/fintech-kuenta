@@ -2,7 +2,7 @@
 
 Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 13 están cerrados. Hoy está en el **Módulo 14: gobierno y evolución**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 14 están cerrados. Hoy está en el **Módulo 15: publicación y exposición**, el último.
 
 ## Cómo navegar este repositorio
 
@@ -25,8 +25,9 @@ Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana fic
 | `modelos/bpmn/` | Los procesos de negocio de Kuenta dibujados en BPMN (Business Process Model and Notation), como abrir un depósito de bajo monto o depositar efectivo en un corresponsal. |
 | `diagramas/` | Diagramas fuente (draw.io, Excalidraw) y sus imágenes exportadas (PNG, SVG) para incrustarlas en el sitio. |
 | `contratos-api/` | Contratos de API (Application Programming Interface, interfaz de programación de aplicaciones) escritos en OpenAPI, antes de construir nada. |
-| `infraestructura/` | Diseño de la solución en AWS, ejemplos de IaC (Infrastructure as Code, infraestructura como código) y el despliegue del sitio en el VPS (servidor virtual privado). |
-| `entrevista/` | Guion y preguntas típicas para exponer la arquitectura ante otras personas. |
+| `infraestructura/` | Despliegue del sitio en el VPS (servidor virtual privado): Dockerfile, nginx, compose y el vhost del gateway, en `infraestructura/sitio/`. El código de infraestructura en AWS no se escribe: el diseño está en `docs/entrega-ci-cd-e-iac/`. |
+| `.github/workflows/` | Flujo de GitHub Actions que construye la imagen del sitio y la publica en GHCR (GitHub Container Registry). |
+| `entrevista/` | Apunta al guion y al banco de preguntas, que viven en `docs/publicacion-y-exposicion/` para que el sitio los publique. |
 | `referencias/` | Lecturas y enlaces públicos que respaldan las decisiones. |
 
 ## Herramientas
@@ -36,3 +37,9 @@ Archi, Structurizr, draw.io y Excalidraw, Docusaurus, Git y Docker. La descripci
 ## Módulos
 
 El proyecto se organiza en 16 módulos (0 a 15), desde el entorno de trabajo hasta la publicación del sitio y el guion de entrevista. El detalle vive en `00-contexto/`.
+
+## Licencia
+
+El código (`infraestructura/`, `.github/` y `sitio/`) se publica bajo la licencia MIT (`LICENSE`). El contenido (documentos, diagramas, modelos y contratos de ejemplo) se publica bajo CC BY 4.0 (`LICENSE-CONTENIDO.md`).
+
+Kuenta es una entidad **ficticia** creada con fines de aprendizaje. Este material no es asesoría legal, financiera ni regulatoria: las referencias normativas y los precios deben verificarse en las fuentes oficiales antes de cualquier uso real.

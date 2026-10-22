@@ -20,4 +20,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 13 están cerrados. Hoy está en el **Módulo 14: gobierno y evolución**.
+El proyecto avanza módulo a módulo. Los Módulos 0 a 14 están cerrados. Hoy está en el **Módulo 15: publicación y exposición**, el último.

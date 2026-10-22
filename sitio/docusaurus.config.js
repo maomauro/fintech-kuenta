@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Kuenta · Arquitectura',
-  tagline: 'Arquitectura de una fintech de ahorros, pagos y créditos en AWS',
+  tagline: 'Arquitectura de una fintech de depósitos y pagos en AWS (caso ficticio)',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -20,7 +20,7 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://kuenta.sitiosapps.com', // provisional: se define en el Módulo 15
+  url: 'https://kuenta.sitiosapps.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',

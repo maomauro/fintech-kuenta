@@ -322,8 +322,7 @@ export const PASOS = [
     "c": "c8",
     "t": "Decidir, gobernar y evolucionar",
     "q": "¿Cómo lo mantenemos en el tiempo?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "Registrar decisiones (ADR)",
       "Medir riesgos",
