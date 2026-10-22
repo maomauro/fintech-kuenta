@@ -294,7 +294,7 @@ export const PASOS = [
     "kuenta": [
       "La Definition of Done de nivel 2 (auditable) se produce con cada despliegue",
       "Decisiones del M11: una sola imagen promovida entre entornos, OIDC sin llaves guardadas, blue/green con reversión e infraestructura como código con OpenTofu",
-      "Estimación de costos en total anual"
+      "Decisiones del M12: estimación anual por entorno con precios de São Paulo, supuestos de volumen explícitos, optimización tras medir 3 meses y revisión mensual de costos"
     ],
     "mods": [
       [

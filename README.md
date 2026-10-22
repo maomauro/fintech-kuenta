@@ -2,7 +2,7 @@
 
 Proyecto de arquitectura de software para **Kuenta**, una fintech colombiana ficticia de **depósitos y pagos** (constituida como SEDPE), diseñada sobre **AWS** (Amazon Web Services). Reúne el caso de negocio, los requisitos, los modelos, los diagramas, los contratos de API, el diseño de infraestructura y las decisiones de arquitectura, y se publica como un sitio navegable.
 
-> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 10 están cerrados. Hoy está en el **Módulo 11: entrega, CI/CD e IaC**.
+> Estado: el proyecto avanza módulo a módulo. Los Módulos 0 a 11 están cerrados. Hoy está en el **Módulo 12: costos (FinOps)**.
 
 ## Cómo navegar este repositorio
 
