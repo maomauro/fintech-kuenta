@@ -42,12 +42,12 @@ Con la arquitectura completa, el último módulo la **publica y prepara su expos
 - [x] Archivos de despliegue y flujo de trabajo
 - [x] Guion de entrevista y banco de preguntas
 - [x] Licencias
-- [ ] Probar `docker build` en local y el arranque en solo lectura
+- [x] Probar `docker build` en local y el arranque en solo lectura
 - [ ] Crear el DNS y el certificado de origen de `kuenta.sitiosapps.com` en Cloudflare
 - [ ] Publicar la imagen y hacer pública la visibilidad del paquete en GHCR
 - [ ] Agregar `kuenta.conf` al gateway y recargar
 - [ ] Decidir si se automatiza el paso del VPS (llave SSH en GitHub)
-- [ ] Fijar las acciones del flujo de trabajo por huella de commit
+- [x] Fijar las acciones del flujo de trabajo por huella de commit
 
 ## Glosario
 
