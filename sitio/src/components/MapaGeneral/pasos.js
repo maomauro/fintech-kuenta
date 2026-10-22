@@ -341,6 +341,7 @@ export const PASOS = [
     "kuenta": [
       "Cada decisión del curso se traza a una capacidad o a un principio",
       "Decisiones del M13: diez ADR en formato MADR, stack Java 25 con Spring Boot y Spring Modulith, tabla de trade-offs y matriz de 13 riesgos",
+      "Decisiones del M14: gobierno ligero con funciones de aptitud en el pipeline, cinco umbrales para extraer módulos y un plan de evolución en tres horizontes",
       "Plan de evolución que incluye la posible extracción de módulos del monolito"
     ],
     "mods": [

@@ -24,11 +24,11 @@ Vista consolidada de los 16 módulos del curso: qué responde cada uno, qué ent
 | 10 | [Resiliencia y operación](resiliencia-y-operacion.md) | ¿Qué pasa cuando algo falla? | Plan de recuperación y objetivos de nivel de servicio | 7 SLO, tres escenarios de recuperación, parámetros de resiliencia y observabilidad | Cerrado |
 | 11 | [Entrega: CI/CD e IaC](entrega-ci-cd-e-iac.md) | ¿Cómo llega un cambio a producción? | Diseño del flujo de despliegue | Trunk-based, una imagen promovida, OIDC, blue/green de ECS, OpenTofu, cinco métricas DORA | Cerrado |
 | 12 | [Costos (FinOps)](costos-finops.md) | ¿Cuánto cuesta un año? | Estimación en total anual | Estimación por entorno con precios de São Paulo, optimización tras medir 3 meses | Cerrado |
-| 13 | [Decisiones y trade-offs](decisiones-y-trade-offs.md) | ¿Qué se decidió y qué se sacrificó? | ADR y evaluación de riesgos | Diez ADR en MADR, Java 25 con Spring Boot y Modulith, 13 riesgos puntuados | En revisión |
-| 14 | Gobierno y evolución | ¿Cómo se mantiene en el tiempo? | Lineamientos y plan de evolución | Pendiente: lineamientos, umbrales de extracción de módulos y hoja de ruta | Pendiente |
+| 13 | [Decisiones y trade-offs](decisiones-y-trade-offs.md) | ¿Qué se decidió y qué se sacrificó? | ADR y evaluación de riesgos | Diez ADR en MADR, Java 25 con Spring Boot y Modulith, 13 riesgos puntuados | Cerrado |
+| 14 | [Gobierno y evolución](gobierno-y-evolucion.md) | ¿Cómo se mantiene en el tiempo? | Lineamientos y plan de evolución | Gobierno ligero, ocho funciones de aptitud, cinco umbrales de extracción y plan en tres horizontes | En revisión |
 | 15 | Publicación y exposición | ¿Cómo se presenta? | Sitio en el VPS y guion de entrevista | Pendiente: publicación en el VPS y guion de entrevista | Pendiente |
 
-**Avance:** 13 de 16 módulos documentados; el 13 está en revisión.
+**Avance:** 15 de 16 módulos documentados; el 14 está en revisión y el 15 está pendiente.
 
 ## Kuenta en una página
 
