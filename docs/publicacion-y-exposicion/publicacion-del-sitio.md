@@ -87,7 +87,7 @@ El sitio comparte el VPS existente, así que **no agrega costo mensual**. Su ima
 
 El sitio es una copia derivada del repositorio, que ya está en GitHub. No hay datos propios que respaldar en el servidor.
 
-## Verificación pendiente
+## Verificación
 
-- Probar `docker build` en local antes de fusionar, y confirmar que la imagen arranca con sistema de archivos de solo lectura.
-- Fijar las acciones del flujo de trabajo por huella de commit, como recomienda GitHub, en lugar de por versión mayor.
+- Las acciones del flujo de trabajo están fijadas por la huella completa de su commit, como recomienda GitHub, con la versión en un comentario. Al actualizarlas hay que cambiar la huella y el comentario.
+- Se probó `docker build` en local y el arranque con sistema de archivos de solo lectura y sin capacidades extra: `/salud` responde 200, la portada 200 y una ruta inexistente 404.
