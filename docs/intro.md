@@ -11,6 +11,7 @@ title: Kuenta · Arquitectura
 ## Cómo navegar
 
 - **[Mapa general](./mapa-general.md)**: cómo se implementa una arquitectura, paso a paso.
+- **[Panorama de los módulos](./modulos/panorama.md)**: los 16 módulos en una tabla, con su entregable, decisiones clave y estado.
 - **[Mapa de alto nivel](./mapa-alto-nivel.md)**: el recorrido completo en una sola vista, con iconos.
 - **[Mapa de engranes](./mapa-engranes.md)**: cómo encajan las etapas entre sí.
 - **Módulos**: una nota por módulo, con lo hecho y lo decidido.
@@ -19,4 +20,4 @@ title: Kuenta · Arquitectura
 
 ## Estado
 
-El proyecto avanza módulo a módulo. Los Módulos 0 a 11 están cerrados. Hoy está en el **Módulo 12: costos (FinOps)**.
+El proyecto avanza módulo a módulo. Los Módulos 0 a 12 están cerrados. Hoy está en el **Módulo 13: decisiones y trade-offs**.
