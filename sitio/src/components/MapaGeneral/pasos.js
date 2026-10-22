@@ -275,8 +275,7 @@ export const PASOS = [
     "c": "c7",
     "t": "Entregar y controlar costos",
     "q": "¿Cómo llega a producción?",
-    "st": "now",
-    "aqui": true,
+    "st": "done",
     "bul": [
       "CI/CD e infraestructura como código",
       "Evidencia automática",
@@ -323,7 +322,8 @@ export const PASOS = [
     "c": "c8",
     "t": "Decidir, gobernar y evolucionar",
     "q": "¿Cómo lo mantenemos en el tiempo?",
-    "st": "todo",
+    "st": "now",
+    "aqui": true,
     "bul": [
       "Registrar decisiones (ADR)",
       "Medir riesgos",
@@ -340,6 +340,7 @@ export const PASOS = [
     ],
     "kuenta": [
       "Cada decisión del curso se traza a una capacidad o a un principio",
+      "Decisiones del M13: diez ADR en formato MADR, stack Java 25 con Spring Boot y Spring Modulith, tabla de trade-offs y matriz de 13 riesgos",
       "Plan de evolución que incluye la posible extracción de módulos del monolito"
     ],
     "mods": [
